@@ -1,0 +1,99 @@
+defmodule ShadcnElixir.Components.ButtonGroup do
+  @moduledoc """
+  ButtonGroup — a port of shadcn/ui's
+  [Button Group](https://ui.shadcn.com/docs/components/button-group).
+
+  Composed of `button_group/1`, `button_group_text/1`, and `button_group_separator/1`.
+  """
+  use Phoenix.Component
+
+  import ShadcnElixir, only: [cn: 1]
+  import ShadcnElixir.Variants
+
+  @variants %{
+    base:
+      "flex w-fit items-stretch [&>*]:rounded-none [&>*]:shadow-none " <>
+        "[&>*]:focus-visible:z-10 [&>*]:focus-visible:relative " <>
+        "[&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1 " <>
+        "has-[>[data-slot=button-group]]:gap-2",
+    variants: %{
+      orientation: %{
+        "horizontal" =>
+          "[&>*:not(:first-child)]:border-l-0 [&>*:not(:first-child)]:rounded-l-none " <>
+            "[&>*:not(:last-child)]:rounded-r-none",
+        "vertical" =>
+          "flex-col [&>*:not(:first-child)]:border-t-0 [&>*:not(:first-child)]:rounded-t-none " <>
+            "[&>*:not(:last-child)]:rounded-b-none"
+      }
+    },
+    default_variants: %{orientation: "horizontal"}
+  }
+
+  @doc """
+  Renders a button group.
+
+  ## Examples
+
+      <.button_group>
+        <.button variant="outline">One</.button>
+        <.button variant="outline">Two</.button>
+      </.button_group>
+  """
+  attr :orientation, :string, default: nil, values: [nil, "horizontal", "vertical"]
+  attr :class, :any, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def button_group(assigns) do
+    assigns =
+      assign(assigns, :class, variant(@variants, orientation: assigns.orientation, class: assigns.class))
+
+    ~H"""
+    <div role="group" data-slot="button-group" data-orientation={@orientation || "horizontal"} class={@class} {@rest}>
+      {render_slot(@inner_block)}
+    </div>
+    """
+  end
+
+  attr :class, :any, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def button_group_text(assigns) do
+    ~H"""
+    <div
+      data-slot="button-group-text"
+      class={
+        cn([
+          "bg-muted flex items-center gap-2 rounded-md border px-4 text-sm font-medium shadow-xs",
+          "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+          @class
+        ])
+      }
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </div>
+    """
+  end
+
+  attr :class, :any, default: nil
+  attr :rest, :global
+
+  def button_group_separator(assigns) do
+    ~H"""
+    <div
+      role="separator"
+      data-orientation="vertical"
+      data-slot="button-group-separator"
+      class={
+        cn([
+          "bg-input relative !m-0 self-stretch w-px data-[orientation=vertical]:h-auto",
+          @class
+        ])
+      }
+      {@rest}
+    />
+    """
+  end
+end

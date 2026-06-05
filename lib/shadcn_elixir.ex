@@ -83,7 +83,32 @@ defmodule ShadcnElixir do
   @doc false
   defmacro __using__(_opts) do
     quote do
-      import ShadcnElixir.Components.Button
+      import ShadcnElixir.Components.{
+        AspectRatio,
+        Alert,
+        Avatar,
+        Badge,
+        Breadcrumb,
+        Button,
+        ButtonGroup,
+        Card,
+        Empty,
+        Field,
+        Input,
+        InputGroup,
+        Item,
+        Kbd,
+        Label,
+        NativeSelect,
+        Pagination,
+        Progress,
+        Separator,
+        Skeleton,
+        Spinner,
+        Table,
+        Textarea,
+        Typography
+      }
     end
   end
 end
