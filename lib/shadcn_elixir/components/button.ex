@@ -51,28 +51,33 @@ defmodule ShadcnElixir.Components.Button do
       <.button variant="destructive" size="sm">Delete</.button>
       <.button variant="outline" navigate={~p"/settings"}>Settings</.button>
   """
-  attr :variant, :string,
+  attr(:variant, :string,
     default: nil,
     values: [nil, "default", "destructive", "outline", "secondary", "ghost", "link"],
     doc: "Visual style variant."
+  )
 
-  attr :size, :string,
+  attr(:size, :string,
     default: nil,
     values: [nil, "default", "sm", "lg", "icon"],
     doc: "Size variant."
+  )
 
-  attr :type, :string, default: nil, doc: "The `type` attribute when rendered as a `<button>`."
-  attr :class, :any, default: nil, doc: "Additional classes merged over the variant classes."
+  attr(:type, :string, default: nil, doc: "The `type` attribute when rendered as a `<button>`.")
+  attr(:class, :any, default: nil, doc: "Additional classes merged over the variant classes.")
 
-  attr :rest, :global,
-    include: ~w(disabled form formaction formmethod name value href navigate patch method download),
+  attr(:rest, :global,
+    include:
+      ~w(disabled form formaction formmethod name value href navigate patch method download),
     doc: "Arbitrary HTML attributes; link attributes switch rendering to an `<a>`."
+  )
 
-  slot :inner_block, required: true
+  slot(:inner_block, required: true)
 
   def button(assigns) do
     assigns =
-      assign(assigns,
+      assign(
+        assigns,
         :class,
         variant(@variants, variant: assigns.variant, size: assigns.size, class: assigns.class)
       )

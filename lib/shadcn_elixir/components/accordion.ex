@@ -23,9 +23,9 @@ defmodule ShadcnElixir.Components.Accordion do
         </.accordion_item>
       </.accordion>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def accordion(assigns) do
     ~H"""
@@ -33,10 +33,10 @@ defmodule ShadcnElixir.Components.Accordion do
     """
   end
 
-  attr :open, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:open, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def accordion_item(assigns) do
     ~H"""
@@ -51,9 +51,9 @@ defmodule ShadcnElixir.Components.Accordion do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def accordion_trigger(assigns) do
     ~H"""
@@ -92,9 +92,9 @@ defmodule ShadcnElixir.Components.Accordion do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def accordion_content(assigns) do
     ~H"""

@@ -13,12 +13,12 @@ defmodule ShadcnElixir.Components.Select do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :id, :string, required: true
-  attr :name, :string, default: nil
-  attr :value, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:name, :string, default: nil)
+  attr(:value, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def select(assigns) do
     ~H"""
@@ -36,11 +36,11 @@ defmodule ShadcnElixir.Components.Select do
     """
   end
 
-  attr :select, :string, required: true
-  attr :size, :string, default: "default", values: ["default", "sm"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:select, :string, required: true)
+  attr(:size, :string, default: "default", values: ["default", "sm"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def select_trigger(assigns) do
     ~H"""
@@ -85,9 +85,9 @@ defmodule ShadcnElixir.Components.Select do
     """
   end
 
-  attr :placeholder, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:placeholder, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def select_value(assigns) do
     ~H"""
@@ -103,10 +103,10 @@ defmodule ShadcnElixir.Components.Select do
     """
   end
 
-  attr :select, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:select, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def select_content(assigns) do
     ~H"""
@@ -131,9 +131,9 @@ defmodule ShadcnElixir.Components.Select do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def select_group(assigns) do
     ~H"""
@@ -143,9 +143,9 @@ defmodule ShadcnElixir.Components.Select do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def select_label(assigns) do
     ~H"""
@@ -159,11 +159,11 @@ defmodule ShadcnElixir.Components.Select do
     """
   end
 
-  attr :select, :string, required: true
-  attr :value, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:select, :string, required: true)
+  attr(:value, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def select_item(assigns) do
     ~H"""
@@ -203,8 +203,8 @@ defmodule ShadcnElixir.Components.Select do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def select_separator(assigns) do
     ~H"""

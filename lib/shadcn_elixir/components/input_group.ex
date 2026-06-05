@@ -41,9 +41,9 @@ defmodule ShadcnElixir.Components.InputGroup do
         <.input_group_input placeholder="Search..." />
       </.input_group>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def input_group(assigns) do
     ~H"""
@@ -70,13 +70,14 @@ defmodule ShadcnElixir.Components.InputGroup do
     """
   end
 
-  attr :align, :string,
+  attr(:align, :string,
     default: nil,
     values: [nil, "inline-start", "inline-end", "block-start", "block-end"]
+  )
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def input_group_addon(assigns) do
     assigns = assign(assigns, :class, variant(@addon, align: assigns.align, class: assigns.class))
@@ -88,11 +89,11 @@ defmodule ShadcnElixir.Components.InputGroup do
     """
   end
 
-  attr :type, :string, default: "text"
-  attr :name, :string, default: nil
-  attr :value, :any, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(placeholder disabled required readonly autocomplete)
+  attr(:type, :string, default: "text")
+  attr(:name, :string, default: nil)
+  attr(:value, :any, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(placeholder disabled required readonly autocomplete))
 
   def input_group_input(assigns) do
     ~H"""
@@ -114,10 +115,10 @@ defmodule ShadcnElixir.Components.InputGroup do
     """
   end
 
-  attr :name, :string, default: nil
-  attr :value, :any, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(placeholder disabled required readonly rows)
+  attr(:name, :string, default: nil)
+  attr(:value, :any, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(placeholder disabled required readonly rows))
 
   def input_group_textarea(assigns) do
     ~H"""
@@ -137,14 +138,15 @@ defmodule ShadcnElixir.Components.InputGroup do
     """
   end
 
-  attr :size, :string, default: "icon-xs"
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:size, :string, default: "icon-xs")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def input_group_button(assigns) do
     assigns =
-      assign(assigns,
+      assign(
+        assigns,
         :class,
         Button.button_variants(
           variant: "ghost",
@@ -160,9 +162,9 @@ defmodule ShadcnElixir.Components.InputGroup do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def input_group_text(assigns) do
     ~H"""

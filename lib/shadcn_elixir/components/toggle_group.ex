@@ -23,13 +23,13 @@ defmodule ShadcnElixir.Components.ToggleGroup do
         <.toggle_group_item group="align" value="center">Center</.toggle_group_item>
       </.toggle_group>
   """
-  attr :id, :string, required: true
-  attr :type, :string, default: "single", values: ["single", "multiple"]
-  attr :variant, :string, default: "default"
-  attr :size, :string, default: "default"
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:type, :string, default: "single", values: ["single", "multiple"])
+  attr(:variant, :string, default: "default")
+  attr(:size, :string, default: "default")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def toggle_group(assigns) do
     ~H"""
@@ -54,19 +54,20 @@ defmodule ShadcnElixir.Components.ToggleGroup do
     """
   end
 
-  attr :group, :string, required: true, doc: "The id of the parent `toggle_group/1`."
-  attr :value, :string, required: true
-  attr :type, :string, default: "single", values: ["single", "multiple"]
-  attr :variant, :string, default: nil, values: [nil, "default", "outline"]
-  attr :size, :string, default: nil, values: [nil, "default", "sm", "lg"]
-  attr :pressed, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:group, :string, required: true, doc: "The id of the parent `toggle_group/1`.")
+  attr(:value, :string, required: true)
+  attr(:type, :string, default: "single", values: ["single", "multiple"])
+  attr(:variant, :string, default: nil, values: [nil, "default", "outline"])
+  attr(:size, :string, default: nil, values: [nil, "default", "sm", "lg"])
+  attr(:pressed, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def toggle_group_item(assigns) do
     assigns =
-      assign(assigns,
+      assign(
+        assigns,
         :class,
         cn([
           toggle_variants(variant: assigns.variant, size: assigns.size),

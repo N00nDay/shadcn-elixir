@@ -16,10 +16,10 @@ defmodule ShadcnElixir.Components.AspectRatio do
         <img src="..." class="h-full w-full object-cover" />
       </.aspect_ratio>
   """
-  attr :ratio, :string, default: "1/1", doc: "CSS aspect-ratio value, e.g. \"16/9\"."
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:ratio, :string, default: "1/1", doc: "CSS aspect-ratio value, e.g. \"16/9\".")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def aspect_ratio(assigns) do
     ~H"""

@@ -24,9 +24,9 @@ defmodule ShadcnElixir.Components.Breadcrumb do
         </.breadcrumb_list>
       </.breadcrumb>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def breadcrumb(assigns) do
     ~H"""
@@ -36,9 +36,9 @@ defmodule ShadcnElixir.Components.Breadcrumb do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def breadcrumb_list(assigns) do
     ~H"""
@@ -58,9 +58,9 @@ defmodule ShadcnElixir.Components.Breadcrumb do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def breadcrumb_item(assigns) do
     ~H"""
@@ -74,9 +74,9 @@ defmodule ShadcnElixir.Components.Breadcrumb do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(href navigate patch)
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(href navigate patch))
+  slot(:inner_block, required: true)
 
   def breadcrumb_link(assigns) do
     ~H"""
@@ -90,9 +90,9 @@ defmodule ShadcnElixir.Components.Breadcrumb do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def breadcrumb_page(assigns) do
     ~H"""
@@ -109,9 +109,9 @@ defmodule ShadcnElixir.Components.Breadcrumb do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block)
 
   def breadcrumb_separator(assigns) do
     ~H"""
@@ -143,8 +143,8 @@ defmodule ShadcnElixir.Components.Breadcrumb do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def breadcrumb_ellipsis(assigns) do
     ~H"""

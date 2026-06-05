@@ -13,14 +13,15 @@ defmodule ShadcnElixir.Components.Input do
 
       <.input type="email" placeholder="you@example.com" />
   """
-  attr :type, :string, default: "text"
-  attr :name, :string, default: nil
-  attr :value, :any, default: nil
-  attr :class, :any, default: nil
+  attr(:type, :string, default: "text")
+  attr(:name, :string, default: nil)
+  attr(:value, :any, default: nil)
+  attr(:class, :any, default: nil)
 
-  attr :rest, :global,
+  attr(:rest, :global,
     include: ~w(autocomplete disabled form max maxlength min minlength pattern placeholder
                 readonly required step inputmode list multiple accept)
+  )
 
   def input(assigns) do
     ~H"""

@@ -17,11 +17,11 @@ defmodule ShadcnElixir.Components.Switch do
       <.switch name="airplane_mode" />
       <.switch name="wifi" checked />
   """
-  attr :name, :string, default: nil
-  attr :value, :string, default: "true"
-  attr :checked, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(disabled required form id)
+  attr(:name, :string, default: nil)
+  attr(:value, :string, default: "true")
+  attr(:checked, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(disabled required form id))
 
   def switch(assigns) do
     ~H"""

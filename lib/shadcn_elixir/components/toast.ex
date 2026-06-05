@@ -25,13 +25,14 @@ defmodule ShadcnElixir.Components.Toast do
     default_variants: %{variant: "default"}
   }
 
-  attr :variant, :string, default: nil, values: [nil, "default", "destructive"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:variant, :string, default: nil, values: [nil, "default", "destructive"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def toast(assigns) do
-    assigns = assign(assigns, :class, variant(@variants, variant: assigns.variant, class: assigns.class))
+    assigns =
+      assign(assigns, :class, variant(@variants, variant: assigns.variant, class: assigns.class))
 
     ~H"""
     <div role="status" aria-live="polite" data-slot="toast" class={@class} {@rest}>
@@ -40,9 +41,9 @@ defmodule ShadcnElixir.Components.Toast do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def toast_title(assigns) do
     ~H"""
@@ -52,9 +53,9 @@ defmodule ShadcnElixir.Components.Toast do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def toast_description(assigns) do
     ~H"""
@@ -64,9 +65,9 @@ defmodule ShadcnElixir.Components.Toast do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def toast_action(assigns) do
     ~H"""
@@ -88,8 +89,8 @@ defmodule ShadcnElixir.Components.Toast do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def toast_close(assigns) do
     ~H"""

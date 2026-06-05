@@ -11,9 +11,9 @@ defmodule ShadcnElixir.Components.Typography do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_h1(assigns) do
     ~H"""
@@ -26,9 +26,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_h2(assigns) do
     ~H"""
@@ -43,9 +43,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_h3(assigns) do
     ~H"""
@@ -55,9 +55,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_h4(assigns) do
     ~H"""
@@ -67,9 +67,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_p(assigns) do
     ~H"""
@@ -79,9 +79,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_blockquote(assigns) do
     ~H"""
@@ -91,9 +91,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_list(assigns) do
     ~H"""
@@ -103,9 +103,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_inline_code(assigns) do
     ~H"""
@@ -123,9 +123,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_lead(assigns) do
     ~H"""
@@ -133,9 +133,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_large(assigns) do
     ~H"""
@@ -143,9 +143,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_small(assigns) do
     ~H"""
@@ -155,9 +155,9 @@ defmodule ShadcnElixir.Components.Typography do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def typography_muted(assigns) do
     ~H"""

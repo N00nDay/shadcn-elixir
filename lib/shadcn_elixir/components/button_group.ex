@@ -39,14 +39,18 @@ defmodule ShadcnElixir.Components.ButtonGroup do
         <.button variant="outline">Two</.button>
       </.button_group>
   """
-  attr :orientation, :string, default: nil, values: [nil, "horizontal", "vertical"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:orientation, :string, default: nil, values: [nil, "horizontal", "vertical"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def button_group(assigns) do
     assigns =
-      assign(assigns, :class, variant(@variants, orientation: assigns.orientation, class: assigns.class))
+      assign(
+        assigns,
+        :class,
+        variant(@variants, orientation: assigns.orientation, class: assigns.class)
+      )
 
     ~H"""
     <div role="group" data-slot="button-group" data-orientation={@orientation || "horizontal"} class={@class} {@rest}>
@@ -55,9 +59,9 @@ defmodule ShadcnElixir.Components.ButtonGroup do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def button_group_text(assigns) do
     ~H"""
@@ -77,8 +81,8 @@ defmodule ShadcnElixir.Components.ButtonGroup do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def button_group_separator(assigns) do
     ~H"""

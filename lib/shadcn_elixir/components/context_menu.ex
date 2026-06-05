@@ -18,10 +18,10 @@ defmodule ShadcnElixir.Components.ContextMenu do
              "m.hidden=false;m.setAttribute('data-state','open');" <>
              "m.style.left=event.offsetX+'px';m.style.top=event.offsetY+'px';"
 
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def context_menu(assigns) do
     ~H"""
@@ -31,9 +31,9 @@ defmodule ShadcnElixir.Components.ContextMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def context_menu_trigger(assigns) do
     assigns = assign(assigns, :open_js, @open_js)
@@ -45,10 +45,10 @@ defmodule ShadcnElixir.Components.ContextMenu do
     """
   end
 
-  attr :menu, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:menu, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def context_menu_content(assigns) do
     ~H"""
@@ -73,11 +73,11 @@ defmodule ShadcnElixir.Components.ContextMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :variant, :string, default: "default", values: ["default", "destructive"]
-  attr :inset, :boolean, default: false
-  attr :rest, :global, include: ~w(href navigate patch)
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:variant, :string, default: "default", values: ["default", "destructive"])
+  attr(:inset, :boolean, default: false)
+  attr(:rest, :global, include: ~w(href navigate patch))
+  slot(:inner_block, required: true)
 
   def context_menu_item(assigns) do
     ~H"""
@@ -103,10 +103,10 @@ defmodule ShadcnElixir.Components.ContextMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :inset, :boolean, default: false
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:inset, :boolean, default: false)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def context_menu_label(assigns) do
     ~H"""
@@ -121,8 +121,8 @@ defmodule ShadcnElixir.Components.ContextMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def context_menu_separator(assigns) do
     ~H"""
@@ -135,9 +135,9 @@ defmodule ShadcnElixir.Components.ContextMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def context_menu_shortcut(assigns) do
     ~H"""

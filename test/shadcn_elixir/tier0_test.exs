@@ -72,7 +72,8 @@ defmodule ShadcnElixir.Tier0Test do
       </.card>
       """)
 
-    for part <- ~w(card card-header card-title card-description card-action card-content card-footer) do
+    for part <-
+          ~w(card card-header card-title card-description card-action card-content card-footer) do
       assert html =~ ~s(data-slot="#{part}")
     end
 
@@ -183,11 +184,21 @@ defmodule ShadcnElixir.Tier0Test do
 
   test "button_group, empty, field, input_group, item, typography render" do
     assigns = %{}
-    assert rendered_to_string(~H|<.button_group><.button>A</.button></.button_group>|) =~ ~s(role="group")
+
+    assert rendered_to_string(~H|<.button_group><.button>A</.button></.button_group>|) =~
+             ~s(role="group")
+
     assert rendered_to_string(~H|<.empty><.empty_title>None</.empty_title></.empty>|) =~ "None"
-    assert rendered_to_string(~H|<.field><.field_label>L</.field_label></.field>|) =~ ~s(data-slot="field")
-    assert rendered_to_string(~H|<.input_group><.input_group_input /></.input_group>|) =~ "input-group"
-    assert rendered_to_string(~H|<.item><.item_title>T</.item_title></.item>|) =~ ~s(data-slot="item")
+
+    assert rendered_to_string(~H|<.field><.field_label>L</.field_label></.field>|) =~
+             ~s(data-slot="field")
+
+    assert rendered_to_string(~H|<.input_group><.input_group_input /></.input_group>|) =~
+             "input-group"
+
+    assert rendered_to_string(~H|<.item><.item_title>T</.item_title></.item>|) =~
+             ~s(data-slot="item")
+
     assert rendered_to_string(~H|<.typography_h1>Hi</.typography_h1>|) =~ "font-extrabold"
   end
 end

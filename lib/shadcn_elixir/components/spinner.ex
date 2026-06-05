@@ -16,8 +16,8 @@ defmodule ShadcnElixir.Components.Spinner do
       <.spinner />
       <.spinner class="size-6" />
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def spinner(assigns) do
     ~H"""

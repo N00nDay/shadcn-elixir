@@ -14,10 +14,10 @@ defmodule ShadcnElixir.Components.Sidebar do
   import ShadcnElixir, only: [cn: 1]
   alias Phoenix.LiveView.JS
 
-  attr :id, :string, default: "sidebar"
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, default: "sidebar")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_provider(assigns) do
     ~H"""
@@ -34,10 +34,10 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :side, :string, default: "left", values: ["left", "right"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:side, :string, default: "left", values: ["left", "right"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar(assigns) do
     ~H"""
@@ -60,9 +60,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :target, :string, default: "sidebar"
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:target, :string, default: "sidebar")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def sidebar_trigger(assigns) do
     ~H"""
@@ -87,9 +87,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_header(assigns) do
     ~H"""
@@ -99,9 +99,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_content(assigns) do
     ~H"""
@@ -115,9 +115,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_footer(assigns) do
     ~H"""
@@ -127,9 +127,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_group(assigns) do
     ~H"""
@@ -143,9 +143,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_group_label(assigns) do
     ~H"""
@@ -165,9 +165,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_group_content(assigns) do
     ~H"""
@@ -177,9 +177,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_menu(assigns) do
     ~H"""
@@ -189,9 +189,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_menu_item(assigns) do
     ~H"""
@@ -201,10 +201,10 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :active, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(href navigate patch)
-  slot :inner_block, required: true
+  attr(:active, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(href navigate patch))
+  slot(:inner_block, required: true)
 
   def sidebar_menu_button(assigns) do
     ~H"""
@@ -227,8 +227,8 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def sidebar_separator(assigns) do
     ~H"""
@@ -241,9 +241,9 @@ defmodule ShadcnElixir.Components.Sidebar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sidebar_inset(assigns) do
     ~H"""

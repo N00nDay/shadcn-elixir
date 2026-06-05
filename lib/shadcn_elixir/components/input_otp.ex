@@ -18,12 +18,12 @@ defmodule ShadcnElixir.Components.InputOTP do
 
       <.input_otp id="otp" name="code" length={6} />
   """
-  attr :id, :string, required: true
-  attr :name, :string, default: nil
-  attr :length, :integer, default: 6
-  attr :value, :string, default: ""
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:id, :string, required: true)
+  attr(:name, :string, default: nil)
+  attr(:length, :integer, default: 6)
+  attr(:value, :string, default: "")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def input_otp(assigns) do
     assigns = assign(assigns, :slots, 0..(assigns.length - 1))

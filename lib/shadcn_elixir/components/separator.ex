@@ -15,10 +15,10 @@ defmodule ShadcnElixir.Components.Separator do
       <.separator />
       <.separator orientation="vertical" />
   """
-  attr :orientation, :string, default: "horizontal", values: ["horizontal", "vertical"]
-  attr :decorative, :boolean, default: true
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:orientation, :string, default: "horizontal", values: ["horizontal", "vertical"])
+  attr(:decorative, :boolean, default: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def separator(assigns) do
     ~H"""

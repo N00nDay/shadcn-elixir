@@ -23,15 +23,15 @@ defmodule ShadcnElixir.Components.DataTable do
   import ShadcnElixir, only: [cn: 1]
   import ShadcnElixir.Components.Table
 
-  attr :rows, :list, required: true
-  attr :empty_message, :string, default: "No results."
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:rows, :list, required: true)
+  attr(:empty_message, :string, default: "No results.")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   slot :col, required: true do
-    attr :label, :string
-    attr :class, :any
-    attr :sort_click, :any, doc: "A phx-click value to make this header sortable."
+    attr(:label, :string)
+    attr(:class, :any)
+    attr(:sort_click, :any, doc: "A phx-click value to make this header sortable.")
   end
 
   def data_table(assigns) do

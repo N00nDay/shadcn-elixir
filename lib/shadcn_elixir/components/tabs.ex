@@ -26,10 +26,10 @@ defmodule ShadcnElixir.Components.Tabs do
         <.tabs_content tabs="demo" value="b">Password panel</.tabs_content>
       </.tabs>
   """
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def tabs(assigns) do
     ~H"""
@@ -39,9 +39,9 @@ defmodule ShadcnElixir.Components.Tabs do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def tabs_list(assigns) do
     ~H"""
@@ -62,12 +62,12 @@ defmodule ShadcnElixir.Components.Tabs do
     """
   end
 
-  attr :tabs, :string, required: true, doc: "The id of the parent `tabs/1`."
-  attr :value, :string, required: true
-  attr :active, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:tabs, :string, required: true, doc: "The id of the parent `tabs/1`.")
+  attr(:value, :string, required: true)
+  attr(:active, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def tabs_trigger(assigns) do
     ~H"""
@@ -100,12 +100,12 @@ defmodule ShadcnElixir.Components.Tabs do
     """
   end
 
-  attr :tabs, :string, required: true, doc: "The id of the parent `tabs/1`."
-  attr :value, :string, required: true
-  attr :active, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:tabs, :string, required: true, doc: "The id of the parent `tabs/1`.")
+  attr(:value, :string, required: true)
+  attr(:active, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def tabs_content(assigns) do
     ~H"""

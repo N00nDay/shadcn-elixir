@@ -19,11 +19,11 @@ defmodule ShadcnElixir.Components.Chart do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :id, :string, required: true
-  attr :type, :string, default: "bar", values: ["bar", "line"]
-  attr :data, :list, required: true, doc: "List of maps with :label and :value keys."
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:id, :string, required: true)
+  attr(:type, :string, default: "bar", values: ["bar", "line"])
+  attr(:data, :list, required: true, doc: "List of maps with :label and :value keys.")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def chart(assigns) do
     assigns = assign(assigns, :payload, Jason.encode!(normalize(assigns.data)))

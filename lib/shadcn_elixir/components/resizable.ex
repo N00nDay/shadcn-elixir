@@ -11,11 +11,11 @@ defmodule ShadcnElixir.Components.Resizable do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :id, :string, required: true
-  attr :direction, :string, default: "horizontal", values: ["horizontal", "vertical"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:direction, :string, default: "horizontal", values: ["horizontal", "vertical"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def resizable_panel_group(assigns) do
     ~H"""
@@ -37,10 +37,10 @@ defmodule ShadcnElixir.Components.Resizable do
     """
   end
 
-  attr :basis, :integer, default: 50, doc: "Initial size as a flex-grow weight."
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:basis, :integer, default: 50, doc: "Initial size as a flex-grow weight.")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def resizable_panel(assigns) do
     ~H"""
@@ -56,9 +56,9 @@ defmodule ShadcnElixir.Components.Resizable do
     """
   end
 
-  attr :with_handle, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:with_handle, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def resizable_handle(assigns) do
     ~H"""

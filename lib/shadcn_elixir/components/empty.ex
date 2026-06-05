@@ -38,9 +38,9 @@ defmodule ShadcnElixir.Components.Empty do
         </.empty_content>
       </.empty>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def empty(assigns) do
     ~H"""
@@ -60,9 +60,9 @@ defmodule ShadcnElixir.Components.Empty do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def empty_header(assigns) do
     ~H"""
@@ -76,22 +76,23 @@ defmodule ShadcnElixir.Components.Empty do
     """
   end
 
-  attr :variant, :string, default: nil, values: [nil, "default", "icon"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:variant, :string, default: nil, values: [nil, "default", "icon"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def empty_media(assigns) do
-    assigns = assign(assigns, :class, variant(@media, variant: assigns.variant, class: assigns.class))
+    assigns =
+      assign(assigns, :class, variant(@media, variant: assigns.variant, class: assigns.class))
 
     ~H"""
     <div data-slot="empty-media" class={@class} {@rest}>{render_slot(@inner_block)}</div>
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def empty_title(assigns) do
     ~H"""
@@ -101,9 +102,9 @@ defmodule ShadcnElixir.Components.Empty do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def empty_description(assigns) do
     ~H"""
@@ -123,9 +124,9 @@ defmodule ShadcnElixir.Components.Empty do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def empty_content(assigns) do
     ~H"""

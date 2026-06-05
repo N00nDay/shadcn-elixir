@@ -24,16 +24,16 @@ defmodule ShadcnElixir.Components.DatePicker do
   import ShadcnElixir.Components.Calendar
   import ShadcnElixir.Components.Button, only: [button_variants: 1]
 
-  attr :id, :string, required: true
-  attr :selected, :any, default: nil
-  attr :month, :any, default: nil
-  attr :placeholder, :string, default: "Pick a date"
-  attr :format, :string, default: "%B %-d, %Y"
-  attr :on_select, :string, default: nil
-  attr :on_previous_month, :string, default: nil
-  attr :on_next_month, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:id, :string, required: true)
+  attr(:selected, :any, default: nil)
+  attr(:month, :any, default: nil)
+  attr(:placeholder, :string, default: "Pick a date")
+  attr(:format, :string, default: "%B %-d, %Y")
+  attr(:on_select, :string, default: nil)
+  attr(:on_previous_month, :string, default: nil)
+  attr(:on_next_month, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def date_picker(assigns) do
     label =

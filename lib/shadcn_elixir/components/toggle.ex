@@ -42,16 +42,20 @@ defmodule ShadcnElixir.Components.Toggle do
       <.toggle>Bold</.toggle>
       <.toggle variant="outline" pressed>Italic</.toggle>
   """
-  attr :variant, :string, default: nil, values: [nil, "default", "outline"]
-  attr :size, :string, default: nil, values: [nil, "default", "sm", "lg"]
-  attr :pressed, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:variant, :string, default: nil, values: [nil, "default", "outline"])
+  attr(:size, :string, default: nil, values: [nil, "default", "sm", "lg"])
+  attr(:pressed, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def toggle(assigns) do
     assigns =
-      assign(assigns, :class, variant(@variants, variant: assigns.variant, size: assigns.size, class: assigns.class))
+      assign(
+        assigns,
+        :class,
+        variant(@variants, variant: assigns.variant, size: assigns.size, class: assigns.class)
+      )
 
     ~H"""
     <button

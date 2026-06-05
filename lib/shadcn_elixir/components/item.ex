@@ -39,10 +39,8 @@ defmodule ShadcnElixir.Components.Item do
     variants: %{
       variant: %{
         "default" => "bg-transparent",
-        "icon" =>
-          "size-8 border rounded-sm bg-muted [&_svg:not([class*='size-'])]:size-4",
-        "image" =>
-          "size-10 rounded-sm overflow-hidden [&_img]:size-full [&_img]:object-cover"
+        "icon" => "size-8 border rounded-sm bg-muted [&_svg:not([class*='size-'])]:size-4",
+        "image" => "size-10 rounded-sm overflow-hidden [&_img]:size-full [&_img]:object-cover"
       }
     },
     default_variants: %{variant: "default"}
@@ -51,9 +49,9 @@ defmodule ShadcnElixir.Components.Item do
   @doc """
   Renders an item group wrapper.
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item_group(assigns) do
     ~H"""
@@ -68,8 +66,8 @@ defmodule ShadcnElixir.Components.Item do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def item_separator(assigns) do
     ~H"""
@@ -96,37 +94,42 @@ defmodule ShadcnElixir.Components.Item do
         <.item_actions>...</.item_actions>
       </.item>
   """
-  attr :variant, :string, default: nil, values: [nil, "default", "outline", "muted"]
-  attr :size, :string, default: nil, values: [nil, "default", "sm"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:variant, :string, default: nil, values: [nil, "default", "outline", "muted"])
+  attr(:size, :string, default: nil, values: [nil, "default", "sm"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item(assigns) do
     assigns =
-      assign(assigns, :class, variant(@item, variant: assigns.variant, size: assigns.size, class: assigns.class))
+      assign(
+        assigns,
+        :class,
+        variant(@item, variant: assigns.variant, size: assigns.size, class: assigns.class)
+      )
 
     ~H"""
     <div data-slot="item" class={@class} {@rest}>{render_slot(@inner_block)}</div>
     """
   end
 
-  attr :variant, :string, default: nil, values: [nil, "default", "icon", "image"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:variant, :string, default: nil, values: [nil, "default", "icon", "image"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item_media(assigns) do
-    assigns = assign(assigns, :class, variant(@media, variant: assigns.variant, class: assigns.class))
+    assigns =
+      assign(assigns, :class, variant(@media, variant: assigns.variant, class: assigns.class))
 
     ~H"""
     <div data-slot="item-media" class={@class} {@rest}>{render_slot(@inner_block)}</div>
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item_content(assigns) do
     ~H"""
@@ -140,9 +143,9 @@ defmodule ShadcnElixir.Components.Item do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item_title(assigns) do
     ~H"""
@@ -156,9 +159,9 @@ defmodule ShadcnElixir.Components.Item do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item_description(assigns) do
     ~H"""
@@ -178,9 +181,9 @@ defmodule ShadcnElixir.Components.Item do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item_actions(assigns) do
     ~H"""
@@ -190,9 +193,9 @@ defmodule ShadcnElixir.Components.Item do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item_header(assigns) do
     ~H"""
@@ -206,9 +209,9 @@ defmodule ShadcnElixir.Components.Item do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def item_footer(assigns) do
     ~H"""

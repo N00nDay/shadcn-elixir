@@ -14,9 +14,9 @@ defmodule ShadcnElixir.Components.Skeleton do
 
       <.skeleton class="h-4 w-[250px]" />
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block)
 
   def skeleton(assigns) do
     ~H"""

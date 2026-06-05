@@ -16,13 +16,13 @@ defmodule ShadcnElixir.Components.Slider do
 
       <.slider name="volume" min={0} max={100} value={50} />
   """
-  attr :name, :string, default: nil
-  attr :min, :integer, default: 0
-  attr :max, :integer, default: 100
-  attr :step, :integer, default: 1
-  attr :value, :integer, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(disabled form)
+  attr(:name, :string, default: nil)
+  attr(:min, :integer, default: 0)
+  attr(:max, :integer, default: 100)
+  attr(:step, :integer, default: 1)
+  attr(:value, :integer, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(disabled form))
 
   def slider(assigns) do
     ~H"""

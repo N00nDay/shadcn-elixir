@@ -14,9 +14,9 @@ defmodule ShadcnElixir.Components.Kbd do
       <.kbd>⌘</.kbd>
       <.kbd_group><.kbd>Ctrl</.kbd><.kbd>K</.kbd></.kbd_group>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def kbd(assigns) do
     ~H"""
@@ -38,9 +38,9 @@ defmodule ShadcnElixir.Components.Kbd do
   end
 
   @doc "Groups multiple `kbd/1` keys together."
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def kbd_group(assigns) do
     ~H"""

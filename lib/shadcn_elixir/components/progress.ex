@@ -14,9 +14,9 @@ defmodule ShadcnElixir.Components.Progress do
 
       <.progress value={60} />
   """
-  attr :value, :integer, default: 0, doc: "Completion percentage, 0..100."
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:value, :integer, default: 0, doc: "Completion percentage, 0..100.")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def progress(assigns) do
     ~H"""

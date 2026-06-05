@@ -23,9 +23,9 @@ defmodule ShadcnElixir.Components.Card do
         <.card_footer>Footer</.card_footer>
       </.card>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def card(assigns) do
     ~H"""
@@ -44,9 +44,9 @@ defmodule ShadcnElixir.Components.Card do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def card_header(assigns) do
     ~H"""
@@ -66,9 +66,9 @@ defmodule ShadcnElixir.Components.Card do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def card_title(assigns) do
     ~H"""
@@ -78,9 +78,9 @@ defmodule ShadcnElixir.Components.Card do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def card_description(assigns) do
     ~H"""
@@ -90,9 +90,9 @@ defmodule ShadcnElixir.Components.Card do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def card_action(assigns) do
     ~H"""
@@ -106,9 +106,9 @@ defmodule ShadcnElixir.Components.Card do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def card_content(assigns) do
     ~H"""
@@ -118,9 +118,9 @@ defmodule ShadcnElixir.Components.Card do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def card_footer(assigns) do
     ~H"""

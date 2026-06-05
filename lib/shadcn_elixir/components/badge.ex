@@ -27,8 +27,7 @@ defmodule ShadcnElixir.Components.Badge do
           "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 " <>
             "focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 " <>
             "dark:bg-destructive/60",
-        "outline" =>
-          "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground"
+        "outline" => "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground"
       }
     },
     default_variants: %{variant: "default"}
@@ -43,16 +42,18 @@ defmodule ShadcnElixir.Components.Badge do
       <.badge variant="destructive">Error</.badge>
       <.badge variant="outline" navigate={~p"/tags/elixir"}>elixir</.badge>
   """
-  attr :variant, :string,
+  attr(:variant, :string,
     default: nil,
     values: [nil, "default", "secondary", "destructive", "outline"]
+  )
 
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(href navigate patch)
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(href navigate patch))
+  slot(:inner_block, required: true)
 
   def badge(assigns) do
-    assigns = assign(assigns, :class, variant(@variants, variant: assigns.variant, class: assigns.class))
+    assigns =
+      assign(assigns, :class, variant(@variants, variant: assigns.variant, class: assigns.class))
 
     ~H"""
     <.link :if={link?(@rest)} data-slot="badge" class={@class} {@rest}>

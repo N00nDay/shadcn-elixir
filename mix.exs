@@ -35,7 +35,6 @@ defmodule ShadcnElixir.MixProject do
       {:tw_merge, "~> 0.1"},
       {:jason, "~> 1.4"},
       # dev/test only
-      {:phoenix_storybook, "~> 0.8", only: :dev},
       {:floki, ">= 0.30.0", only: :test},
       {:ex_doc, "~> 0.34", only: :dev, runtime: false}
     ]

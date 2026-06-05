@@ -36,13 +36,14 @@ defmodule ShadcnElixir.Components.Alert do
         <.alert_description>You can add components to your app.</.alert_description>
       </.alert>
   """
-  attr :variant, :string, default: nil, values: [nil, "default", "destructive"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:variant, :string, default: nil, values: [nil, "default", "destructive"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert(assigns) do
-    assigns = assign(assigns, :class, variant(@variants, variant: assigns.variant, class: assigns.class))
+    assigns =
+      assign(assigns, :class, variant(@variants, variant: assigns.variant, class: assigns.class))
 
     ~H"""
     <div role="alert" data-slot="alert" class={@class} {@rest}>
@@ -51,9 +52,9 @@ defmodule ShadcnElixir.Components.Alert do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_title(assigns) do
     ~H"""
@@ -67,9 +68,9 @@ defmodule ShadcnElixir.Components.Alert do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_description(assigns) do
     ~H"""

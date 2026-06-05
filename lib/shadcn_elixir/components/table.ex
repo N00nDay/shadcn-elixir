@@ -23,9 +23,9 @@ defmodule ShadcnElixir.Components.Table do
         </.table_body>
       </.table>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def table(assigns) do
     ~H"""
@@ -37,9 +37,9 @@ defmodule ShadcnElixir.Components.Table do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def table_header(assigns) do
     ~H"""
@@ -49,9 +49,9 @@ defmodule ShadcnElixir.Components.Table do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def table_body(assigns) do
     ~H"""
@@ -61,9 +61,9 @@ defmodule ShadcnElixir.Components.Table do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def table_footer(assigns) do
     ~H"""
@@ -77,9 +77,9 @@ defmodule ShadcnElixir.Components.Table do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def table_row(assigns) do
     ~H"""
@@ -98,9 +98,9 @@ defmodule ShadcnElixir.Components.Table do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(colspan rowspan scope abbr)
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(colspan rowspan scope abbr))
+  slot(:inner_block, required: true)
 
   def table_head(assigns) do
     ~H"""
@@ -120,9 +120,9 @@ defmodule ShadcnElixir.Components.Table do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(colspan rowspan headers)
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(colspan rowspan headers))
+  slot(:inner_block, required: true)
 
   def table_cell(assigns) do
     ~H"""
@@ -142,9 +142,9 @@ defmodule ShadcnElixir.Components.Table do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def table_caption(assigns) do
     ~H"""

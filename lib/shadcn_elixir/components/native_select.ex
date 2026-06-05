@@ -20,10 +20,10 @@ defmodule ShadcnElixir.Components.NativeSelect do
         <option value="banana">Banana</option>
       </.native_select>
   """
-  attr :name, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(disabled form multiple required size)
-  slot :inner_block, required: true
+  attr(:name, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(disabled form multiple required size))
+  slot(:inner_block, required: true)
 
   def native_select(assigns) do
     ~H"""

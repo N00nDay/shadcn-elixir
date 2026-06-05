@@ -19,12 +19,20 @@ defmodule ShadcnElixir.Components.Sonner do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :position, :string,
+  attr(:position, :string,
     default: "bottom-right",
-    values: ["top-left", "top-right", "bottom-left", "bottom-right", "top-center", "bottom-center"]
+    values: [
+      "top-left",
+      "top-right",
+      "bottom-left",
+      "bottom-right",
+      "top-center",
+      "bottom-center"
+    ]
+  )
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def toaster(assigns) do
     ~H"""

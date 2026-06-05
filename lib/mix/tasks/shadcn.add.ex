@@ -33,7 +33,11 @@ defmodule Mix.Tasks.Shadcn.Add do
 
     if opts[:list] do
       Mix.shell().info("Available components:\n")
-      Registry.list() |> Enum.chunk_every(3) |> Enum.each(&Mix.shell().info("  " <> Enum.join(&1, ", ")))
+
+      Registry.list()
+      |> Enum.chunk_every(3)
+      |> Enum.each(&Mix.shell().info("  " <> Enum.join(&1, ", ")))
+
       :ok
     else
       do_run(opts, names)
@@ -43,9 +47,14 @@ defmodule Mix.Tasks.Shadcn.Add do
   defp do_run(opts, names) do
     requested =
       cond do
-        opts[:all] -> Registry.list()
-        names == [] -> Mix.raise("Specify component names, or use --all. See `mix shadcn.add --list`.")
-        true -> validate(names)
+        opts[:all] ->
+          Registry.list()
+
+        names == [] ->
+          Mix.raise("Specify component names, or use --all. See `mix shadcn.add --list`.")
+
+        true ->
+          validate(names)
       end
 
     namespace = opts[:namespace] || default_namespace()
@@ -66,7 +75,14 @@ defmodule Mix.Tasks.Shadcn.Add do
 
           cond do
             File.exists?(target) and opts[:force] != true ->
-              Mix.shell().info([:yellow, "* skipped ", :reset, Path.relative_to_cwd(target), " (exists; use --force)"])
+              Mix.shell().info([
+                :yellow,
+                "* skipped ",
+                :reset,
+                Path.relative_to_cwd(target),
+                " (exists; use --force)"
+              ])
+
               acc
 
             true ->

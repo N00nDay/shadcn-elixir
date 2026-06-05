@@ -25,9 +25,9 @@ defmodule ShadcnElixir.Components.Pagination do
         </.pagination_content>
       </.pagination>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def pagination(assigns) do
     ~H"""
@@ -43,9 +43,9 @@ defmodule ShadcnElixir.Components.Pagination do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def pagination_content(assigns) do
     ~H"""
@@ -59,8 +59,8 @@ defmodule ShadcnElixir.Components.Pagination do
     """
   end
 
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def pagination_item(assigns) do
     ~H"""
@@ -68,15 +68,16 @@ defmodule ShadcnElixir.Components.Pagination do
     """
   end
 
-  attr :is_active, :boolean, default: false
-  attr :size, :string, default: "icon"
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(href navigate patch)
-  slot :inner_block, required: true
+  attr(:is_active, :boolean, default: false)
+  attr(:size, :string, default: "icon")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(href navigate patch))
+  slot(:inner_block, required: true)
 
   def pagination_link(assigns) do
     assigns =
-      assign(assigns,
+      assign(
+        assigns,
         :class,
         Button.button_variants(
           variant: if(assigns.is_active, do: "outline", else: "ghost"),
@@ -98,8 +99,8 @@ defmodule ShadcnElixir.Components.Pagination do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(href navigate patch)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(href navigate patch))
 
   def pagination_previous(assigns) do
     ~H"""
@@ -128,8 +129,8 @@ defmodule ShadcnElixir.Components.Pagination do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(href navigate patch)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(href navigate patch))
 
   def pagination_next(assigns) do
     ~H"""
@@ -158,8 +159,8 @@ defmodule ShadcnElixir.Components.Pagination do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def pagination_ellipsis(assigns) do
     ~H"""

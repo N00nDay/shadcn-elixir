@@ -18,11 +18,11 @@ defmodule ShadcnElixir.Components.Checkbox do
       <.checkbox name="terms" />
       <.checkbox name="news" checked />
   """
-  attr :name, :string, default: nil
-  attr :value, :string, default: "true"
-  attr :checked, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(disabled required form id)
+  attr(:name, :string, default: nil)
+  attr(:value, :string, default: "true")
+  attr(:checked, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(disabled required form id))
 
   def checkbox(assigns) do
     ~H"""

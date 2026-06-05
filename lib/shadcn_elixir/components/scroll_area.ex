@@ -18,9 +18,9 @@ defmodule ShadcnElixir.Components.ScrollArea do
         ...long content...
       </.scroll_area>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def scroll_area(assigns) do
     ~H"""

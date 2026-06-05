@@ -12,10 +12,10 @@ defmodule ShadcnElixir.Components.AlertDialog do
   import ShadcnElixir.JS, only: [open_modal: 1, close_modal: 1]
   alias ShadcnElixir.Components.Button
 
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog(assigns) do
     ~H"""
@@ -25,9 +25,9 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog_trigger(assigns) do
     ~H"""
@@ -37,10 +37,10 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog_content(assigns) do
     ~H"""
@@ -75,9 +75,9 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog_header(assigns) do
     ~H"""
@@ -91,9 +91,9 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog_footer(assigns) do
     ~H"""
@@ -107,9 +107,9 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog_title(assigns) do
     ~H"""
@@ -119,9 +119,9 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog_description(assigns) do
     ~H"""
@@ -135,10 +135,10 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog_action(assigns) do
     ~H"""
@@ -154,10 +154,10 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def alert_dialog_cancel(assigns) do
     ~H"""

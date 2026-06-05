@@ -20,10 +20,10 @@ defmodule ShadcnElixir.Components.Collapsible do
         <.collapsible_content>Hidden content</.collapsible_content>
       </.collapsible>
   """
-  attr :open, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:open, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def collapsible(assigns) do
     ~H"""
@@ -38,9 +38,9 @@ defmodule ShadcnElixir.Components.Collapsible do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def collapsible_trigger(assigns) do
     ~H"""
@@ -59,9 +59,9 @@ defmodule ShadcnElixir.Components.Collapsible do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def collapsible_content(assigns) do
     ~H"""

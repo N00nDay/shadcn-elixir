@@ -10,9 +10,9 @@ defmodule ShadcnElixir.Components.HoverCard do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def hover_card(assigns) do
     ~H"""
@@ -26,9 +26,9 @@ defmodule ShadcnElixir.Components.HoverCard do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def hover_card_trigger(assigns) do
     ~H"""
@@ -38,10 +38,10 @@ defmodule ShadcnElixir.Components.HoverCard do
     """
   end
 
-  attr :align, :string, default: "center", values: ["start", "center", "end"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:align, :string, default: "center", values: ["start", "center", "end"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def hover_card_content(assigns) do
     ~H"""

@@ -29,10 +29,10 @@ defmodule ShadcnElixir.Components.Dialog do
         </.dialog_content>
       </.dialog>
   """
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dialog(assigns) do
     ~H"""
@@ -42,9 +42,9 @@ defmodule ShadcnElixir.Components.Dialog do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dialog_trigger(assigns) do
     ~H"""
@@ -54,11 +54,11 @@ defmodule ShadcnElixir.Components.Dialog do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :class, :any, default: nil
-  attr :show_close, :boolean, default: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:show_close, :boolean, default: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dialog_content(assigns) do
     ~H"""
@@ -121,9 +121,9 @@ defmodule ShadcnElixir.Components.Dialog do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dialog_header(assigns) do
     ~H"""
@@ -137,9 +137,9 @@ defmodule ShadcnElixir.Components.Dialog do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dialog_footer(assigns) do
     ~H"""
@@ -153,9 +153,9 @@ defmodule ShadcnElixir.Components.Dialog do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dialog_title(assigns) do
     ~H"""
@@ -165,9 +165,9 @@ defmodule ShadcnElixir.Components.Dialog do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dialog_description(assigns) do
     ~H"""
@@ -177,9 +177,9 @@ defmodule ShadcnElixir.Components.Dialog do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dialog_close(assigns) do
     ~H"""

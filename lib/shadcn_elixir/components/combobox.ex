@@ -19,17 +19,17 @@ defmodule ShadcnElixir.Components.Combobox do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :id, :string, required: true
-  attr :name, :string, default: nil
-  attr :value, :string, default: nil
-  attr :placeholder, :string, default: "Select an option..."
-  attr :search_placeholder, :string, default: "Search..."
-  attr :empty, :string, default: "No results found."
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:id, :string, required: true)
+  attr(:name, :string, default: nil)
+  attr(:value, :string, default: nil)
+  attr(:placeholder, :string, default: "Select an option...")
+  attr(:search_placeholder, :string, default: "Search...")
+  attr(:empty, :string, default: "No results found.")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   slot :option do
-    attr :value, :string, required: true
+    attr(:value, :string, required: true)
   end
 
   def combobox(assigns) do

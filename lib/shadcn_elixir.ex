@@ -27,7 +27,7 @@ defmodule ShadcnElixir do
 
   > #### Cache {: .info}
   >
-  > `cn/1` depends on `TwMerge`, which requires the `TwMerge.Cache` process. Add it to
+  > `cn/1` depends on `TwMerge`, which requires the TwMerge.Cache process. Add it to
   > your application's supervision tree:
   >
   >     children = [

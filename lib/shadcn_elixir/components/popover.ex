@@ -12,10 +12,10 @@ defmodule ShadcnElixir.Components.Popover do
   import ShadcnElixir, only: [cn: 1]
   import ShadcnElixir.JS, only: [toggle: 1, close: 1]
 
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def popover(assigns) do
     ~H"""
@@ -31,9 +31,9 @@ defmodule ShadcnElixir.Components.Popover do
     """
   end
 
-  attr :popover, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:popover, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def popover_trigger(assigns) do
     ~H"""
@@ -43,11 +43,11 @@ defmodule ShadcnElixir.Components.Popover do
     """
   end
 
-  attr :popover, :string, required: true
-  attr :align, :string, default: "center", values: ["start", "center", "end"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:popover, :string, required: true)
+  attr(:align, :string, default: "center", values: ["start", "center", "end"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def popover_content(assigns) do
     ~H"""

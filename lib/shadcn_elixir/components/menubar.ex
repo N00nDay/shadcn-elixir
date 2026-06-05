@@ -12,9 +12,9 @@ defmodule ShadcnElixir.Components.Menubar do
   import ShadcnElixir, only: [cn: 1]
   import ShadcnElixir.JS, only: [toggle: 1, close: 1]
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def menubar(assigns) do
     ~H"""
@@ -29,10 +29,10 @@ defmodule ShadcnElixir.Components.Menubar do
     """
   end
 
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def menubar_menu(assigns) do
     ~H"""
@@ -42,10 +42,10 @@ defmodule ShadcnElixir.Components.Menubar do
     """
   end
 
-  attr :menu, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:menu, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def menubar_trigger(assigns) do
     ~H"""
@@ -68,10 +68,10 @@ defmodule ShadcnElixir.Components.Menubar do
     """
   end
 
-  attr :menu, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:menu, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def menubar_content(assigns) do
     ~H"""
@@ -96,10 +96,10 @@ defmodule ShadcnElixir.Components.Menubar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :inset, :boolean, default: false
-  attr :rest, :global, include: ~w(href navigate patch)
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:inset, :boolean, default: false)
+  attr(:rest, :global, include: ~w(href navigate patch))
+  slot(:inner_block, required: true)
 
   def menubar_item(assigns) do
     ~H"""
@@ -124,10 +124,10 @@ defmodule ShadcnElixir.Components.Menubar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :inset, :boolean, default: false
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:inset, :boolean, default: false)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def menubar_label(assigns) do
     ~H"""
@@ -142,8 +142,8 @@ defmodule ShadcnElixir.Components.Menubar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def menubar_separator(assigns) do
     ~H"""
@@ -156,9 +156,9 @@ defmodule ShadcnElixir.Components.Menubar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def menubar_shortcut(assigns) do
     ~H"""

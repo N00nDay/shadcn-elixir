@@ -12,11 +12,11 @@ defmodule ShadcnElixir.Components.Carousel do
   import ShadcnElixir, only: [cn: 1]
   alias ShadcnElixir.Components.Button
 
-  attr :id, :string, required: true
-  attr :orientation, :string, default: "horizontal", values: ["horizontal", "vertical"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:orientation, :string, default: "horizontal", values: ["horizontal", "vertical"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def carousel(assigns) do
     ~H"""
@@ -34,9 +34,9 @@ defmodule ShadcnElixir.Components.Carousel do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def carousel_content(assigns) do
     ~H"""
@@ -52,9 +52,9 @@ defmodule ShadcnElixir.Components.Carousel do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def carousel_item(assigns) do
     ~H"""
@@ -70,9 +70,9 @@ defmodule ShadcnElixir.Components.Carousel do
     """
   end
 
-  attr :carousel, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:carousel, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def carousel_previous(assigns) do
     assigns = assign(assigns, :scroll_js, scroll_js(assigns.carousel, -1))
@@ -93,9 +93,9 @@ defmodule ShadcnElixir.Components.Carousel do
     """
   end
 
-  attr :carousel, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:carousel, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def carousel_next(assigns) do
     assigns = assign(assigns, :scroll_js, scroll_js(assigns.carousel, 1))

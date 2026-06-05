@@ -14,10 +14,10 @@ defmodule ShadcnElixir.Components.Command do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def command(assigns) do
     ~H"""
@@ -38,9 +38,9 @@ defmodule ShadcnElixir.Components.Command do
     """
   end
 
-  attr :placeholder, :string, default: "Type a command or search..."
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:placeholder, :string, default: "Type a command or search...")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def command_input(assigns) do
     ~H"""
@@ -76,9 +76,9 @@ defmodule ShadcnElixir.Components.Command do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def command_list(assigns) do
     ~H"""
@@ -94,9 +94,9 @@ defmodule ShadcnElixir.Components.Command do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def command_empty(assigns) do
     ~H"""
@@ -112,10 +112,10 @@ defmodule ShadcnElixir.Components.Command do
     """
   end
 
-  attr :heading, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:heading, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def command_group(assigns) do
     ~H"""
@@ -128,10 +128,10 @@ defmodule ShadcnElixir.Components.Command do
     """
   end
 
-  attr :value, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(phx-click href navigate patch)
-  slot :inner_block, required: true
+  attr(:value, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(phx-click href navigate patch))
+  slot(:inner_block, required: true)
 
   def command_item(assigns) do
     ~H"""
@@ -157,8 +157,8 @@ defmodule ShadcnElixir.Components.Command do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def command_separator(assigns) do
     ~H"""
@@ -166,9 +166,9 @@ defmodule ShadcnElixir.Components.Command do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def command_shortcut(assigns) do
     ~H"""

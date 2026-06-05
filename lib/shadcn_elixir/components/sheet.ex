@@ -18,8 +18,10 @@ defmodule ShadcnElixir.Components.Sheet do
         "data-[state=open]:animate-in",
     variants: %{
       side: %{
-        "right" => "data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
-        "left" => "data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
+        "right" =>
+          "data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
+        "left" =>
+          "data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
         "top" => "data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b",
         "bottom" => "data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t"
       }
@@ -27,10 +29,10 @@ defmodule ShadcnElixir.Components.Sheet do
     default_variants: %{side: "right"}
   }
 
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sheet(assigns) do
     ~H"""
@@ -40,9 +42,9 @@ defmodule ShadcnElixir.Components.Sheet do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sheet_trigger(assigns) do
     ~H"""
@@ -52,14 +54,15 @@ defmodule ShadcnElixir.Components.Sheet do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :side, :string, default: "right", values: ["right", "left", "top", "bottom"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:side, :string, default: "right", values: ["right", "left", "top", "bottom"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sheet_content(assigns) do
-    assigns = assign(assigns, :content_class, variant(@content, side: assigns.side, class: assigns.class))
+    assigns =
+      assign(assigns, :content_class, variant(@content, side: assigns.side, class: assigns.class))
 
     ~H"""
     <div
@@ -108,9 +111,9 @@ defmodule ShadcnElixir.Components.Sheet do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sheet_header(assigns) do
     ~H"""
@@ -120,9 +123,9 @@ defmodule ShadcnElixir.Components.Sheet do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sheet_footer(assigns) do
     ~H"""
@@ -132,9 +135,9 @@ defmodule ShadcnElixir.Components.Sheet do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sheet_title(assigns) do
     ~H"""
@@ -144,9 +147,9 @@ defmodule ShadcnElixir.Components.Sheet do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sheet_description(assigns) do
     ~H"""
@@ -156,9 +159,9 @@ defmodule ShadcnElixir.Components.Sheet do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def sheet_close(assigns) do
     ~H"""

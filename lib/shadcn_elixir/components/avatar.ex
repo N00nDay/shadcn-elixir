@@ -20,9 +20,9 @@ defmodule ShadcnElixir.Components.Avatar do
         <.avatar_fallback>CN</.avatar_fallback>
       </.avatar>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def avatar(assigns) do
     ~H"""
@@ -36,10 +36,10 @@ defmodule ShadcnElixir.Components.Avatar do
     """
   end
 
-  attr :src, :string, required: true
-  attr :alt, :string, default: ""
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:src, :string, required: true)
+  attr(:alt, :string, default: "")
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def avatar_image(assigns) do
     ~H"""
@@ -54,9 +54,9 @@ defmodule ShadcnElixir.Components.Avatar do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def avatar_fallback(assigns) do
     ~H"""

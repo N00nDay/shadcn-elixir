@@ -25,9 +25,9 @@ defmodule ShadcnElixir.Components.RadioGroup do
         </label>
       </.radio_group>
   """
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def radio_group(assigns) do
     ~H"""
@@ -37,11 +37,11 @@ defmodule ShadcnElixir.Components.RadioGroup do
     """
   end
 
-  attr :name, :string, required: true
-  attr :value, :string, required: true
-  attr :checked, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(disabled required form id)
+  attr(:name, :string, required: true)
+  attr(:value, :string, required: true)
+  attr(:checked, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(disabled required form id))
 
   def radio_group_item(assigns) do
     ~H"""

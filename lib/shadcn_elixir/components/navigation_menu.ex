@@ -11,9 +11,9 @@ defmodule ShadcnElixir.Components.NavigationMenu do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def navigation_menu(assigns) do
     ~H"""
@@ -27,9 +27,9 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def navigation_menu_list(assigns) do
     ~H"""
@@ -43,9 +43,9 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def navigation_menu_item(assigns) do
     ~H"""
@@ -59,9 +59,9 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def navigation_menu_trigger(assigns) do
     ~H"""
@@ -96,9 +96,9 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def navigation_menu_content(assigns) do
     ~H"""
@@ -120,10 +120,10 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :active, :boolean, default: false
-  attr :rest, :global, include: ~w(href navigate patch)
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:active, :boolean, default: false)
+  attr(:rest, :global, include: ~w(href navigate patch))
+  slot(:inner_block, required: true)
 
   def navigation_menu_link(assigns) do
     ~H"""

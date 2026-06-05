@@ -11,10 +11,10 @@ defmodule ShadcnElixir.Components.Drawer do
   import ShadcnElixir, only: [cn: 1]
   import ShadcnElixir.JS, only: [open_modal: 1, close_modal: 1]
 
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def drawer(assigns) do
     ~H"""
@@ -24,9 +24,9 @@ defmodule ShadcnElixir.Components.Drawer do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def drawer_trigger(assigns) do
     ~H"""
@@ -36,10 +36,10 @@ defmodule ShadcnElixir.Components.Drawer do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def drawer_content(assigns) do
     ~H"""
@@ -74,9 +74,9 @@ defmodule ShadcnElixir.Components.Drawer do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def drawer_header(assigns) do
     ~H"""
@@ -90,9 +90,9 @@ defmodule ShadcnElixir.Components.Drawer do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def drawer_footer(assigns) do
     ~H"""
@@ -102,9 +102,9 @@ defmodule ShadcnElixir.Components.Drawer do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def drawer_title(assigns) do
     ~H"""
@@ -114,9 +114,9 @@ defmodule ShadcnElixir.Components.Drawer do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def drawer_description(assigns) do
     ~H"""
@@ -126,9 +126,9 @@ defmodule ShadcnElixir.Components.Drawer do
     """
   end
 
-  attr :dialog, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:dialog, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def drawer_close(assigns) do
     ~H"""

@@ -14,13 +14,14 @@ defmodule ShadcnElixir.Components.Textarea do
 
       <.textarea placeholder="Type your message here." />
   """
-  attr :name, :string, default: nil
-  attr :value, :any, default: nil
-  attr :class, :any, default: nil
+  attr(:name, :string, default: nil)
+  attr(:value, :any, default: nil)
+  attr(:class, :any, default: nil)
 
-  attr :rest, :global,
+  attr(:rest, :global,
     include: ~w(autocomplete disabled form maxlength minlength placeholder readonly
                 required rows cols wrap)
+  )
 
   def textarea(assigns) do
     ~H"""

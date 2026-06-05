@@ -36,9 +36,9 @@ defmodule ShadcnElixir.Components.Field do
   }
 
   @doc "Groups related fields with an optional legend."
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field_set(assigns) do
     ~H"""
@@ -58,13 +58,14 @@ defmodule ShadcnElixir.Components.Field do
     """
   end
 
-  attr :variant, :string, default: nil, values: [nil, "legend", "label"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:variant, :string, default: nil, values: [nil, "legend", "label"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field_legend(assigns) do
-    assigns = assign(assigns, :class, variant(@legend, variant: assigns.variant, class: assigns.class))
+    assigns =
+      assign(assigns, :class, variant(@legend, variant: assigns.variant, class: assigns.class))
 
     ~H"""
     <legend data-slot="field-legend" data-variant={@variant || "legend"} class={@class} {@rest}>
@@ -74,9 +75,9 @@ defmodule ShadcnElixir.Components.Field do
   end
 
   @doc "A vertical stack of fields."
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field_group(assigns) do
     ~H"""
@@ -107,14 +108,18 @@ defmodule ShadcnElixir.Components.Field do
         <.field_description>Your full name.</.field_description>
       </.field>
   """
-  attr :orientation, :string, default: nil, values: [nil, "vertical", "horizontal", "responsive"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:orientation, :string, default: nil, values: [nil, "vertical", "horizontal", "responsive"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field(assigns) do
     assigns =
-      assign(assigns, :class, variant(@field, orientation: assigns.orientation, class: assigns.class))
+      assign(
+        assigns,
+        :class,
+        variant(@field, orientation: assigns.orientation, class: assigns.class)
+      )
 
     ~H"""
     <div role="group" data-slot="field" data-orientation={@orientation || "vertical"} class={@class} {@rest}>
@@ -123,9 +128,9 @@ defmodule ShadcnElixir.Components.Field do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field_content(assigns) do
     ~H"""
@@ -139,10 +144,10 @@ defmodule ShadcnElixir.Components.Field do
     """
   end
 
-  attr :for, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:for, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field_label(assigns) do
     ~H"""
@@ -164,9 +169,9 @@ defmodule ShadcnElixir.Components.Field do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field_title(assigns) do
     ~H"""
@@ -180,9 +185,9 @@ defmodule ShadcnElixir.Components.Field do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field_description(assigns) do
     ~H"""
@@ -202,9 +207,9 @@ defmodule ShadcnElixir.Components.Field do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block)
 
   def field_separator(assigns) do
     ~H"""
@@ -224,9 +229,9 @@ defmodule ShadcnElixir.Components.Field do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def field_error(assigns) do
     ~H"""

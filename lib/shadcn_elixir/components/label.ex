@@ -14,10 +14,10 @@ defmodule ShadcnElixir.Components.Label do
 
       <.label for="email">Email</.label>
   """
-  attr :for, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:for, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def label(assigns) do
     ~H"""

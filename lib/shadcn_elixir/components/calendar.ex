@@ -14,14 +14,14 @@ defmodule ShadcnElixir.Components.Calendar do
 
   @weekdays ~w(Su Mo Tu We Th Fr Sa)
 
-  attr :month, :any, default: nil, doc: "A Date within the month to display (defaults to today)."
-  attr :selected, :any, default: nil, doc: "The selected Date, or nil."
-  attr :today, :any, default: nil, doc: "Override for 'today' (defaults to Date.utc_today/0)."
-  attr :on_select, :string, default: nil
-  attr :on_previous_month, :string, default: nil
-  attr :on_next_month, :string, default: nil
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:month, :any, default: nil, doc: "A Date within the month to display (defaults to today).")
+  attr(:selected, :any, default: nil, doc: "The selected Date, or nil.")
+  attr(:today, :any, default: nil, doc: "Override for 'today' (defaults to Date.utc_today/0).")
+  attr(:on_select, :string, default: nil)
+  attr(:on_previous_month, :string, default: nil)
+  attr(:on_next_month, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def calendar(assigns) do
     today = assigns.today || Date.utc_today()
@@ -120,7 +120,8 @@ defmodule ShadcnElixir.Components.Calendar do
       "hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none",
       day.month != first.month && "text-muted-foreground opacity-50",
       day == today && day != selected && "bg-accent text-accent-foreground",
-      day == selected && "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
+      day == selected &&
+        "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
     ])
   end
 end

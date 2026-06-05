@@ -14,10 +14,10 @@ defmodule ShadcnElixir.Components.DropdownMenu do
   import ShadcnElixir, only: [cn: 1]
   import ShadcnElixir.JS, only: [toggle: 1, close: 1]
 
-  attr :id, :string, required: true
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:id, :string, required: true)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu(assigns) do
     ~H"""
@@ -33,9 +33,9 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :menu, :string, required: true
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:menu, :string, required: true)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_trigger(assigns) do
     ~H"""
@@ -45,11 +45,11 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :menu, :string, required: true
-  attr :align, :string, default: "start", values: ["start", "center", "end"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:menu, :string, required: true)
+  attr(:align, :string, default: "start", values: ["start", "center", "end"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_content(assigns) do
     ~H"""
@@ -77,9 +77,9 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_group(assigns) do
     ~H"""
@@ -89,10 +89,10 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :inset, :boolean, default: false
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:inset, :boolean, default: false)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_label(assigns) do
     ~H"""
@@ -107,12 +107,12 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :menu, :string, required: true
-  attr :variant, :string, default: "default", values: ["default", "destructive"]
-  attr :inset, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global, include: ~w(href navigate patch)
-  slot :inner_block, required: true
+  attr(:menu, :string, required: true)
+  attr(:variant, :string, default: "default", values: ["default", "destructive"])
+  attr(:inset, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global, include: ~w(href navigate patch))
+  slot(:inner_block, required: true)
 
   def dropdown_menu_item(assigns) do
     ~H"""
@@ -145,11 +145,11 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :menu, :string, required: true
-  attr :checked, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:menu, :string, required: true)
+  attr(:checked, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_checkbox_item(assigns) do
     ~H"""
@@ -182,11 +182,11 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :menu, :string, required: true
-  attr :checked, :boolean, default: false
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:menu, :string, required: true)
+  attr(:checked, :boolean, default: false)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_radio_item(assigns) do
     ~H"""
@@ -209,8 +209,8 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
 
   def dropdown_menu_separator(assigns) do
     ~H"""
@@ -223,9 +223,9 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_shortcut(assigns) do
     ~H"""
@@ -240,9 +240,9 @@ defmodule ShadcnElixir.Components.DropdownMenu do
   end
 
   @doc "A submenu (CSS hover-reveal)."
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_sub(assigns) do
     ~H"""
@@ -252,10 +252,10 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :inset, :boolean, default: false
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:inset, :boolean, default: false)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_sub_trigger(assigns) do
     ~H"""
@@ -282,9 +282,9 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def dropdown_menu_sub_content(assigns) do
     ~H"""

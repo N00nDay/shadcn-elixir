@@ -10,9 +10,9 @@ defmodule ShadcnElixir.Components.Tooltip do
 
   import ShadcnElixir, only: [cn: 1]
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def tooltip(assigns) do
     ~H"""
@@ -26,9 +26,9 @@ defmodule ShadcnElixir.Components.Tooltip do
     """
   end
 
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def tooltip_trigger(assigns) do
     ~H"""
@@ -38,10 +38,10 @@ defmodule ShadcnElixir.Components.Tooltip do
     """
   end
 
-  attr :side, :string, default: "top", values: ["top", "bottom", "left", "right"]
-  attr :class, :any, default: nil
-  attr :rest, :global
-  slot :inner_block, required: true
+  attr(:side, :string, default: "top", values: ["top", "bottom", "left", "right"])
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+  slot(:inner_block, required: true)
 
   def tooltip_content(assigns) do
     ~H"""
