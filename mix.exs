@@ -33,6 +33,7 @@ defmodule ShadcnElixir.MixProject do
     [
       {:phoenix_live_view, "~> 1.0"},
       {:tw_merge, "~> 0.1"},
+      {:jason, "~> 1.4"},
       # dev/test only
       {:phoenix_storybook, "~> 0.8", only: :dev},
       {:floki, ">= 0.30.0", only: :test},

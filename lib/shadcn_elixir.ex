@@ -85,6 +85,7 @@ defmodule ShadcnElixir do
     quote do
       import ShadcnElixir.Components.{
         AspectRatio,
+        Accordion,
         Alert,
         Avatar,
         Badge,
@@ -92,6 +93,8 @@ defmodule ShadcnElixir do
         Button,
         ButtonGroup,
         Card,
+        Checkbox,
+        Collapsible,
         Empty,
         Field,
         Input,
@@ -102,11 +105,16 @@ defmodule ShadcnElixir do
         NativeSelect,
         Pagination,
         Progress,
+        RadioGroup,
         Separator,
         Skeleton,
         Spinner,
+        Switch,
         Table,
+        Tabs,
         Textarea,
+        Toggle,
+        ToggleGroup,
         Typography
       }
     end
