@@ -99,7 +99,7 @@ defmodule ShadcnElixir.Components.Table do
   end
 
   attr :class, :any, default: nil
-  attr :rest, :global
+  attr :rest, :global, include: ~w(colspan rowspan scope abbr)
   slot :inner_block, required: true
 
   def table_head(assigns) do
@@ -121,7 +121,7 @@ defmodule ShadcnElixir.Components.Table do
   end
 
   attr :class, :any, default: nil
-  attr :rest, :global
+  attr :rest, :global, include: ~w(colspan rowspan headers)
   slot :inner_block, required: true
 
   def table_cell(assigns) do
