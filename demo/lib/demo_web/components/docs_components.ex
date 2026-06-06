@@ -249,7 +249,11 @@ defmodule DemoWeb.DocsComponents do
 
   defp docs_sidebar(assigns) do
     ~H"""
-    <aside class="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-60 shrink-0 overflow-y-auto border-r px-3 py-8 md:block">
+    <aside
+      id="docs-sidebar-scroll"
+      phx-hook="DocsSidebarScroll"
+      class="sticky top-14 hidden h-[calc(100svh-3.5rem)] w-60 shrink-0 overflow-y-auto border-r px-3 py-8 md:block"
+    >
       <nav class="space-y-6">
         <div>
           <p class="mb-2 px-2 text-sm font-semibold">Getting Started</p>

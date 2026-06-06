@@ -40,6 +40,19 @@ const DocsHooks = {
       })
     },
   },
+  // Preserve the docs sidebar's scroll position across LiveView navigations.
+  DocsSidebarScroll: {
+    mounted() {
+      const key = "docs-sidebar-scroll"
+      const saved = sessionStorage.getItem(key)
+      if (saved !== null) this.el.scrollTop = parseInt(saved, 10)
+      this._onScroll = () => sessionStorage.setItem(key, String(this.el.scrollTop))
+      this.el.addEventListener("scroll", this._onScroll, {passive: true})
+    },
+    destroyed() {
+      this.el.removeEventListener("scroll", this._onScroll)
+    },
+  },
   // ⌘K / Ctrl+K opens the docs search palette by clicking its trigger.
   CommandK: {
     mounted() {
