@@ -67,9 +67,9 @@ defmodule DemoWeb.DocsComponents do
     assigns = assign(assigns, :github_url, @github_url)
 
     ~H"""
-    <footer class="mt-12 border-t py-8">
+    <footer class="py-8">
       <div class="mx-auto max-w-5xl px-6 lg:px-10">
-        <p class="text-sm text-balance text-muted-foreground">
+        <p class="text-center text-sm text-balance text-muted-foreground">
           Built by <.link
             href="https://twitter.com/shadcn"
             target="_blank"
@@ -103,9 +103,6 @@ defmodule DemoWeb.DocsComponents do
     ~H"""
     <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div class="mx-auto flex h-14 max-w-screen-2xl items-center gap-4 px-6 lg:px-10">
-        <.link navigate="/" class="flex items-center gap-2 text-base font-semibold">
-          shadcn-elixir
-        </.link>
         <nav class="hidden items-center gap-4 text-sm font-medium md:flex">
           <.link navigate="/" class="text-foreground/70 transition-colors hover:text-foreground">
             Home

@@ -69,30 +69,34 @@ defmodule DemoWeb.HomeLive do
           </div>
         </section>
 
-        <section class="mx-auto max-w-screen-2xl px-6 pb-24 lg:px-10">
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <div class="flex flex-col gap-6">
-              <.kit_card />
-              <.nav_card />
-              <.account_nav_card />
-              <.savings_card />
+        <section class="relative">
+          <div class="mx-auto max-w-screen-2xl px-6 pb-16 lg:px-10">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+              <div class="flex flex-col gap-6">
+                <.kit_card />
+                <.nav_card />
+                <.account_nav_card />
+                <.savings_card />
+              </div>
+              <div class="flex flex-col gap-6">
+                <.contribution_card />
+                <.balance_card />
+                <.dividends_card />
+              </div>
+              <div class="flex flex-col gap-6">
+                <.connect_card />
+                <.transfer_card />
+                <.payments_card />
+              </div>
+              <div class="flex flex-col gap-6">
+                <.distribute_card />
+                <.analytics_card />
+                <.notifications_card />
+                <.power_card />
+              </div>
             </div>
-            <div class="flex flex-col gap-6">
-              <.contribution_card />
-              <.balance_card />
-              <.dividends_card />
-            </div>
-            <div class="flex flex-col gap-6">
-              <.connect_card />
-              <.transfer_card />
-              <.payments_card />
-            </div>
-            <div class="flex flex-col gap-6">
-              <.distribute_card />
-              <.analytics_card />
-              <.notifications_card />
-              <.power_card />
-            </div>
+          </div>
+          <div class="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background to-transparent">
           </div>
         </section>
       </main>
