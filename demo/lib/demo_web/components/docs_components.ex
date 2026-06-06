@@ -106,7 +106,10 @@ defmodule DemoWeb.DocsComponents do
         <.link navigate="/" class="flex items-center gap-2 text-base font-semibold">
           shadcn-elixir
         </.link>
-        <nav class="hidden items-center gap-5 text-sm md:flex">
+        <nav class="hidden items-center gap-4 text-sm font-medium md:flex">
+          <.link navigate="/" class="text-foreground/70 transition-colors hover:text-foreground">
+            Home
+          </.link>
           <.link
             navigate="/docs/introduction"
             class="text-foreground/70 transition-colors hover:text-foreground"
@@ -118,6 +121,15 @@ defmodule DemoWeb.DocsComponents do
             class="text-foreground/70 transition-colors hover:text-foreground"
           >
             Components
+          </.link>
+          <.link href="#" class="text-foreground/70 transition-colors hover:text-foreground">
+            Blocks
+          </.link>
+          <.link href="#" class="text-foreground/70 transition-colors hover:text-foreground">
+            Charts
+          </.link>
+          <.link href="#" class="text-foreground/70 transition-colors hover:text-foreground">
+            Create
           </.link>
         </nav>
         <div class="ml-auto flex items-center gap-2">
@@ -184,7 +196,7 @@ defmodule DemoWeb.DocsComponents do
       type="button"
       phx-hook="CommandK"
       phx-click={open_modal("docs-search")}
-      class="inline-flex h-8 w-9 items-center gap-2 rounded-md border bg-muted/40 px-0 text-sm text-muted-foreground transition-colors hover:bg-muted sm:w-56 sm:px-3"
+      class="inline-flex h-9 w-9 items-center gap-2 rounded-md border bg-muted/40 px-0 text-sm text-muted-foreground transition-colors hover:bg-muted sm:w-64 sm:px-3 lg:w-72"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -214,7 +226,7 @@ defmodule DemoWeb.DocsComponents do
     <.dialog id="docs-search">
       <.dialog_content dialog="docs-search" show_close={false} class="overflow-hidden p-0 sm:max-w-lg">
         <.command id="docs-search-cmd" class="[&_[data-slot=command-input-wrapper]]:h-11">
-          <.command_input placeholder="Search components..." />
+          <.command_input placeholder="Search documentation..." />
           <.command_list>
             <.command_empty>No results found.</.command_empty>
             <.command_group heading="Components">
