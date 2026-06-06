@@ -69,34 +69,43 @@ defmodule DemoWeb.HomeLive do
           </div>
         </section>
 
-        <section class="relative">
-          <div class="mx-auto max-w-screen-2xl px-6 pb-16 lg:px-10">
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <div class="flex flex-col gap-6">
+        <section class="overflow-hidden">
+          <div
+            data-slot="demo"
+            class="relative flex w-full flex-col gap-(--gap) overflow-hidden bg-muted p-12 pb-0! [--gap:--spacing(8)] lg:p-6 lg:[--gap:--spacing(6)] dark:bg-background"
+          >
+            <div class="relative z-10 mx-auto grid gap-(--gap) **:data-[slot=card]:w-full md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:max-w-[1600px] min-[1400px]:grid-cols-4 min-[1900px]:grid-cols-5 2xl:max-w-[1900px]">
+              <div class="flex flex-col items-start gap-(--gap)">
                 <.kit_card />
                 <.nav_card />
-                <.account_nav_card />
                 <.savings_card />
               </div>
-              <div class="flex flex-col gap-6">
+              <div class="hidden flex-col gap-(--gap) lg:flex">
                 <.contribution_card />
                 <.balance_card />
                 <.dividends_card />
               </div>
-              <div class="flex flex-col gap-6">
+              <div class="hidden flex-col gap-(--gap) min-[1900px]:flex">
+                <.account_nav_card />
+              </div>
+              <div class="hidden flex-col gap-(--gap) md:flex">
                 <.connect_card />
                 <.transfer_card />
                 <.payments_card />
               </div>
-              <div class="flex flex-col gap-6">
+              <div class="hidden flex-col gap-(--gap) min-[1400px]:flex">
                 <.distribute_card />
                 <.analytics_card />
                 <.notifications_card />
                 <.power_card />
               </div>
             </div>
-          </div>
-          <div class="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background to-transparent">
+            <div class="from-background via-muted pointer-events-none absolute inset-x-0 top-0 z-[1] h-120 bg-linear-to-b to-transparent dark:hidden">
+            </div>
+            <div class="from-background via-muted pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-120 bg-linear-to-t to-transparent dark:hidden">
+            </div>
+            <div class="from-background pointer-events-none absolute inset-x-0 bottom-0 z-[1] hidden h-120 bg-linear-to-t to-transparent dark:block">
+            </div>
           </div>
         </section>
       </main>
