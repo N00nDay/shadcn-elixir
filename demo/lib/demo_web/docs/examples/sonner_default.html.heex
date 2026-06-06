@@ -1,0 +1,9 @@
+<div>
+  <.button
+    variant="outline"
+    onclick="window.dispatchEvent(new CustomEvent('shadcn:toast', {detail: {title: 'Changes saved', description: 'Your preferences have been updated.'}}))"
+  >
+    Show Toast
+  </.button>
+  <.toaster />
+</div>

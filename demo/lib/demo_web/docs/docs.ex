@@ -934,5 +934,15 @@ defmodule DemoWeb.Docs do
     }
   end
 
+  def component("sonner") do
+    %{
+      slug: "sonner",
+      title: "Sonner",
+      description: "An opinionated toast notifier — mount the toaster and push toasts to it.",
+      examples: [%{key: "sonner_default", title: "Default", description: nil}],
+      props: [%{label: "toaster", module: C.Sonner, fun: :toaster}]
+    }
+  end
+
   def component(_), do: nil
 end
