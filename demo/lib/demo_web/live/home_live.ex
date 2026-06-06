@@ -117,76 +117,99 @@ defmodule DemoWeb.HomeLive do
 
   defp kit_card(assigns) do
     ~H"""
-    <.card class="p-6">
-      <div class="flex flex-wrap items-center gap-2">
-        <.button size="sm">
-          Button
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
-          </svg>
-        </.button>
-        <.button size="sm" variant="secondary">Secondary</.button>
-        <.button size="sm" variant="outline">Outline</.button>
-      </div>
-
-      <div class="relative mt-4">
-        <.input placeholder="Name" class="pr-9" />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground"
-        >
-          <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
-        </svg>
-      </div>
-
-      <.textarea placeholder="Message" class="mt-3 min-h-20" />
-
-      <div class="mt-4 flex items-center justify-between gap-2">
-        <div class="flex items-center gap-2">
-          <.badge>Badge</.badge>
-          <.badge variant="secondary">Secondary</.badge>
-        </div>
-        <div class="flex items-center gap-3">
-          <.radio_group_item name="kit" value="a" />
-          <.radio_group_item name="kit" value="b" checked />
-          <.checkbox checked />
-          <.switch checked />
-        </div>
-      </div>
-
-      <div class="mt-4 flex items-center justify-between gap-2">
-        <.button variant="outline" size="sm">Alert Dialog</.button>
-        <.button_group>
-          <.button variant="outline" size="sm">Button Group</.button>
-          <.button variant="outline" size="icon-sm" aria-label="Collapse">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="m18 15-6-6-6 6" />
+    <.card class="w-full">
+      <.card_content class="flex flex-col gap-6">
+        <div class="flex gap-2">
+          <.button>
+            Button
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-icon="inline-end">
+              <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
             </svg>
           </.button>
-        </.button_group>
-      </div>
+          <.button variant="secondary">Secondary</.button>
+          <.button variant="outline">Outline</.button>
+        </div>
+
+        <.field_group>
+          <.field>
+            <.input_group>
+              <.input_group_input placeholder="Name" />
+              <.input_group_addon align="inline-end">
+                <.input_group_text>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+                  </svg>
+                </.input_group_text>
+              </.input_group_addon>
+            </.input_group>
+          </.field>
+          <.field class="flex-1">
+            <.textarea placeholder="Message" class="resize-none" />
+          </.field>
+        </.field_group>
+
+        <div class="flex items-center gap-2">
+          <div class="flex gap-2">
+            <.badge>Badge</.badge>
+            <.badge variant="secondary">Secondary</.badge>
+            <.badge variant="outline" class="4xl:flex hidden">Outline</.badge>
+          </div>
+          <.radio_group class="ml-auto flex w-fit gap-3" aria-label="Plan">
+            <.radio_group_item name="kit-plan" value="monthly" checked aria-label="Monthly" />
+            <.radio_group_item name="kit-plan" value="yearly" aria-label="Yearly" />
+          </.radio_group>
+          <div class="flex gap-3">
+            <.checkbox checked aria-label="Enable email alerts" />
+            <.checkbox class="4xl:flex hidden" aria-label="Enable push alerts" />
+          </div>
+          <.switch checked class="4xl:hidden flex" aria-label="Compact mode" />
+        </div>
+
+        <div class="flex items-center gap-4">
+          <.alert_dialog id="ui-alert">
+            <.alert_dialog_trigger dialog="ui-alert">
+              <.button variant="outline">Alert Dialog</.button>
+            </.alert_dialog_trigger>
+            <.alert_dialog_content dialog="ui-alert" size="sm">
+              <.alert_dialog_header>
+                <.alert_dialog_title>Update notification settings?</.alert_dialog_title>
+                <.alert_dialog_description>
+                  This changes how alerts are delivered across your connected devices.
+                </.alert_dialog_description>
+              </.alert_dialog_header>
+              <.alert_dialog_footer>
+                <.alert_dialog_cancel dialog="ui-alert">Cancel</.alert_dialog_cancel>
+                <.alert_dialog_action dialog="ui-alert">Update</.alert_dialog_action>
+              </.alert_dialog_footer>
+            </.alert_dialog_content>
+          </.alert_dialog>
+          <.button_group class="ml-auto">
+            <.button variant="outline">Button Group</.button>
+            <.dropdown_menu id="ui-menu">
+              <.dropdown_menu_trigger menu="ui-menu">
+                <.button variant="outline" size="icon" aria-label="Open actions">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m5 12 7-7 7 7" /><path d="M12 19V5" />
+                  </svg>
+                </.button>
+              </.dropdown_menu_trigger>
+              <.dropdown_menu_content menu="ui-menu" align="end" class="w-40">
+                <.dropdown_menu_group>
+                  <.dropdown_menu_label>Actions</.dropdown_menu_label>
+                  <.dropdown_menu_item menu="ui-menu">Edit</.dropdown_menu_item>
+                  <.dropdown_menu_item menu="ui-menu">Duplicate</.dropdown_menu_item>
+                  <.dropdown_menu_item menu="ui-menu">Archive</.dropdown_menu_item>
+                </.dropdown_menu_group>
+                <.dropdown_menu_separator />
+                <.dropdown_menu_group>
+                  <.dropdown_menu_item menu="ui-menu" variant="destructive">Delete</.dropdown_menu_item>
+                </.dropdown_menu_group>
+              </.dropdown_menu_content>
+            </.dropdown_menu>
+          </.button_group>
+          <.switch checked class="4xl:flex hidden" aria-label="Advanced setting" />
+        </div>
+      </.card_content>
     </.card>
     """
   end
