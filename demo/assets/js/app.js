@@ -31,12 +31,34 @@ import topbar from "../vendor/topbar"
 const DocsHooks = {
   CopyCode: {
     mounted() {
+      const showCopied = () => {
+        this.el.setAttribute("data-copied", "true")
+        clearTimeout(this._t)
+        this._t = setTimeout(() => this.el.removeAttribute("data-copied"), 1500)
+      }
+      const fallbackCopy = (text) => {
+        try {
+          const ta = document.createElement("textarea")
+          ta.value = text
+          ta.setAttribute("readonly", "")
+          ta.style.position = "fixed"
+          ta.style.top = "0"
+          ta.style.opacity = "0"
+          document.body.appendChild(ta)
+          ta.focus()
+          ta.select()
+          const ok = document.execCommand("copy")
+          document.body.removeChild(ta)
+          if (ok) showCopied()
+        } catch (_e) {}
+      }
       this.el.addEventListener("click", () => {
         const code = this.el.dataset.code || ""
-        navigator.clipboard.writeText(code).then(() => {
-          this.el.setAttribute("data-copied", "true")
-          setTimeout(() => this.el.removeAttribute("data-copied"), 1500)
-        })
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(showCopied).catch(() => fallbackCopy(code))
+        } else {
+          fallbackCopy(code)
+        }
       })
     },
   },
