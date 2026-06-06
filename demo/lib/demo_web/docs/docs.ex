@@ -615,5 +615,129 @@ defmodule DemoWeb.Docs do
     }
   end
 
+  def component("button_group") do
+    %{
+      slug: "button_group",
+      title: "Button Group",
+      description: "Groups related buttons together with shared borders.",
+      examples: [%{key: "button_group_default", title: "Default", description: nil}],
+      props: [
+        %{label: "button_group", module: C.ButtonGroup, fun: :button_group},
+        %{label: "button_group_text", module: C.ButtonGroup, fun: :button_group_text}
+      ]
+    }
+  end
+
+  def component("input_group") do
+    %{
+      slug: "input_group",
+      title: "Input Group",
+      description: "Group an input with addons such as icons, text, or buttons.",
+      examples: [%{key: "input_group_default", title: "Default", description: nil}],
+      props: [
+        %{label: "input_group", module: C.InputGroup, fun: :input_group},
+        %{label: "input_group_input", module: C.InputGroup, fun: :input_group_input},
+        %{label: "input_group_addon", module: C.InputGroup, fun: :input_group_addon},
+        %{label: "input_group_text", module: C.InputGroup, fun: :input_group_text}
+      ]
+    }
+  end
+
+  def component("item") do
+    %{
+      slug: "item",
+      title: "Item",
+      description: "A flexible row for displaying media, content, and actions together.",
+      examples: [%{key: "item_default", title: "Default", description: nil}],
+      props: [
+        %{label: "item", module: C.Item, fun: :item},
+        %{label: "item_media", module: C.Item, fun: :item_media},
+        %{label: "item_content", module: C.Item, fun: :item_content},
+        %{label: "item_title", module: C.Item, fun: :item_title},
+        %{label: "item_description", module: C.Item, fun: :item_description},
+        %{label: "item_actions", module: C.Item, fun: :item_actions}
+      ]
+    }
+  end
+
+  def component("scroll_area") do
+    %{
+      slug: "scroll_area",
+      title: "Scroll Area",
+      description: "Augments native scroll functionality for custom, cross-browser styling.",
+      examples: [%{key: "scroll_area_default", title: "Default", description: nil}],
+      props: [%{label: "scroll_area", module: C.ScrollArea, fun: :scroll_area}]
+    }
+  end
+
+  def component("slider") do
+    %{
+      slug: "slider",
+      title: "Slider",
+      description: "An input where the user selects a value from within a given range.",
+      examples: [%{key: "slider_default", title: "Default", description: nil}],
+      props: [%{label: "slider", module: C.Slider, fun: :slider}]
+    }
+  end
+
+  def component("sheet") do
+    %{
+      slug: "sheet",
+      title: "Sheet",
+      description: "Extends the Dialog component to display content that slides in from the edge.",
+      examples: [%{key: "sheet_default", title: "Default", description: nil}],
+      props: [
+        %{label: "sheet", module: C.Sheet, fun: :sheet},
+        %{label: "sheet_trigger", module: C.Sheet, fun: :sheet_trigger},
+        %{label: "sheet_content", module: C.Sheet, fun: :sheet_content}
+      ]
+    }
+  end
+
+  def component("drawer") do
+    %{
+      slug: "drawer",
+      title: "Drawer",
+      description: "A panel that slides up from the bottom of the screen.",
+      examples: [%{key: "drawer_default", title: "Default", description: nil}],
+      props: [
+        %{label: "drawer", module: C.Drawer, fun: :drawer},
+        %{label: "drawer_trigger", module: C.Drawer, fun: :drawer_trigger},
+        %{label: "drawer_content", module: C.Drawer, fun: :drawer_content}
+      ]
+    }
+  end
+
+  def component("context_menu") do
+    %{
+      slug: "context_menu",
+      title: "Context Menu",
+      description: "Displays a menu triggered by a right click.",
+      examples: [%{key: "context_menu_default", title: "Default", description: nil}],
+      props: [
+        %{label: "context_menu", module: C.ContextMenu, fun: :context_menu},
+        %{label: "context_menu_trigger", module: C.ContextMenu, fun: :context_menu_trigger},
+        %{label: "context_menu_content", module: C.ContextMenu, fun: :context_menu_content},
+        %{label: "context_menu_item", module: C.ContextMenu, fun: :context_menu_item}
+      ]
+    }
+  end
+
+  def component("menubar") do
+    %{
+      slug: "menubar",
+      title: "Menubar",
+      description: "A visually persistent menu common in desktop applications.",
+      examples: [%{key: "menubar_default", title: "Default", description: nil}],
+      props: [
+        %{label: "menubar", module: C.Menubar, fun: :menubar},
+        %{label: "menubar_menu", module: C.Menubar, fun: :menubar_menu},
+        %{label: "menubar_trigger", module: C.Menubar, fun: :menubar_trigger},
+        %{label: "menubar_content", module: C.Menubar, fun: :menubar_content},
+        %{label: "menubar_item", module: C.Menubar, fun: :menubar_item}
+      ]
+    }
+  end
+
   def component(_), do: nil
 end
