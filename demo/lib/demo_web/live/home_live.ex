@@ -1,8 +1,7 @@
 defmodule DemoWeb.HomeLive do
   @moduledoc """
-  Landing page (`/`). Mirrors the shadcn/ui landing: the shared site header, a centered
-  hero, and a bento-grid dashboard mockup assembled entirely from real library components,
-  followed by the attribution footer.
+  Landing page (`/`) — a clone of the shadcn/ui landing (hero + bento dashboard),
+  built from the library's own components. Only the footer attribution differs.
   """
   use Phoenix.LiveView
   use ShadcnElixir
@@ -28,9 +27,7 @@ defmodule DemoWeb.HomeLive do
             rel="noreferrer"
             class="inline-flex items-center gap-2 rounded-full border bg-muted/40 px-4 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
           >
-            <span class="text-muted-foreground">New</span>
-            <.separator orientation="vertical" class="h-4" />
-            <span>58 components for Phoenix</span>
+            <span>Introducing GitHub Registries</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -46,46 +43,56 @@ defmodule DemoWeb.HomeLive do
           </.link>
 
           <h1 class="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
-            Beautifully designed components for Phoenix
+            The Foundation for your Design System
           </h1>
 
           <p class="max-w-2xl text-lg text-balance text-muted-foreground">
-            A faithful port of shadcn/ui for Phoenix LiveView. Accessible, customizable, open
-            source — and yours to own. Copy, paste, and ship.
+            A set of beautifully designed components that you can customize, extend, and build on.
+            Start here then make it your own. Open Source. Open Code.
           </p>
 
-          <div class="flex flex-wrap items-center justify-center gap-3">
-            <.button navigate="/docs/introduction" size="lg">Get Started</.button>
-            <.button variant="outline" size="lg" navigate="/docs/components/button">
-              Browse Components
+          <div>
+            <.button navigate="/docs/introduction" size="lg">
+              Build Your Own
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+              </svg>
             </.button>
           </div>
         </section>
 
         <section class="mx-auto max-w-7xl px-6 pb-24">
-          <.bento />
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div class="flex flex-col gap-6">
+              <.kit_card />
+              <.nav_card />
+            </div>
+            <div class="flex flex-col gap-6">
+              <.contribution_card />
+              <.balance_card />
+            </div>
+            <div class="flex flex-col gap-6">
+              <.connect_card />
+              <.transfer_card />
+            </div>
+            <div class="flex flex-col gap-6">
+              <.distribute_card />
+              <.analytics_card />
+              <.notifications_card />
+            </div>
+          </div>
         </section>
       </main>
 
       <.docs_footer />
-    </div>
-    """
-  end
-
-  # A bento-grid dashboard mockup — the landing showcase, assembled from real library
-  # components (analogous to shadcn's hero preview). Masonry via CSS multi-columns.
-  defp bento(assigns) do
-    ~H"""
-    <div class="gap-6 [column-fill:_balance] sm:columns-2 lg:columns-4 [&>*]:mb-6 [&>*]:break-inside-avoid">
-      <.kit_card />
-      <.activity_card />
-      <.connect_card />
-      <.distribute_card />
-      <.nav_card />
-      <.balance_card />
-      <.transfer_card />
-      <.analytics_card />
-      <.notifications_card />
     </div>
     """
   end
@@ -147,7 +154,7 @@ defmodule DemoWeb.HomeLive do
         <.button variant="outline" size="sm">Alert Dialog</.button>
         <.button_group>
           <.button variant="outline" size="sm">Button Group</.button>
-          <.button variant="outline" size="icon-sm" aria-label="More">
+          <.button variant="outline" size="icon-sm" aria-label="Collapse">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -166,29 +173,96 @@ defmodule DemoWeb.HomeLive do
     """
   end
 
-  defp activity_card(assigns) do
-    bars = [
-      {"Dec", 45},
-      {"Jan", 80},
-      {"Feb", 60},
-      {"Mar", 95},
-      {"Apr", 35},
-      {"May", 100}
+  defp nav_card(assigns) do
+    planning = [
+      {"Documents", "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z M14 2v5h5"},
+      {"Budget",
+       "M3 7V5a2 2 0 0 1 2-2h2 M17 3h2a2 2 0 0 1 2 2v2 M21 17v2a2 2 0 0 1-2 2h-2 M7 21H5a2 2 0 0 1-2-2v-2"},
+      {"Reports", "M3 3v18h18 M18 17V9 M13 17V5 M8 17v-3"},
+      {"Goals", "M22 12h-4 M6 12H2 M12 6V2 M12 22v-4"},
+      {"Calendar", "M8 2v4 M16 2v4 M3 10h18 M3 4h18v18H3z"}
     ]
 
+    support = [
+      {"Help Center", "M12 17h.01 M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"},
+      {"Docs",
+       "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"},
+      {"Contact Us", "M22 6 12 13 2 6 M2 6h20v12H2z"},
+      {"Status", "M22 12h-4l-3 9L9 3l-3 9H2"},
+      {"Community", "M2 12h20 M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"}
+    ]
+
+    assigns = assign(assigns, planning: planning, support: support)
+
+    ~H"""
+    <.card class="p-6">
+      <div class="grid grid-cols-2 gap-x-6 gap-y-6">
+        <div>
+          <p class="mb-2 text-sm font-medium text-muted-foreground">Planning</p>
+          <ul class="space-y-1 text-sm">
+            <li :for={{label, d} <- @planning}>
+              <a href="#" class="flex items-center gap-2 rounded-md py-1.5 hover:text-foreground">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-4 text-muted-foreground"
+                >
+                  <path d={d} />
+                </svg>
+                {label}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p class="mb-2 text-sm font-medium text-muted-foreground">Support</p>
+          <ul class="space-y-1 text-sm">
+            <li :for={{label, d} <- @support}>
+              <a href="#" class="flex items-center gap-2 rounded-md py-1.5 hover:text-foreground">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-4 text-muted-foreground"
+                >
+                  <path d={d} />
+                </svg>
+                {label}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <p class="text-sm font-medium text-muted-foreground">Overview</p>
+        <p class="text-sm font-medium text-muted-foreground">Account</p>
+      </div>
+    </.card>
+    """
+  end
+
+  defp contribution_card(assigns) do
+    bars = [{"Dec", 45}, {"Jan", 80}, {"Feb", 60}, {"Mar", 95}, {"Apr", 35}, {"May", 100}]
     assigns = assign(assigns, :bars, bars)
 
     ~H"""
     <.card>
       <.card_header>
-        <.card_title>Monthly Activity</.card_title>
+        <.card_title>Contribution History</.card_title>
         <.card_description>Last 6 months of activity</.card_description>
       </.card_header>
       <.card_content>
-        <div class="flex h-40 items-end justify-between gap-2">
-          <div :for={{label, h} <- @bars} class="flex flex-1 flex-col items-center gap-2">
+        <div class="flex h-40 items-stretch justify-between gap-2">
+          <div :for={{label, h} <- @bars} class="flex h-full flex-1 flex-col justify-end gap-2">
             <div class="w-full rounded-t-sm bg-muted-foreground/70" style={"height: #{h}%"}></div>
-            <span class="text-xs text-muted-foreground">{label}</span>
+            <span class="text-center text-xs text-muted-foreground">{label}</span>
           </div>
         </div>
         <div class="mt-4 grid grid-cols-2 gap-3">
@@ -198,7 +272,7 @@ defmodule DemoWeb.HomeLive do
             <p class="text-xs text-muted-foreground">Scheduled</p>
           </div>
           <div class="rounded-lg border p-3">
-            <p class="text-xs tracking-wide text-muted-foreground uppercase">Plan</p>
+            <p class="text-xs tracking-wide text-muted-foreground uppercase">Savings Plan</p>
             <p class="font-semibold">Accelerated</p>
             <p class="text-xs text-muted-foreground">Recurring</p>
           </div>
@@ -207,6 +281,22 @@ defmodule DemoWeb.HomeLive do
       <.card_footer>
         <.button variant="secondary" class="w-full">View Full Report</.button>
       </.card_footer>
+    </.card>
+    """
+  end
+
+  defp balance_card(assigns) do
+    ~H"""
+    <.card>
+      <.card_header>
+        <.card_description>Claimable Balance</.card_description>
+        <.card_title class="text-3xl font-bold tracking-tight">$1,211.29</.card_title>
+      </.card_header>
+      <.card_content>
+        <.badge variant="secondary" class="gap-1.5">
+          <span class="size-1.5 rounded-full bg-amber-500"></span> Pending Setup
+        </.badge>
+      </.card_content>
     </.card>
     """
   end
@@ -236,10 +326,50 @@ defmodule DemoWeb.HomeLive do
           </svg>
         </div>
         <div>
-          <p class="font-semibold">Scan to connect your device</p>
+          <p class="font-semibold">Scan to connect your mobile device</p>
           <p class="mt-1 text-sm text-muted-foreground">
-            Open the app and scan this code to pair your device.
+            Open the Ledger mobile app and scan this code to link your device.
           </p>
+        </div>
+      </.card_content>
+    </.card>
+    """
+  end
+
+  defp transfer_card(assigns) do
+    ~H"""
+    <.card>
+      <.card_header>
+        <div class="flex items-start justify-between">
+          <.card_title>Transfer Funds</.card_title>
+          <button type="button" aria-label="Close" class="text-muted-foreground hover:text-foreground">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-4"
+            >
+              <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <.card_description>Move money between your connected accounts.</.card_description>
+      </.card_header>
+      <.card_content class="grid gap-4">
+        <div class="grid gap-2">
+          <.label for="transfer-amount">Amount to Transfer</.label>
+          <.input id="transfer-amount" value="$ 1,200.00" />
+        </div>
+        <div class="grid gap-2">
+          <.label for="transfer-from">From Account</.label>
+          <.native_select id="transfer-from" class="w-full">
+            <option>Main Checking (··8402) — $12,450.00</option>
+            <option>Savings (··1120) — $48,900.00</option>
+          </.native_select>
         </div>
       </.card_content>
     </.card>
@@ -264,129 +394,12 @@ defmodule DemoWeb.HomeLive do
             <path d="M5 12h14" /><path d="M12 5v14" />
           </svg>
         </div>
-        <p class="font-semibold">Publish a release</p>
+        <p class="font-semibold">Distribute Track</p>
         <p class="text-sm text-muted-foreground">
-          Ship your first build and start reaching users across every platform.
+          Upload your first master to start reaching listeners on Spotify, Apple Music, and more.
         </p>
         <.button variant="outline" size="sm">Create Release</.button>
       </.card_content>
-    </.card>
-    """
-  end
-
-  defp nav_card(assigns) do
-    planning = [
-      {"Documents", "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z M14 2v5h5"},
-      {"Budget",
-       "M3 7V5a2 2 0 0 1 2-2h2 M17 3h2a2 2 0 0 1 2 2v2 M21 17v2a2 2 0 0 1-2 2h-2 M7 21H5a2 2 0 0 1-2-2v-2"},
-      {"Reports", "M3 3v18h18 M18 17V9 M13 17V5 M8 17v-3"},
-      {"Goals", "M22 12h-4 M6 12H2 M12 6V2 M12 22v-4"},
-      {"Calendar", "M8 2v4 M16 2v4 M3 10h18 M3 4h18v18H3z"}
-    ]
-
-    support = [
-      {"Help Center", "M12 17h.01 M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"},
-      {"Docs",
-       "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"},
-      {"Contact Us", "M22 6 12 13 2 6 M2 6h20v12H2z"},
-      {"Status", "M22 12h-4l-3 9L9 3l-3 9H2"},
-      {"Community", "M2 12h20 M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"}
-    ]
-
-    assigns = assign(assigns, planning: planning, support: support)
-
-    ~H"""
-    <.card class="p-6">
-      <p class="mb-2 text-sm font-medium text-muted-foreground">Planning</p>
-      <ul class="space-y-1 text-sm">
-        <li :for={{label, d} <- @planning}>
-          <a
-            href="#"
-            class="flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-accent hover:text-accent-foreground"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-4 text-muted-foreground"
-            >
-              <path d={d} />
-            </svg>
-            {label}
-          </a>
-        </li>
-      </ul>
-      <.separator class="my-4" />
-      <p class="mb-2 text-sm font-medium text-muted-foreground">Support</p>
-      <ul class="space-y-1 text-sm">
-        <li :for={{label, d} <- @support}>
-          <a
-            href="#"
-            class="flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-accent hover:text-accent-foreground"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-4 text-muted-foreground"
-            >
-              <path d={d} />
-            </svg>
-            {label}
-          </a>
-        </li>
-      </ul>
-    </.card>
-    """
-  end
-
-  defp balance_card(assigns) do
-    ~H"""
-    <.card>
-      <.card_header>
-        <.card_description>Available balance</.card_description>
-        <.card_title class="text-3xl font-bold tracking-tight">$1,248.00</.card_title>
-      </.card_header>
-      <.card_content>
-        <.badge variant="secondary" class="gap-1.5">
-          <span class="size-1.5 rounded-full bg-amber-500"></span> Pending setup
-        </.badge>
-      </.card_content>
-    </.card>
-    """
-  end
-
-  defp transfer_card(assigns) do
-    ~H"""
-    <.card>
-      <.card_header>
-        <.card_title>Transfer funds</.card_title>
-        <.card_description>Move money between your connected accounts.</.card_description>
-      </.card_header>
-      <.card_content class="grid gap-4">
-        <div class="grid gap-2">
-          <.label for="transfer-amount">Amount</.label>
-          <.input id="transfer-amount" value="$ 1,200.00" />
-        </div>
-        <div class="grid gap-2">
-          <.label for="transfer-from">From account</.label>
-          <.native_select id="transfer-from" class="w-full">
-            <option>Main checking — $12,450.00</option>
-            <option>Savings — $48,900.00</option>
-          </.native_select>
-        </div>
-      </.card_content>
-      <.card_footer>
-        <.button class="w-full">Transfer</.button>
-      </.card_footer>
     </.card>
     """
   end
@@ -401,9 +414,9 @@ defmodule DemoWeb.HomeLive do
         </div>
         <div class="flex items-center gap-2">
           <span class="text-2xl font-bold">418.2K</span>
+          <span class="text-sm text-muted-foreground">Visitors</span>
           <.badge variant="secondary">+10%</.badge>
         </div>
-        <.card_description>Visitors this month</.card_description>
       </.card_header>
       <.card_content>
         <svg viewBox="0 0 300 80" preserveAspectRatio="none" class="h-20 w-full text-muted-foreground">
@@ -420,27 +433,12 @@ defmodule DemoWeb.HomeLive do
   end
 
   defp notifications_card(assigns) do
-    rows = [
-      {"Email", "Product updates and news", true},
-      {"Push", "Activity on your account", true},
-      {"SMS", "Critical security alerts", false}
-    ]
-
-    assigns = assign(assigns, :rows, rows)
-
     ~H"""
     <.card class="p-6">
       <p class="font-semibold">Notifications</p>
-      <p class="mt-1 text-sm text-muted-foreground">Choose what you want to hear about.</p>
-      <div class="mt-4 space-y-4">
-        <div :for={{title, desc, on} <- @rows} class="flex items-center justify-between gap-4">
-          <div>
-            <p class="text-sm font-medium">{title}</p>
-            <p class="text-xs text-muted-foreground">{desc}</p>
-          </div>
-          <.switch checked={on} />
-        </div>
-      </div>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Choose which email and push alerts you want to receive.
+      </p>
     </.card>
     """
   end

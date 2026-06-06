@@ -69,29 +69,18 @@ defmodule DemoWeb.DocsComponents do
     ~H"""
     <footer class="mt-12 border-t py-8">
       <div class="mx-auto max-w-5xl px-6 lg:px-10">
-        <p class="text-sm text-muted-foreground">
-          A port of
-          <.link
-            href="https://ui.shadcn.com"
-            target="_blank"
-            rel="noreferrer"
-            class="font-medium underline underline-offset-4"
-          >
-            shadcn/ui
-          </.link>
-          by <.link
+        <p class="text-sm text-balance text-muted-foreground">
+          Built by <.link
             href="https://twitter.com/shadcn"
             target="_blank"
             rel="noreferrer"
             class="font-medium underline underline-offset-4"
-          >shadcn</.link>.
-          Built for Phoenix by <.link
+          >shadcn</.link>. Ported to Phoenix by <.link
             href="https://github.com/N00nDay"
             target="_blank"
             rel="noreferrer"
             class="font-medium underline underline-offset-4"
-          >Craig Howell</.link>.
-          The source code is available on <.link
+          >Craig Howell</.link>. The source code is available on <.link
             href={@github_url}
             target="_blank"
             rel="noreferrer"
