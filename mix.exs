@@ -2,7 +2,7 @@ defmodule ShadcnElixir.MixProject do
   use Mix.Project
 
   @version "0.1.0"
-  @source_url "https://github.com/craighowell/shadcn-elixir"
+  @source_url "https://github.com/N00nDay/shadcn-elixir"
 
   def project do
     [

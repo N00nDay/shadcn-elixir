@@ -48,7 +48,7 @@ defmodule ShadcnElixir.Components.Drawer do
       data-slot="drawer-overlay"
       data-state="closed"
       phx-click={close_modal(@dialog)}
-      class="fixed inset-0 z-50 bg-black/50 data-[state=closed]:hidden data-[state=open]:animate-in data-[state=open]:fade-in-0"
+      class="fixed inset-0 z-50 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 data-[state=open]:opacity-100 data-[state=open]:pointer-events-auto"
     >
     </div>
     <div
@@ -61,9 +61,10 @@ defmodule ShadcnElixir.Components.Drawer do
       phx-key="escape"
       class={
         cn([
-          "data-[state=closed]:hidden",
-          "bg-background fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[80vh] flex-col",
-          "rounded-t-lg border data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom",
+          "group/drawer-content bg-background fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto",
+          "max-h-[80vh] flex-col rounded-t-lg border-t pointer-events-none",
+          "translate-y-full transition-transform duration-300 ease-in-out",
+          "data-[state=open]:translate-y-0 data-[state=open]:pointer-events-auto",
           @class
         ])
       }

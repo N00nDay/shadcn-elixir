@@ -63,7 +63,7 @@ defmodule ShadcnElixir.Components.Accordion do
         cn([
           "focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start",
           "justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all",
-          "outline-none hover:underline focus-visible:ring-[3px] cursor-pointer list-none",
+          "outline-none hover:underline focus-visible:ring-[3px] cursor-pointer list-none select-none",
           "marker:hidden [&::-webkit-details-marker]:hidden",
           @class
         ])

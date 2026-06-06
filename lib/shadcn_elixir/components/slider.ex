@@ -42,14 +42,17 @@ defmodule ShadcnElixir.Components.Slider do
           "[&::-webkit-slider-runnable-track]:h-1.5 [&::-webkit-slider-runnable-track]:rounded-full",
           "[&::-webkit-slider-runnable-track]:bg-muted",
           "[&::-moz-range-track]:h-1.5 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-muted",
+          # range fill (Firefox supports a native progress pseudo-element)
+          "[&::-moz-range-progress]:h-1.5 [&::-moz-range-progress]:rounded-full",
+          "[&::-moz-range-progress]:bg-primary",
           # thumb
           "[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-4",
           "[&::-webkit-slider-thumb]:-mt-[5px] [&::-webkit-slider-thumb]:rounded-full",
           "[&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-primary",
-          "[&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:shadow-sm",
+          "[&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-sm",
           "[&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:rounded-full",
           "[&::-moz-range-thumb]:border [&::-moz-range-thumb]:border-primary",
-          "[&::-moz-range-thumb]:bg-background",
+          "[&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:shadow-sm",
           @class
         ])
       }

@@ -18,7 +18,8 @@ defmodule ShadcnElixir.Components.Field do
         "vertical" => "flex-col [&>*]:w-full [&>.sr-only]:w-auto",
         "horizontal" =>
           "flex-row items-center [&>[data-slot=field-label]]:flex-auto " <>
-            "has-[>[data-slot=field-content]]:items-start",
+            "has-[>[data-slot=field-content]]:items-start " <>
+            "has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
         "responsive" =>
           "flex-col [&>*]:w-full [&>.sr-only]:w-auto @md/field-group:flex-row " <>
             "@md/field-group:items-center @md/field-group:[&>*]:w-auto"
@@ -156,9 +157,13 @@ defmodule ShadcnElixir.Components.Field do
       data-slot="field-label"
       class={
         cn([
-          "group/field-label flex w-fit items-center gap-2 text-sm leading-snug font-medium",
-          "select-none group-data-[disabled=true]/field:opacity-50",
+          "group/field-label peer/field-label flex w-fit items-center gap-2 text-sm leading-snug",
+          "font-medium select-none group-data-[disabled=true]/field:opacity-50",
           "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+          "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
+          "has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4",
+          "has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5",
+          "dark:has-data-[state=checked]:bg-primary/10",
           @class
         ])
       }
@@ -196,6 +201,8 @@ defmodule ShadcnElixir.Components.Field do
       class={
         cn([
           "text-muted-foreground text-sm leading-normal font-normal",
+          "group-has-[[data-orientation=horizontal]]/field:text-balance",
+          "last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5",
           "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
           @class
         ])
@@ -215,7 +222,8 @@ defmodule ShadcnElixir.Components.Field do
     ~H"""
     <div
       data-slot="field-separator"
-      class={cn(["relative -my-2 h-5 text-sm", @class])}
+      data-content={@inner_block != []}
+      class={cn(["relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2", @class])}
       {@rest}
     >
       <div class="bg-border absolute inset-0 top-1/2 h-px"></div>

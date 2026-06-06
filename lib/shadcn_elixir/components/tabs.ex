@@ -27,18 +27,26 @@ defmodule ShadcnElixir.Components.Tabs do
       </.tabs>
   """
   attr(:id, :string, required: true)
+  attr(:orientation, :string, default: "horizontal", values: ["horizontal", "vertical"])
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
 
   def tabs(assigns) do
     ~H"""
-    <div id={@id} data-slot="tabs" class={cn(["flex flex-col gap-2", @class])} {@rest}>
+    <div
+      id={@id}
+      data-slot="tabs"
+      data-orientation={@orientation}
+      class={cn(["group/tabs flex gap-2 data-[orientation=horizontal]:flex-col", @class])}
+      {@rest}
+    >
       {render_slot(@inner_block)}
     </div>
     """
   end
 
+  attr(:variant, :string, default: "default", values: ["default", "line"])
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -48,10 +56,15 @@ defmodule ShadcnElixir.Components.Tabs do
     <div
       role="tablist"
       data-slot="tabs-list"
+      data-variant={@variant}
       class={
         cn([
-          "bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center",
-          "rounded-lg p-[3px]",
+          "group/tabs-list text-muted-foreground inline-flex w-fit items-center justify-center",
+          "rounded-lg p-[3px] group-data-[orientation=horizontal]/tabs:h-9",
+          "group-data-[orientation=vertical]/tabs:h-fit group-data-[orientation=vertical]/tabs:flex-col",
+          "data-[variant=line]:rounded-none",
+          @variant == "default" && "bg-muted",
+          @variant == "line" && "gap-1 bg-transparent",
           @class
         ])
       }
@@ -81,15 +94,32 @@ defmodule ShadcnElixir.Components.Tabs do
       data-slot="tabs-trigger"
       class={
         cn([
-          "data-[state=active]:bg-background dark:data-[state=active]:text-foreground",
-          "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring",
+          "relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5",
+          "rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap",
+          "text-foreground/60 transition-all",
+          "group-data-[orientation=vertical]/tabs:w-full group-data-[orientation=vertical]/tabs:justify-start",
+          "hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px]",
+          "focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring",
+          "disabled:pointer-events-none disabled:opacity-50",
+          "group-data-[variant=default]/tabs-list:data-[state=active]:shadow-sm",
+          "group-data-[variant=line]/tabs-list:data-[state=active]:shadow-none",
+          "dark:text-muted-foreground dark:hover:text-foreground",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "group-data-[variant=line]/tabs-list:bg-transparent",
+          "group-data-[variant=line]/tabs-list:data-[state=active]:bg-transparent",
+          "dark:group-data-[variant=line]/tabs-list:data-[state=active]:border-transparent",
+          "dark:group-data-[variant=line]/tabs-list:data-[state=active]:bg-transparent",
+          "data-[state=active]:bg-background data-[state=active]:text-foreground",
           "dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30",
-          "text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1",
-          "items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1",
-          "text-sm font-medium whitespace-nowrap transition-[color,box-shadow]",
-          "focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none",
-          "disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none",
-          "[&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "dark:data-[state=active]:text-foreground",
+          "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity",
+          "group-data-[orientation=horizontal]/tabs:after:inset-x-0",
+          "group-data-[orientation=horizontal]/tabs:after:bottom-[-5px]",
+          "group-data-[orientation=horizontal]/tabs:after:h-0.5",
+          "group-data-[orientation=vertical]/tabs:after:inset-y-0",
+          "group-data-[orientation=vertical]/tabs:after:-right-1",
+          "group-data-[orientation=vertical]/tabs:after:w-0.5",
+          "group-data-[variant=line]/tabs-list:data-[state=active]:after:opacity-100",
           @class
         ])
       }

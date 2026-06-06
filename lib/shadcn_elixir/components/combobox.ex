@@ -77,7 +77,7 @@ defmodule ShadcnElixir.Components.Combobox do
         id={"#{@id}-content"}
         data-part="content"
         hidden
-        class="bg-popover text-popover-foreground absolute top-full left-0 z-50 mt-1 w-full min-w-[12rem] overflow-hidden rounded-md border p-0 shadow-md"
+        class="bg-popover text-popover-foreground absolute top-full left-0 z-50 mt-1 w-full overflow-hidden rounded-md border p-0 shadow-md"
       >
         <div class="flex h-9 items-center gap-2 border-b px-3">
           <svg

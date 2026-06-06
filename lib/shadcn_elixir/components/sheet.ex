@@ -14,16 +14,23 @@ defmodule ShadcnElixir.Components.Sheet do
 
   @content %{
     base:
-      "bg-background fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out " <>
-        "data-[state=closed]:hidden data-[state=open]:animate-in",
+      "bg-background fixed z-50 flex flex-col gap-4 shadow-lg pointer-events-none " <>
+        "transition-transform duration-300 ease-in-out data-[state=open]:duration-500 " <>
+        "data-[state=open]:pointer-events-auto",
     variants: %{
       side: %{
         "right" =>
-          "data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
+          "inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm " <>
+            "translate-x-full data-[state=open]:translate-x-0",
         "left" =>
-          "data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
-        "top" => "data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b",
-        "bottom" => "data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t"
+          "inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm " <>
+            "-translate-x-full data-[state=open]:translate-x-0",
+        "top" =>
+          "inset-x-0 top-0 h-auto border-b " <>
+            "-translate-y-full data-[state=open]:translate-y-0",
+        "bottom" =>
+          "inset-x-0 bottom-0 h-auto border-t " <>
+            "translate-y-full data-[state=open]:translate-y-0"
       }
     },
     default_variants: %{side: "right"}
@@ -70,7 +77,7 @@ defmodule ShadcnElixir.Components.Sheet do
       data-slot="sheet-overlay"
       data-state="closed"
       phx-click={close_modal(@dialog)}
-      class="fixed inset-0 z-50 bg-black/50 data-[state=closed]:hidden data-[state=open]:animate-in data-[state=open]:fade-in-0"
+      class="fixed inset-0 z-50 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300 data-[state=open]:opacity-100 data-[state=open]:pointer-events-auto"
     >
     </div>
     <div
@@ -90,7 +97,7 @@ defmodule ShadcnElixir.Components.Sheet do
         type="button"
         phx-click={close_modal(@dialog)}
         aria-label="Close"
-        class="ring-offset-background focus:ring-ring absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:outline-hidden [&_svg]:size-4"
+        class="ring-offset-background focus:ring-ring absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:size-4"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

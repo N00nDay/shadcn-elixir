@@ -88,6 +88,7 @@ defmodule ShadcnElixir.Components.Menubar do
           "data-[state=closed]:hidden",
           "bg-popover text-popover-foreground absolute top-full left-0 z-50 mt-1 min-w-[12rem]",
           "overflow-hidden rounded-md border p-1 shadow-md",
+          "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
           @class
         ])
       }
@@ -99,6 +100,7 @@ defmodule ShadcnElixir.Components.Menubar do
   end
 
   attr(:class, :any, default: nil)
+  attr(:variant, :string, default: "default", values: ["default", "destructive"])
   attr(:inset, :boolean, default: false)
   attr(:rest, :global, include: ~w(href navigate patch))
   slot(:inner_block, required: true)
@@ -109,13 +111,20 @@ defmodule ShadcnElixir.Components.Menubar do
       role="menuitem"
       tabindex="-1"
       data-slot="menubar-item"
-      data-inset={@inset}
+      data-variant={@variant}
+      data-inset={to_string(@inset)}
       class={
         cn([
           "focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground",
           "relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm",
           "outline-hidden select-none data-[inset=true]:pl-8",
-          "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+          "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+          "data-[variant=destructive]:text-destructive",
+          "data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:hover:bg-destructive/10",
+          "data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:hover:text-destructive",
+          "dark:data-[variant=destructive]:focus:bg-destructive/20 dark:data-[variant=destructive]:hover:bg-destructive/20",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "[&_svg:not([class*='text-'])]:text-muted-foreground data-[variant=destructive]:*:[svg]:text-destructive!",
           @class
         ])
       }
@@ -135,7 +144,7 @@ defmodule ShadcnElixir.Components.Menubar do
     ~H"""
     <div
       data-slot="menubar-label"
-      data-inset={@inset}
+      data-inset={to_string(@inset)}
       class={cn(["px-2 py-1.5 text-sm font-medium data-[inset=true]:pl-8", @class])}
       {@rest}
     >

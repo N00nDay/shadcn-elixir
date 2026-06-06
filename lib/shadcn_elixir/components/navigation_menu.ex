@@ -19,7 +19,12 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     ~H"""
     <nav
       data-slot="navigation-menu"
-      class={cn(["relative flex max-w-max flex-1 items-center justify-center", @class])}
+      class={
+        cn([
+          "group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
+          @class
+        ])
+      }
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -72,7 +77,10 @@ defmodule ShadcnElixir.Components.NavigationMenu do
         cn([
           "group/nav-trigger bg-background hover:bg-accent hover:text-accent-foreground",
           "focus:bg-accent focus:text-accent-foreground inline-flex h-9 w-max items-center",
-          "justify-center rounded-md px-4 py-2 text-sm font-medium outline-none transition-colors",
+          "justify-center rounded-md px-4 py-2 text-sm font-medium outline-none",
+          "transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:ring-ring/50",
+          "focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50",
+          "group-hover/nav-item:bg-accent/50 group-hover/nav-item:text-accent-foreground",
           @class
         ])
       }
@@ -87,7 +95,7 @@ defmodule ShadcnElixir.Components.NavigationMenu do
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="relative top-px ml-1 size-3 transition-transform duration-200 group-hover/nav-item:rotate-180"
+        class="relative top-[1px] ml-1 size-3 transition duration-300 group-hover/nav-item:rotate-180"
         aria-hidden="true"
       >
         <path d="m6 9 6 6 6-6" />
@@ -129,12 +137,15 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     ~H"""
     <.link
       data-slot="navigation-menu-link"
-      data-active={@active}
+      data-active={to_string(@active)}
       class={
         cn([
           "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-          "data-[active=true]:bg-accent/50 flex flex-col gap-1 rounded-sm p-2 text-sm",
-          "outline-none transition-colors",
+          "flex flex-col gap-1 rounded-sm p-2 text-sm outline-none transition-all",
+          "focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1",
+          "data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground",
+          "data-[active=true]:hover:bg-accent data-[active=true]:focus:bg-accent",
+          "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
           @class
         ])
       }

@@ -46,9 +46,12 @@ defmodule ShadcnElixir.Components.Sidebar do
       data-side={@side}
       class={
         cn([
-          "bg-sidebar text-sidebar-foreground flex h-svh flex-col border-r transition-[width]",
-          "duration-200 w-[--sidebar-width]",
-          "group-data-[state=collapsed]/sidebar-wrapper:w-[--sidebar-width-icon]",
+          "bg-sidebar text-sidebar-foreground flex h-svh shrink-0 flex-col border-r transition-[width]",
+          "duration-200",
+          # State-based widths (mutually exclusive) so neither overrides the other by source
+          # order — Tailwind v4 wraps group-data variants in :where() (0 specificity).
+          "group-data-[state=expanded]/sidebar-wrapper:w-(--sidebar-width)",
+          "group-data-[state=collapsed]/sidebar-wrapper:w-(--sidebar-width-icon)",
           "group-data-[state=collapsed]/sidebar-wrapper:overflow-hidden",
           @class
         ])
@@ -107,7 +110,13 @@ defmodule ShadcnElixir.Components.Sidebar do
     ~H"""
     <div
       data-slot="sidebar-content"
-      class={cn(["flex min-h-0 flex-1 flex-col gap-2 overflow-auto p-2", @class])}
+      class={
+        cn([
+          "flex min-h-0 flex-1 flex-col gap-2 overflow-auto",
+          "group-data-[state=collapsed]/sidebar-wrapper:overflow-hidden",
+          @class
+        ])
+      }
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -154,7 +163,10 @@ defmodule ShadcnElixir.Components.Sidebar do
       class={
         cn([
           "text-sidebar-foreground/70 flex h-8 shrink-0 items-center rounded-md px-2 text-xs",
-          "font-medium outline-none group-data-[state=collapsed]/sidebar-wrapper:hidden",
+          "font-medium outline-none transition-[margin,opacity] duration-200 ease-linear",
+          "group-data-[state=collapsed]/sidebar-wrapper:-mt-8",
+          "group-data-[state=collapsed]/sidebar-wrapper:opacity-0",
+          "group-data-[state=collapsed]/sidebar-wrapper:pointer-events-none",
           @class
         ])
       }
@@ -210,13 +222,19 @@ defmodule ShadcnElixir.Components.Sidebar do
     ~H"""
     <.link
       data-slot="sidebar-menu-button"
-      data-active={@active}
+      data-active={to_string(@active)}
       class={
         cn([
           "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left",
-          "text-sm outline-none transition-[width,height,padding] hover:bg-sidebar-accent",
-          "hover:text-sidebar-accent-foreground data-[active=true]:bg-sidebar-accent",
-          "data-[active=true]:font-medium [&>svg]:size-4 [&>svg]:shrink-0",
+          "text-sm outline-none ring-sidebar-ring transition-[width,height,padding]",
+          "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2",
+          "active:bg-sidebar-accent active:text-sidebar-accent-foreground",
+          "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none",
+          "aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent",
+          "data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground",
+          "group-data-[state=collapsed]/sidebar-wrapper:size-8!",
+          "group-data-[state=collapsed]/sidebar-wrapper:p-2!",
+          "[&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
           @class
         ])
       }

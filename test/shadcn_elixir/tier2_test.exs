@@ -62,7 +62,9 @@ defmodule ShadcnElixir.Tier2Test do
       """)
 
     assert html =~ ~s(data-side="left")
-    assert html =~ "slide-in-from-left"
+    # left sheet slides in from the left edge: off-screen when closed, translate-0 when open
+    assert html =~ "-translate-x-full"
+    assert html =~ "data-[state=open]:translate-x-0"
   end
 
   test "drawer renders a handle" do

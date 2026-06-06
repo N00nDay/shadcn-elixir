@@ -31,6 +31,9 @@ function setupSelect(root) {
   const items = qa(root, '[data-part="item"]');
 
   const open = () => {
+    // Match the dropdown width to the trigger (like radix's --radix-select-trigger-width),
+    // so the menu never overhangs regardless of container sizing.
+    content.style.width = trigger.offsetWidth + "px";
     content.hidden = false;
     root.dataset.state = "open";
     trigger.setAttribute("aria-expanded", "true");
@@ -123,6 +126,8 @@ function setupCombobox(root) {
   const items = qa(root, '[data-part="item"]');
 
   const open = () => {
+    // Match the dropdown width to the trigger (like the Select), so it never overhangs.
+    content.style.width = trigger.offsetWidth + "px";
     content.hidden = false;
     root.dataset.state = "open";
     trigger.setAttribute("aria-expanded", "true");
@@ -348,13 +353,28 @@ function setupToaster(root) {
   if (root.__shadcnBound) return;
   root.__shadcnBound = true;
 
+  // Toasts slide from / leave toward the edge the toaster is anchored to.
+  const fromTop = (root.getAttribute("data-position") || "bottom-right").startsWith("top");
+  const inClass = fromTop ? "shadcn-toast-in-top" : "shadcn-toast-in";
+  const outClass = fromTop ? "shadcn-toast-out-top" : "shadcn-toast-out";
+
+  const dismiss = (el) => {
+    if (el.__dismissing) return;
+    el.__dismissing = true;
+    el.classList.remove(inClass);
+    el.classList.add(outClass);
+    setTimeout(() => el.remove(), 200);
+  };
+
   const add = (detail) => {
     const { title, description, variant, duration = 4000 } = detail || {};
     const el = document.createElement("div");
     el.setAttribute("role", "status");
     el.className =
       "pointer-events-auto relative flex w-full items-center justify-between gap-4 " +
-      "overflow-hidden rounded-md border p-4 shadow-lg transition-opacity bg-background text-foreground " +
+      "overflow-hidden rounded-md border p-4 shadow-lg bg-background text-foreground " +
+      inClass +
+      " " +
       (variant === "destructive" ? "border-destructive bg-destructive text-white" : "");
     const stack = document.createElement("div");
     stack.className = "grid gap-1";
@@ -371,11 +391,10 @@ function setupToaster(root) {
       stack.appendChild(d);
     }
     el.appendChild(stack);
-    root.appendChild(el);
-    setTimeout(() => {
-      el.style.opacity = "0";
-      setTimeout(() => el.remove(), 200);
-    }, duration);
+    // Dismiss on click, or automatically after `duration`.
+    el.addEventListener("click", () => dismiss(el));
+    fromTop ? root.prepend(el) : root.appendChild(el);
+    if (duration > 0) setTimeout(() => dismiss(el), duration);
   };
 
   window.addEventListener("shadcn:toast", (e) => add(e.detail));

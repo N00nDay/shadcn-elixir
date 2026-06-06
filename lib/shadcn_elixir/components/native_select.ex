@@ -21,24 +21,31 @@ defmodule ShadcnElixir.Components.NativeSelect do
       </.native_select>
   """
   attr(:name, :string, default: nil)
+  attr(:size, :string, default: "default", values: ["default", "sm"], doc: "Control height.")
   attr(:class, :any, default: nil)
-  attr(:rest, :global, include: ~w(disabled form multiple required size))
+  attr(:rest, :global, include: ~w(disabled form multiple required))
   slot(:inner_block, required: true)
 
   def native_select(assigns) do
     ~H"""
-    <div class="relative w-full" data-slot="native-select-wrapper">
+    <div
+      data-slot="native-select-wrapper"
+      class="group/native-select relative w-fit has-[select:disabled]:opacity-50"
+    >
       <select
         name={@name}
         data-slot="native-select"
+        data-size={@size}
         class={
           cn([
-            "border-input dark:bg-input/30 flex h-9 w-full appearance-none items-center",
-            "rounded-md border bg-transparent px-3 py-2 pr-8 text-base shadow-xs",
-            "transition-[color,box-shadow] outline-none disabled:cursor-not-allowed",
-            "disabled:opacity-50 md:text-sm focus-visible:border-ring",
-            "focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:border-destructive",
-            "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
+            "h-9 w-full min-w-0 appearance-none rounded-md border border-input bg-transparent px-3",
+            "py-2 pr-9 text-sm shadow-xs transition-[color,box-shadow] outline-none",
+            "selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground",
+            "disabled:pointer-events-none disabled:cursor-not-allowed",
+            "data-[size=sm]:h-8 data-[size=sm]:py-1 dark:bg-input/30 dark:hover:bg-input/50",
+            "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
+            "aria-invalid:border-destructive aria-invalid:ring-destructive/20",
+            "dark:aria-invalid:ring-destructive/40",
             @class
           ])
         }
@@ -56,7 +63,7 @@ defmodule ShadcnElixir.Components.NativeSelect do
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 opacity-50"
+        class="pointer-events-none absolute top-1/2 right-3.5 size-4 -translate-y-1/2 text-muted-foreground opacity-50 select-none"
       >
         <path d="m6 9 6 6 6-6" />
       </svg>

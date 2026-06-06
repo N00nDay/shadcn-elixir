@@ -26,7 +26,7 @@ defmodule ShadcnElixir.Components.Resizable do
       data-direction={@direction}
       class={
         cn([
-          "flex h-full w-full data-[direction=vertical]:flex-col",
+          "group/rg flex h-full w-full data-[direction=vertical]:flex-col",
           @class
         ])
       }
@@ -68,11 +68,17 @@ defmodule ShadcnElixir.Components.Resizable do
       data-part="handle"
       class={
         cn([
-          "bg-border focus-visible:ring-ring relative flex w-px items-center justify-center shrink-0",
+          "bg-border relative flex w-px shrink-0 items-center justify-center",
           "after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2",
-          "cursor-col-resize select-none",
+          "focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1",
+          "focus-visible:outline-hidden cursor-col-resize select-none",
           "group-data-[direction=vertical]/rg:h-px group-data-[direction=vertical]/rg:w-full",
           "group-data-[direction=vertical]/rg:cursor-row-resize",
+          "group-data-[direction=vertical]/rg:after:left-0 group-data-[direction=vertical]/rg:after:h-1",
+          "group-data-[direction=vertical]/rg:after:w-full",
+          "group-data-[direction=vertical]/rg:after:translate-x-0",
+          "group-data-[direction=vertical]/rg:after:-translate-y-1/2",
+          "group-data-[direction=vertical]/rg:[&>div]:rotate-90",
           @class
         ])
       }
@@ -80,7 +86,7 @@ defmodule ShadcnElixir.Components.Resizable do
     >
       <div
         :if={@with_handle}
-        class="bg-border z-10 flex h-4 w-3 items-center justify-center rounded-sm border"
+        class="bg-border z-10 flex h-4 w-3 items-center justify-center rounded-xs border"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

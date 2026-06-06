@@ -89,7 +89,7 @@ defmodule ShadcnElixir.Components.Pagination do
     ~H"""
     <.link
       aria-current={if @is_active, do: "page", else: nil}
-      data-active={@is_active}
+      data-active={to_string(@is_active)}
       data-slot="pagination-link"
       class={@class}
       {@rest}

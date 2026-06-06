@@ -48,7 +48,7 @@ defmodule ShadcnElixir.Components.Collapsible do
       data-slot="collapsible-trigger"
       class={
         cn([
-          "cursor-pointer list-none marker:hidden [&::-webkit-details-marker]:hidden",
+          "cursor-pointer list-none select-none marker:hidden [&::-webkit-details-marker]:hidden",
           @class
         ])
       }

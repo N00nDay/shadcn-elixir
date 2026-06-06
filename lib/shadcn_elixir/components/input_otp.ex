@@ -52,8 +52,10 @@ defmodule ShadcnElixir.Components.InputOTP do
             cn([
               "border-input relative flex size-9 items-center justify-center border-y border-r",
               "text-center text-sm shadow-xs outline-none transition-all first:rounded-l-md",
-              "first:border-l last:rounded-r-md",
-              "focus:border-ring focus:ring-ring/50 focus:ring-[3px] focus:z-10"
+              "first:border-l last:rounded-r-md dark:bg-input/30",
+              "aria-invalid:border-destructive",
+              "focus:border-ring focus:ring-ring/50 focus:ring-[3px] focus:z-10",
+              "focus:aria-invalid:ring-destructive/20 dark:focus:aria-invalid:ring-destructive/40"
             ])
           }
         />

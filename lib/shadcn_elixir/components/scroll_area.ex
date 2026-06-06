@@ -32,6 +32,7 @@ defmodule ShadcnElixir.Components.ScrollArea do
           "[&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar]:h-2.5",
           "[&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border",
           "[&::-webkit-scrollbar-track]:bg-transparent",
+          "[scrollbar-width:thin] [scrollbar-color:var(--border)_transparent]",
           @class
         ])
       }

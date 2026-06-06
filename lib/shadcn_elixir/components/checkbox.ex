@@ -34,6 +34,8 @@ defmodule ShadcnElixir.Components.Checkbox do
           "peer-checked:border-primary size-4 shrink-0 rounded-[4px] border shadow-xs " <>
           "transition-shadow outline-none flex items-center justify-center " <>
           "peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-[3px] " <>
+          "peer-aria-invalid:border-destructive peer-aria-invalid:ring-destructive/20 " <>
+          "dark:peer-aria-invalid:ring-destructive/40 " <>
           "peer-disabled:cursor-not-allowed peer-disabled:opacity-50 " <>
           "peer-checked:[&>svg]:opacity-100"
       }>
@@ -44,7 +46,7 @@ defmodule ShadcnElixir.Components.Checkbox do
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="3"
+          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
           class="size-3.5 opacity-0 transition-opacity"

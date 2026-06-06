@@ -65,6 +65,7 @@ defmodule ShadcnElixir.Components.ContextMenu do
           "data-[state=closed]:hidden",
           "bg-popover text-popover-foreground absolute z-50 min-w-[8rem] overflow-hidden",
           "rounded-md border p-1 shadow-md",
+          "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
           @class
         ])
       }
@@ -88,13 +89,19 @@ defmodule ShadcnElixir.Components.ContextMenu do
       tabindex="-1"
       data-slot="context-menu-item"
       data-variant={@variant}
-      data-inset={@inset}
+      data-inset={to_string(@inset)}
       class={
         cn([
           "focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground",
-          "data-[variant=destructive]:text-destructive relative flex cursor-default items-center",
-          "gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[inset=true]:pl-8",
-          "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+          "relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm",
+          "outline-hidden select-none data-[inset=true]:pl-8",
+          "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+          "data-[variant=destructive]:text-destructive",
+          "data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:hover:bg-destructive/10",
+          "data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:hover:text-destructive",
+          "dark:data-[variant=destructive]:focus:bg-destructive/20 dark:data-[variant=destructive]:hover:bg-destructive/20",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "[&_svg:not([class*='text-'])]:text-muted-foreground data-[variant=destructive]:*:[svg]:text-destructive!",
           @class
         ])
       }
@@ -114,7 +121,7 @@ defmodule ShadcnElixir.Components.ContextMenu do
     ~H"""
     <div
       data-slot="context-menu-label"
-      data-inset={@inset}
+      data-inset={to_string(@inset)}
       class={cn(["text-foreground px-2 py-1.5 text-sm font-medium data-[inset=true]:pl-8", @class])}
       {@rest}
     >

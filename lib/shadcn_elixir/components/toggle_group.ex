@@ -27,6 +27,7 @@ defmodule ShadcnElixir.Components.ToggleGroup do
   attr(:type, :string, default: "single", values: ["single", "multiple"])
   attr(:variant, :string, default: "default")
   attr(:size, :string, default: "default")
+  attr(:spacing, :integer, default: 0, doc: "Gap between items (0 = joined).")
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -40,10 +41,12 @@ defmodule ShadcnElixir.Components.ToggleGroup do
       data-type={@type}
       data-variant={@variant}
       data-size={@size}
+      data-spacing={@spacing}
+      style={"--gap: #{@spacing}"}
       class={
         cn([
-          "group/toggle-group flex w-fit items-center rounded-md",
-          "data-[variant=outline]:shadow-xs",
+          "group/toggle-group flex w-fit items-center gap-[--spacing(var(--gap))] rounded-md",
+          "data-[spacing=default]:data-[variant=outline]:shadow-xs",
           @class
         ])
       }
@@ -59,6 +62,7 @@ defmodule ShadcnElixir.Components.ToggleGroup do
   attr(:type, :string, default: "single", values: ["single", "multiple"])
   attr(:variant, :string, default: nil, values: [nil, "default", "outline"])
   attr(:size, :string, default: nil, values: [nil, "default", "sm", "lg"])
+  attr(:spacing, :integer, default: 0, doc: "Must match the parent group's spacing.")
   attr(:pressed, :boolean, default: false)
   attr(:class, :any, default: nil)
   attr(:rest, :global)
@@ -71,9 +75,11 @@ defmodule ShadcnElixir.Components.ToggleGroup do
         :class,
         cn([
           toggle_variants(variant: assigns.variant, size: assigns.size),
-          "min-w-0 flex-1 shrink-0 rounded-none shadow-none first:rounded-l-md last:rounded-r-md",
-          "focus:z-10 focus-visible:z-10 data-[variant=outline]:border-l-0",
-          "data-[variant=outline]:first:border-l",
+          "w-auto min-w-0 shrink-0 px-3 focus:z-10 focus-visible:z-10",
+          "data-[spacing=0]:rounded-none data-[spacing=0]:shadow-none",
+          "data-[spacing=0]:first:rounded-l-md data-[spacing=0]:last:rounded-r-md",
+          "data-[spacing=0]:data-[variant=outline]:border-l-0",
+          "data-[spacing=0]:data-[variant=outline]:first:border-l",
           assigns.class
         ])
       )
@@ -83,6 +89,9 @@ defmodule ShadcnElixir.Components.ToggleGroup do
       type="button"
       data-slot="toggle-group-item"
       data-value={@value}
+      data-variant={@variant}
+      data-size={@size}
+      data-spacing={@spacing}
       aria-pressed={to_string(@pressed)}
       data-state={if @pressed, do: "on", else: "off"}
       phx-click={press(@type, @group)}

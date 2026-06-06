@@ -50,7 +50,7 @@ defmodule ShadcnElixir.Components.Tooltip do
       data-slot="tooltip-content"
       class={
         cn([
-          "bg-primary text-primary-foreground pointer-events-none absolute z-50 w-fit",
+          "bg-foreground text-background pointer-events-none absolute z-50 w-fit",
           "rounded-md px-3 py-1.5 text-xs text-balance whitespace-nowrap opacity-0 invisible",
           "transition-opacity group-hover/tooltip:opacity-100 group-hover/tooltip:visible",
           "group-focus-within/tooltip:opacity-100 group-focus-within/tooltip:visible",

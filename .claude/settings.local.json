@@ -3,7 +3,8 @@
     "allow": [
       "WebSearch",
       "WebFetch(domain:ui.shadcn.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }

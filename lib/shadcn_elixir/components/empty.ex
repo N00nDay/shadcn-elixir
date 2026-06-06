@@ -11,12 +11,14 @@ defmodule ShadcnElixir.Components.Empty do
   import ShadcnElixir.Variants
 
   @media %{
-    base: "flex shrink-0 items-center justify-center mb-2 [&_svg:not([class*='size-'])]:size-6",
+    base:
+      "mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0",
     variants: %{
       variant: %{
         "default" => "bg-transparent",
         "icon" =>
-          "bg-muted text-foreground flex size-10 shrink-0 items-center justify-center rounded-lg"
+          "bg-muted text-foreground flex size-10 shrink-0 items-center justify-center rounded-lg " <>
+            "[&_svg:not([class*='size-'])]:size-6"
       }
     },
     default_variants: %{variant: "default"}

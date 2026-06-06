@@ -99,7 +99,7 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     ~H"""
     <div
       data-slot="dropdown-menu-label"
-      data-inset={@inset}
+      data-inset={to_string(@inset)}
       class={cn(["px-2 py-1.5 text-sm font-medium data-[inset=true]:pl-8", @class])}
       {@rest}
     >
@@ -123,7 +123,7 @@ defmodule ShadcnElixir.Components.DropdownMenu do
       tabindex="-1"
       data-slot="dropdown-menu-item"
       data-variant={@variant}
-      data-inset={@inset}
+      data-inset={to_string(@inset)}
       phx-click={close(@menu)}
       class={item_class(@class)}
       {@rest}
@@ -136,7 +136,7 @@ defmodule ShadcnElixir.Components.DropdownMenu do
       tabindex="-1"
       data-slot="dropdown-menu-item"
       data-variant={@variant}
-      data-inset={@inset}
+      data-inset={to_string(@inset)}
       phx-click={close(@menu)}
       class={item_class(@class)}
       {@rest}
@@ -170,7 +170,7 @@ defmodule ShadcnElixir.Components.DropdownMenu do
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="3"
+          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
           class="size-4"
@@ -262,7 +262,7 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     ~H"""
     <div
       data-slot="dropdown-menu-sub-trigger"
-      data-inset={@inset}
+      data-inset={to_string(@inset)}
       class={cn([item_class(nil), "data-[inset=true]:pl-8", @class])}
       {@rest}
     >
@@ -310,11 +310,14 @@ defmodule ShadcnElixir.Components.DropdownMenu do
   defp item_class(extra) do
     cn([
       "focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground",
-      "data-[variant=destructive]:text-destructive data-[variant=destructive]:hover:bg-destructive/10",
       "relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm",
       "outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      "data-[inset=true]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-      "[&_svg:not([class*='size-'])]:size-4",
+      "data-[inset=true]:pl-8 data-[variant=destructive]:text-destructive",
+      "data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:hover:bg-destructive/10",
+      "data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:hover:text-destructive",
+      "dark:data-[variant=destructive]:focus:bg-destructive/20 dark:data-[variant=destructive]:hover:bg-destructive/20",
+      "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+      "[&_svg:not([class*='text-'])]:text-muted-foreground data-[variant=destructive]:*:[svg]:text-destructive!",
       extra
     ])
   end

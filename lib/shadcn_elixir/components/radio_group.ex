@@ -17,13 +17,18 @@ defmodule ShadcnElixir.Components.RadioGroup do
   ## Examples
 
       <.radio_group>
-        <label class="flex items-center gap-2">
-          <.radio_group_item name="plan" value="free" checked /> Free
-        </label>
-        <label class="flex items-center gap-2">
-          <.radio_group_item name="plan" value="pro" /> Pro
-        </label>
+        <div class="flex items-center gap-2">
+          <.radio_group_item id="plan-free" name="plan" value="free" checked />
+          <.label for="plan-free">Free</.label>
+        </div>
+        <div class="flex items-center gap-2">
+          <.radio_group_item id="plan-pro" name="plan" value="pro" />
+          <.label for="plan-pro">Pro</.label>
+        </div>
       </.radio_group>
+
+  The item is a `<label>`, so clicking the dot toggles it; pair it with a sibling
+  `<.label for={id}>` (matching the item's `id`) to make the text clickable too.
   """
   attr(:class, :any, default: nil)
   attr(:rest, :global)
@@ -45,13 +50,15 @@ defmodule ShadcnElixir.Components.RadioGroup do
 
   def radio_group_item(assigns) do
     ~H"""
-    <span class={cn(["inline-flex", @class])} data-slot="radio-group-item">
+    <label class={cn(["inline-flex", @class])} data-slot="radio-group-item">
       <input type="radio" name={@name} value={@value} checked={@checked} class="peer sr-only" {@rest} />
       <span class={
         "border-input text-primary dark:bg-input/30 peer-checked:border-primary " <>
           "aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] " <>
           "outline-none flex items-center justify-center " <>
           "peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-[3px] " <>
+          "peer-aria-invalid:border-destructive peer-aria-invalid:ring-destructive/20 " <>
+          "dark:peer-aria-invalid:ring-destructive/40 " <>
           "peer-disabled:cursor-not-allowed peer-disabled:opacity-50 " <>
           "peer-checked:[&>svg]:opacity-100"
       }>
@@ -59,7 +66,7 @@ defmodule ShadcnElixir.Components.RadioGroup do
           <circle cx="12" cy="12" r="10" />
         </svg>
       </span>
-    </span>
+    </label>
     """
   end
 end

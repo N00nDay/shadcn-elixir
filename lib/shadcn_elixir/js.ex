@@ -44,7 +44,13 @@ defmodule ShadcnElixir.JS do
     |> JS.focus_first(to: "##{id}-content")
   end
 
-  @doc "Close a modal overlay: hide, restore scroll, restore focus."
+  @doc """
+  Close a modal overlay: restore scroll and focus.
+
+  Visibility and both the enter/exit animations are driven entirely by the `data-state`
+  attribute + CSS opacity/transform transitions (see each modal's content classes), so
+  the exit animation plays without any JS timing or `display` toggling.
+  """
   def close_modal(js \\ %JS{}, id) do
     js
     |> JS.set_attribute({"data-state", "closed"}, to: "##{id}")
