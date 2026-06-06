@@ -2,7 +2,17 @@
   <.sidebar_provider id="sidebar-demo" class="h-full min-h-0">
     <.sidebar class="h-full border-r">
       <.sidebar_header>
-        <span class="px-2 py-1 text-sm font-semibold">Acme Inc</span>
+        <div class="flex items-center gap-2 px-1 py-1.5">
+          <div class="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+              <path d="M12 2 2 7l10 5 10-5-10-5Z" /><path d="m2 17 10 5 10-5" /><path d="m2 12 10 5 10-5" />
+            </svg>
+          </div>
+          <div class="grid flex-1 text-left text-sm leading-tight">
+            <span class="truncate font-semibold">Acme Inc</span>
+            <span class="truncate text-xs text-muted-foreground">Enterprise</span>
+          </div>
+        </div>
       </.sidebar_header>
       <.sidebar_content>
         <.sidebar_group>
@@ -10,13 +20,28 @@
           <.sidebar_group_content>
             <.sidebar_menu>
               <.sidebar_menu_item>
-                <.sidebar_menu_button href="#" active>Dashboard</.sidebar_menu_button>
+                <.sidebar_menu_button href="#" active>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="7" height="9" x="3" y="3" rx="1" /><rect width="7" height="5" x="14" y="3" rx="1" /><rect width="7" height="9" x="14" y="12" rx="1" /><rect width="7" height="5" x="3" y="16" rx="1" />
+                  </svg>
+                  <span>Dashboard</span>
+                </.sidebar_menu_button>
               </.sidebar_menu_item>
               <.sidebar_menu_item>
-                <.sidebar_menu_button href="#">Projects</.sidebar_menu_button>
+                <.sidebar_menu_button href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+                  </svg>
+                  <span>Projects</span>
+                </.sidebar_menu_button>
               </.sidebar_menu_item>
               <.sidebar_menu_item>
-                <.sidebar_menu_button href="#">Settings</.sidebar_menu_button>
+                <.sidebar_menu_button href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /><circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <span>Settings</span>
+                </.sidebar_menu_button>
               </.sidebar_menu_item>
             </.sidebar_menu>
           </.sidebar_group_content>
