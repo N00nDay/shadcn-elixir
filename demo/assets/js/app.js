@@ -26,11 +26,27 @@ import {hooks as colocatedHooks} from "phoenix-colocated/demo"
 import {Hooks as ShadcnHooks} from "../../../assets/js/shadcn_elixir"
 import topbar from "../vendor/topbar"
 
+// Docs site: copy a code block's source to the clipboard. Not a UI component —
+// just a clipboard helper for the <.code_block> copy button.
+const DocsHooks = {
+  CopyCode: {
+    mounted() {
+      this.el.addEventListener("click", () => {
+        const code = this.el.dataset.code || ""
+        navigator.clipboard.writeText(code).then(() => {
+          this.el.setAttribute("data-copied", "true")
+          setTimeout(() => this.el.removeAttribute("data-copied"), 1500)
+        })
+      })
+    },
+  },
+}
+
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},
-  hooks: {...colocatedHooks, ...ShadcnHooks},
+  hooks: {...colocatedHooks, ...ShadcnHooks, ...DocsHooks},
 })
 
 // Show progress bar on live navigation and form submits

@@ -57,6 +57,10 @@ defmodule Demo.MixProject do
        depth: 1},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
+      # Docs site: server-side syntax highlighting for example source (demo-only).
+      {:makeup, "~> 1.0"},
+      {:makeup_eex, ">= 0.0.0"},
+      {:makeup_html, ">= 0.0.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"}

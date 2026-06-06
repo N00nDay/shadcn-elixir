@@ -1,0 +1,19 @@
+<.dialog id="dialog-demo">
+  <.dialog_trigger dialog="dialog-demo">
+    <.button variant="outline">Open dialog</.button>
+  </.dialog_trigger>
+  <.dialog_content dialog="dialog-demo">
+    <.dialog_header>
+      <.dialog_title>Are you absolutely sure?</.dialog_title>
+      <.dialog_description>
+        This action cannot be undone. This will permanently delete your account.
+      </.dialog_description>
+    </.dialog_header>
+    <.dialog_footer>
+      <.dialog_close dialog="dialog-demo">
+        <.button variant="outline">Cancel</.button>
+      </.dialog_close>
+      <.button variant="destructive">Delete account</.button>
+    </.dialog_footer>
+  </.dialog_content>
+</.dialog>

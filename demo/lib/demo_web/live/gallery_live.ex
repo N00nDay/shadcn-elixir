@@ -183,14 +183,18 @@ defmodule DemoWeb.GalleryLive do
                 <.input id="dn" value="Ada Lovelace" />
               </div>
               <.dialog_footer>
-                <.dialog_close dialog="dlg"><.button variant="outline">Cancel</.button></.dialog_close>
+                <.dialog_close dialog="dlg">
+                  <.button variant="outline">Cancel</.button>
+                </.dialog_close>
                 <.button>Save</.button>
               </.dialog_footer>
             </.dialog_content>
           </.dialog>
 
           <.dropdown_menu id="dd">
-            <.dropdown_menu_trigger menu="dd"><.button variant="outline">Menu</.button></.dropdown_menu_trigger>
+            <.dropdown_menu_trigger menu="dd">
+              <.button variant="outline">Menu</.button>
+            </.dropdown_menu_trigger>
             <.dropdown_menu_content menu="dd">
               <.dropdown_menu_label>My account</.dropdown_menu_label>
               <.dropdown_menu_separator />
@@ -201,7 +205,9 @@ defmodule DemoWeb.GalleryLive do
           </.dropdown_menu>
 
           <.popover id="pop">
-            <.popover_trigger popover="pop"><.button variant="outline">Popover</.button></.popover_trigger>
+            <.popover_trigger popover="pop">
+              <.button variant="outline">Popover</.button>
+            </.popover_trigger>
             <.popover_content popover="pop">
               <p class="text-sm">Place content for the popover here.</p>
             </.popover_content>
@@ -232,7 +238,9 @@ defmodule DemoWeb.GalleryLive do
         <.data_table rows={@rows}>
           <:col :let={r} label="Name">{r.name}</:col>
           <:col :let={r} label="Email" class="text-muted-foreground">{r.email}</:col>
-          <:col :let={r} label="Role"><.badge variant="secondary">{r.role}</.badge></:col>
+          <:col :let={r} label="Role">
+            <.badge variant="secondary">{r.role}</.badge>
+          </:col>
         </.data_table>
       </.section>
 
@@ -286,8 +294,7 @@ defmodule DemoWeb.GalleryLive do
           <.typography_lead>A modest levy on humor, retold for posterity.</.typography_lead>
           <.typography_h2>The King's Plan</.typography_h2>
           <.typography_p>
-            The king thought long and hard, and finally came up with
-            <.typography_inline_code>a brilliant plan</.typography_inline_code>: he would tax the jokes in the kingdom.
+            The king thought long and hard, and finally came up with <.typography_inline_code>a brilliant plan</.typography_inline_code>: he would tax the jokes in the kingdom.
           </.typography_p>
           <.typography_blockquote>
             "After all," he said, "everyone enjoys a good joke, so it's only fair that they should pay for the privilege."
@@ -407,9 +414,13 @@ defmodule DemoWeb.GalleryLive do
           <.breadcrumb_list>
             <.breadcrumb_item><.breadcrumb_link href="#">Home</.breadcrumb_link></.breadcrumb_item>
             <.breadcrumb_separator />
-            <.breadcrumb_item><.breadcrumb_link href="#">Components</.breadcrumb_link></.breadcrumb_item>
+            <.breadcrumb_item>
+              <.breadcrumb_link href="#">Components</.breadcrumb_link>
+            </.breadcrumb_item>
             <.breadcrumb_separator />
-            <.breadcrumb_item><.breadcrumb_page>Breadcrumb</.breadcrumb_page></.breadcrumb_item>
+            <.breadcrumb_item>
+              <.breadcrumb_page>Breadcrumb</.breadcrumb_page>
+            </.breadcrumb_item>
           </.breadcrumb_list>
         </.breadcrumb>
       </.section>
@@ -419,7 +430,9 @@ defmodule DemoWeb.GalleryLive do
           <.pagination_content>
             <.pagination_item><.pagination_previous href="#" /></.pagination_item>
             <.pagination_item><.pagination_link href="#">1</.pagination_link></.pagination_item>
-            <.pagination_item><.pagination_link href="#" is_active>2</.pagination_link></.pagination_item>
+            <.pagination_item>
+              <.pagination_link href="#" is_active>2</.pagination_link>
+            </.pagination_item>
             <.pagination_item><.pagination_link href="#">3</.pagination_link></.pagination_item>
             <.pagination_item><.pagination_ellipsis /></.pagination_item>
             <.pagination_item><.pagination_next href="#" /></.pagination_item>
@@ -452,17 +465,29 @@ defmodule DemoWeb.GalleryLive do
           <.menubar_menu id="mb-file">
             <.menubar_trigger menu="mb-file">File</.menubar_trigger>
             <.menubar_content menu="mb-file">
-              <.menubar_item>New Tab <.menubar_shortcut>⌘T</.menubar_shortcut></.menubar_item>
+              <.menubar_item>
+                New Tab
+                <.menubar_shortcut>⌘T</.menubar_shortcut>
+              </.menubar_item>
               <.menubar_item>New Window</.menubar_item>
               <.menubar_separator />
-              <.menubar_item>Print… <.menubar_shortcut>⌘P</.menubar_shortcut></.menubar_item>
+              <.menubar_item>
+                Print…
+                <.menubar_shortcut>⌘P</.menubar_shortcut>
+              </.menubar_item>
             </.menubar_content>
           </.menubar_menu>
           <.menubar_menu id="mb-edit">
             <.menubar_trigger menu="mb-edit">Edit</.menubar_trigger>
             <.menubar_content menu="mb-edit">
-              <.menubar_item>Undo <.menubar_shortcut>⌘Z</.menubar_shortcut></.menubar_item>
-              <.menubar_item>Redo <.menubar_shortcut>⇧⌘Z</.menubar_shortcut></.menubar_item>
+              <.menubar_item>
+                Undo
+                <.menubar_shortcut>⌘Z</.menubar_shortcut>
+              </.menubar_item>
+              <.menubar_item>
+                Redo
+                <.menubar_shortcut>⇧⌘Z</.menubar_shortcut>
+              </.menubar_item>
             </.menubar_content>
           </.menubar_menu>
         </.menubar>
@@ -579,8 +604,14 @@ defmodule DemoWeb.GalleryLive do
             </.command_group>
             <.command_separator />
             <.command_group heading="Settings">
-              <.command_item value="profile">Profile <.command_shortcut>⌘P</.command_shortcut></.command_item>
-              <.command_item value="settings">Settings <.command_shortcut>⌘S</.command_shortcut></.command_item>
+              <.command_item value="profile">
+                Profile
+                <.command_shortcut>⌘P</.command_shortcut>
+              </.command_item>
+              <.command_item value="settings">
+                Settings
+                <.command_shortcut>⌘S</.command_shortcut>
+              </.command_item>
             </.command_group>
           </.command_list>
         </.command>
@@ -664,7 +695,11 @@ defmodule DemoWeb.GalleryLive do
       </.section>
 
       <.section title="Resizable">
-        <.resizable_panel_group id="rz-demo" direction="horizontal" class="h-48 max-w-md rounded-lg border">
+        <.resizable_panel_group
+          id="rz-demo"
+          direction="horizontal"
+          class="h-48 max-w-md rounded-lg border"
+        >
           <.resizable_panel basis={50}>
             <div class="flex h-full items-center justify-center p-6 text-sm">One</div>
           </.resizable_panel>
@@ -725,7 +760,9 @@ defmodule DemoWeb.GalleryLive do
               </.drawer_header>
               <.drawer_footer>
                 <.button>Submit</.button>
-                <.drawer_close dialog="drawer-demo"><.button variant="outline">Cancel</.button></.drawer_close>
+                <.drawer_close dialog="drawer-demo">
+                  <.button variant="outline">Cancel</.button>
+                </.drawer_close>
               </.drawer_footer>
             </.drawer_content>
           </.drawer>

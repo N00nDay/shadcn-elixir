@@ -23,3 +23,20 @@
 
 /* Make LiveView wrapper divs transparent for layout */
 [data-phx-session], [data-phx-teleported-src] { display: contents }
+
+/* Docs site: code blocks (Makeup output) — always dark, padded, scrollable. */
+.makeup-wrap pre.highlight {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  border-radius: 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Copy button: swap clipboard <-> check based on copied state. */
+.copy-btn .check-icon { display: none; }
+.copy-btn[data-copied="true"] .copy-icon { display: none; }
+.copy-btn[data-copied="true"] .check-icon { display: inline; }
+.copy-btn[data-copied="true"] { color: #4ade80; }

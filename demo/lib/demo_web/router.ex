@@ -17,7 +17,11 @@ defmodule DemoWeb.Router do
   scope "/", DemoWeb do
     pipe_through :browser
 
-    live "/", GalleryLive
+    live "/", HomeLive
+    live "/docs", DocsLive
+    live "/docs/components/:component", ComponentLive
+    live "/docs/:page", DocsLive
+    live "/gallery", GalleryLive
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,29 @@
+<.dialog id="dialog-form">
+  <.dialog_trigger dialog="dialog-form">
+    <.button variant="outline">Edit profile</.button>
+  </.dialog_trigger>
+  <.dialog_content dialog="dialog-form">
+    <.dialog_header>
+      <.dialog_title>Edit profile</.dialog_title>
+      <.dialog_description>
+        Make changes to your profile here. Click save when you're done.
+      </.dialog_description>
+    </.dialog_header>
+    <div class="grid gap-4 py-2">
+      <div class="grid gap-2">
+        <.label for="name">Name</.label>
+        <.input id="name" name="name" value="Pedro Duarte" />
+      </div>
+      <div class="grid gap-2">
+        <.label for="username">Username</.label>
+        <.input id="username" name="username" value="@peduarte" />
+      </div>
+    </div>
+    <.dialog_footer>
+      <.dialog_close dialog="dialog-form">
+        <.button variant="outline">Cancel</.button>
+      </.dialog_close>
+      <.button>Save changes</.button>
+    </.dialog_footer>
+  </.dialog_content>
+</.dialog>
