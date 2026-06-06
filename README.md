@@ -39,6 +39,17 @@ navigation-menu, pagination, popover, progress, radio-group, resizable, scroll-a
 select, separator, sheet, sidebar, skeleton, slider, sonner, spinner, switch, table,
 tabs, textarea, toast, toggle, toggle-group, tooltip, typography.
 
+## Preview (demo app)
+
+A runnable Phoenix app lives in [`demo/`](demo/) — it shows components from every tier
+with the full Tailwind v4 + theme + JS-hooks pipeline wired up:
+
+```bash
+cd demo
+mix setup
+mix phx.server   # http://localhost:4000
+```
+
 ## Installation
 
 Add to your `mix.exs`:
