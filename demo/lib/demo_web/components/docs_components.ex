@@ -53,9 +53,52 @@ defmodule DemoWeb.DocsComponents do
             </article>
             <.docs_toc :if={@toc != []} toc={@toc} />
           </div>
+          <.docs_footer />
         </main>
       </div>
     </div>
+    """
+  end
+
+  # --- Footer (attribution) --------------------------------------------------
+
+  defp docs_footer(assigns) do
+    assigns = assign(assigns, :github_url, @github_url)
+
+    ~H"""
+    <footer class="mt-12 border-t py-8">
+      <div class="mx-auto max-w-5xl px-6 lg:px-10">
+        <p class="text-sm text-muted-foreground">
+          A port of
+          <.link
+            href="https://ui.shadcn.com"
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            shadcn/ui
+          </.link>
+          by <.link
+            href="https://twitter.com/shadcn"
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium underline underline-offset-4"
+          >shadcn</.link>.
+          Built for Phoenix by <.link
+            href="https://github.com/N00nDay"
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium underline underline-offset-4"
+          >Craig Howell</.link>.
+          The source code is available on <.link
+            href={@github_url}
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium underline underline-offset-4"
+          >GitHub</.link>.
+        </p>
+      </div>
+    </footer>
     """
   end
 
@@ -84,12 +127,6 @@ defmodule DemoWeb.DocsComponents do
             class="text-foreground/70 transition-colors hover:text-foreground"
           >
             Components
-          </.link>
-          <.link
-            navigate="/gallery"
-            class="text-foreground/70 transition-colors hover:text-foreground"
-          >
-            Gallery
           </.link>
         </nav>
         <div class="ml-auto flex items-center gap-2">

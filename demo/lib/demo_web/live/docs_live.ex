@@ -20,6 +20,13 @@ defmodule DemoWeb.DocsLive do
     {:noreply, assign(socket, page: page, page_title: Docs.page_title(page), toc: toc_for(page))}
   end
 
+  defp toc_for("introduction") do
+    [
+      %{id: "coming-from", label: "Coming from React or Svelte?"},
+      %{id: "credits", label: "Credits"}
+    ]
+  end
+
   defp toc_for("installation") do
     [
       %{id: "add-dependency", label: "Add the dependency"},
@@ -87,6 +94,57 @@ defmodule DemoWeb.DocsLive do
         </.card_footer>
       </.card>
     </div>
+
+    <.doc_section_title id="coming-from">Coming from React or Svelte?</.doc_section_title>
+    <p class="text-sm leading-7 text-muted-foreground">
+      The component names, anatomy, and examples mirror
+      <.link
+        href="https://ui.shadcn.com"
+        target="_blank"
+        rel="noreferrer"
+        class="underline underline-offset-4"
+      >
+        shadcn/ui
+      </.link>
+      (React) and <.link
+        href="https://www.shadcn-svelte.com"
+        target="_blank"
+        rel="noreferrer"
+        class="underline underline-offset-4"
+      >shadcn-svelte</.link>.
+      A <code class="rounded bg-muted px-1 py-0.5 text-xs">&lt;Dialog&gt;</code>
+      with a <code class="rounded bg-muted px-1 py-0.5 text-xs">DialogTrigger</code>
+      and <code class="rounded bg-muted px-1 py-0.5 text-xs">DialogContent</code>
+      becomes <code class="rounded bg-muted px-1 py-0.5 text-xs">&lt;.dialog&gt;</code>
+      with <code class="rounded bg-muted px-1 py-0.5 text-xs">&lt;.dialog_trigger&gt;</code>
+      and <code class="rounded bg-muted px-1 py-0.5 text-xs">&lt;.dialog_content&gt;</code>
+      — composed sub-components become snake_cased function components, props become HEEx attributes,
+      and the same Tailwind tokens drive theming.
+    </p>
+
+    <.doc_section_title id="credits">Credits</.doc_section_title>
+    <p class="text-sm leading-7 text-muted-foreground">
+      shadcn-elixir is an independent port of <.link
+        href="https://ui.shadcn.com"
+        target="_blank"
+        rel="noreferrer"
+        class="underline underline-offset-4"
+      >shadcn/ui</.link>,
+      created by <.link
+        href="https://twitter.com/shadcn"
+        target="_blank"
+        rel="noreferrer"
+        class="underline underline-offset-4"
+      >shadcn</.link>.
+      All credit for the original design system and component API belongs to its author. This project
+      simply brings that work to the Phoenix ecosystem, following the example set by <.link
+        href="https://www.shadcn-svelte.com"
+        target="_blank"
+        rel="noreferrer"
+        class="underline underline-offset-4"
+      >shadcn-svelte</.link>.
+      Both shadcn/ui and shadcn-elixir are MIT licensed.
+    </p>
     """
   end
 

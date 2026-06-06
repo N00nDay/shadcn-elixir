@@ -1,6 +1,6 @@
 defmodule DemoWeb.HomeLive do
   @moduledoc """
-  Landing page (`/`) — a short hero linking into the docs and the kitchen-sink gallery.
+  Landing page (`/`) — a short hero linking into the documentation.
   """
   use Phoenix.LiveView
   use ShadcnElixir
@@ -14,7 +14,7 @@ defmodule DemoWeb.HomeLive do
         <span class="font-semibold">shadcn-elixir</span>
         <div class="flex items-center gap-2">
           <.button variant="ghost" navigate="/docs/introduction">Docs</.button>
-          <.button variant="ghost" navigate="/gallery">Gallery</.button>
+          <.button variant="ghost" navigate="/docs/components/button">Components</.button>
           <button
             type="button"
             onclick="toggleTheme()"
@@ -63,6 +63,42 @@ defmodule DemoWeb.HomeLive do
           <.button variant="outline" navigate="/docs/components/button">Browse components</.button>
         </div>
       </main>
+
+      <footer class="border-t py-8">
+        <p class="mx-auto max-w-3xl px-6 text-center text-sm text-muted-foreground">
+          A port of
+          <.link
+            href="https://ui.shadcn.com"
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            shadcn/ui
+          </.link>
+          by <.link
+            href="https://twitter.com/shadcn"
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            shadcn
+          </.link>. Built for Phoenix by <.link
+            href="https://github.com/N00nDay"
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            Craig Howell
+          </.link>. The source code is available on <.link
+            href="https://github.com/N00nDay/shadcn-elixir"
+            target="_blank"
+            rel="noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            GitHub
+          </.link>.
+        </p>
+      </footer>
     </div>
     """
   end

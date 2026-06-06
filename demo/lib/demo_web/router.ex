@@ -21,7 +21,6 @@ defmodule DemoWeb.Router do
     live "/docs", DocsLive
     live "/docs/components/:component", ComponentLive
     live "/docs/:page", DocsLive
-    live "/gallery", GalleryLive
   end
 
   # Other scopes may use custom stacks.

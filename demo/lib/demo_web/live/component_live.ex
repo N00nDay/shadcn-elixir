@@ -54,7 +54,7 @@ defmodule DemoWeb.ComponentLive do
       ]}
     >
       <.built_page :if={@spec} spec={@spec} />
-      <.coming_soon :if={is_nil(@spec)} title={@title} />
+      <.coming_soon :if={is_nil(@spec)} title={@title} slug={@slug} />
     </.docs_shell>
     """
   end
@@ -105,8 +105,11 @@ defmodule DemoWeb.ComponentLive do
   end
 
   attr :title, :string, required: true
+  attr :slug, :string, required: true
 
   defp coming_soon(assigns) do
+    assigns = assign(assigns, :shadcn_url, shadcn_url(assigns.slug))
+
     ~H"""
     <.doc_heading title={@title} />
     <.card class="mt-6">
@@ -115,14 +118,24 @@ defmodule DemoWeb.ComponentLive do
         <.card_description>
           The <span class="font-medium">{@title}</span>
           component is implemented in the library — its documentation page is on the way.
-          In the meantime, see it in the <.link
-            navigate="/gallery"
+          In the meantime, see the original
+          <.link
+            href={@shadcn_url}
+            target="_blank"
+            rel="noreferrer"
             class="underline underline-offset-4"
-          >kitchen-sink gallery</.link>.
+          >
+            shadcn/ui docs
+          </.link>
+          for the equivalent React component.
         </.card_description>
       </.card_header>
     </.card>
     """
+  end
+
+  defp shadcn_url(slug) do
+    "https://ui.shadcn.com/docs/components/" <> String.replace(slug, "_", "-")
   end
 
   defp usage_source do

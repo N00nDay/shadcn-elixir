@@ -204,5 +204,173 @@ defmodule DemoWeb.Docs do
     }
   end
 
+  def component("accordion") do
+    %{
+      slug: "accordion",
+      title: "Accordion",
+      description:
+        "A vertically stacked set of interactive headings that each reveal a section of content. " <>
+          "Built on native `<details>`/`<summary>` — no JavaScript.",
+      examples: [%{key: "accordion_default", title: "Default", description: nil}],
+      props: [
+        %{label: "accordion", module: C.Accordion, fun: :accordion},
+        %{label: "accordion_item", module: C.Accordion, fun: :accordion_item},
+        %{label: "accordion_trigger", module: C.Accordion, fun: :accordion_trigger},
+        %{label: "accordion_content", module: C.Accordion, fun: :accordion_content}
+      ]
+    }
+  end
+
+  def component("alert") do
+    %{
+      slug: "alert",
+      title: "Alert",
+      description: "Displays a callout for user attention.",
+      examples: [
+        %{key: "alert_default", title: "Default", description: nil},
+        %{key: "alert_destructive", title: "Destructive", description: nil}
+      ],
+      props: [
+        %{label: "alert", module: C.Alert, fun: :alert},
+        %{label: "alert_title", module: C.Alert, fun: :alert_title},
+        %{label: "alert_description", module: C.Alert, fun: :alert_description}
+      ]
+    }
+  end
+
+  def component("aspect_ratio") do
+    %{
+      slug: "aspect_ratio",
+      title: "Aspect Ratio",
+      description: "Displays content within a desired ratio.",
+      examples: [%{key: "aspect_ratio_default", title: "Default", description: nil}],
+      props: [%{label: "aspect_ratio", module: C.AspectRatio, fun: :aspect_ratio}]
+    }
+  end
+
+  def component("avatar") do
+    %{
+      slug: "avatar",
+      title: "Avatar",
+      description: "An image element with a fallback for representing the user.",
+      examples: [
+        %{key: "avatar_default", title: "Default", description: nil},
+        %{
+          key: "avatar_overlap",
+          title: "Group",
+          description: "Overlap several avatars with an overflow count."
+        }
+      ],
+      props: [
+        %{label: "avatar", module: C.Avatar, fun: :avatar},
+        %{label: "avatar_image", module: C.Avatar, fun: :avatar_image},
+        %{label: "avatar_fallback", module: C.Avatar, fun: :avatar_fallback}
+      ]
+    }
+  end
+
+  def component("badge") do
+    %{
+      slug: "badge",
+      title: "Badge",
+      description: "Displays a badge or a component that looks like a badge.",
+      examples: [
+        %{key: "badge_default", title: "Default", description: nil},
+        %{
+          key: "badge_variants",
+          title: "Variants",
+          description: "Set the visual style with the `variant` attribute."
+        }
+      ],
+      props: [%{label: "badge", module: C.Badge, fun: :badge}]
+    }
+  end
+
+  def component("checkbox") do
+    %{
+      slug: "checkbox",
+      title: "Checkbox",
+      description:
+        "A control that allows the user to toggle between checked and not checked. " <>
+          "Renders a real `<input type=\"checkbox\">`, so it submits with forms — no JavaScript.",
+      examples: [%{key: "checkbox_default", title: "Default", description: nil}],
+      props: [%{label: "checkbox", module: C.Checkbox, fun: :checkbox}]
+    }
+  end
+
+  def component("kbd") do
+    %{
+      slug: "kbd",
+      title: "Kbd",
+      description: "Displays a keyboard key or a combination of keys.",
+      examples: [%{key: "kbd_default", title: "Default", description: nil}],
+      props: [
+        %{label: "kbd", module: C.Kbd, fun: :kbd},
+        %{label: "kbd_group", module: C.Kbd, fun: :kbd_group}
+      ]
+    }
+  end
+
+  def component("separator") do
+    %{
+      slug: "separator",
+      title: "Separator",
+      description: "Visually or semantically separates content.",
+      examples: [%{key: "separator_default", title: "Default", description: nil}],
+      props: [%{label: "separator", module: C.Separator, fun: :separator}]
+    }
+  end
+
+  def component("skeleton") do
+    %{
+      slug: "skeleton",
+      title: "Skeleton",
+      description: "Use to show a placeholder while content is loading.",
+      examples: [%{key: "skeleton_default", title: "Default", description: nil}],
+      props: [%{label: "skeleton", module: C.Skeleton, fun: :skeleton}]
+    }
+  end
+
+  def component("switch") do
+    %{
+      slug: "switch",
+      title: "Switch",
+      description:
+        "A control that toggles between on and off. Renders a real checkbox, so it " <>
+          "submits with forms — no JavaScript.",
+      examples: [%{key: "switch_default", title: "Default", description: nil}],
+      props: [%{label: "switch", module: C.Switch, fun: :switch}]
+    }
+  end
+
+  def component("textarea") do
+    %{
+      slug: "textarea",
+      title: "Textarea",
+      description: "Displays a form textarea or a component that looks like a textarea.",
+      examples: [
+        %{key: "textarea_default", title: "Default", description: nil},
+        %{key: "textarea_with_label", title: "With label", description: nil}
+      ],
+      props: [%{label: "textarea", module: C.Textarea, fun: :textarea}]
+    }
+  end
+
+  def component("tooltip") do
+    %{
+      slug: "tooltip",
+      title: "Tooltip",
+      description:
+        "A popup that displays information related to an element when it receives " <>
+          "keyboard focus or the mouse hovers over it. Pure CSS — no JavaScript.",
+      examples: [%{key: "tooltip_default", title: "Default", description: nil}],
+      props: [
+        %{label: "tooltip", module: C.Tooltip, fun: :tooltip},
+        %{label: "tooltip_trigger", module: C.Tooltip, fun: :tooltip_trigger},
+        %{label: "tooltip_content", module: C.Tooltip, fun: :tooltip_content}
+      ]
+    }
+  end
+
   def component(_), do: nil
 end
