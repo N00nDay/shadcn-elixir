@@ -45,6 +45,12 @@ defmodule ShadcnElixir.Components.Popover do
 
   attr(:popover, :string, required: true)
   attr(:align, :string, default: "center", values: ["start", "center", "end"])
+
+  attr(:label, :string,
+    default: "Popover",
+    doc: "Accessible name for the popover dialog (role=\"dialog\" requires a name)."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -54,6 +60,7 @@ defmodule ShadcnElixir.Components.Popover do
     <div
       id={"#{@popover}-content"}
       role="dialog"
+      aria-label={@label}
       data-slot="popover-content"
       data-align={@align}
       data-state="closed"

@@ -5,6 +5,13 @@ defmodule ShadcnElixir.Components.Button do
   Renders a `<button>` by default, or an `<a>` (via `Phoenix.Component.link/1`) when any
   of `href`, `navigate`, or `patch` is provided — the idiomatic Phoenix equivalent of
   shadcn's `asChild` link pattern.
+
+  ## Accessibility
+
+  Icon-only buttons (the `icon`, `icon-xs`, `icon-sm`, `icon-lg` sizes) have no visible
+  text, so always give them an `aria-label`, and mark the icon `aria-hidden="true"`:
+
+      <.button size="icon" aria-label="Settings"><.icon name="settings" aria-hidden="true" /></.button>
   """
   use Phoenix.Component
 

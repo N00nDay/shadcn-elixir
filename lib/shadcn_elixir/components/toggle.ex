@@ -4,6 +4,9 @@ defmodule ShadcnElixir.Components.Toggle do
 
   A two-state button. Pressed state is tracked with `data-state`/`aria-pressed`,
   toggled client-side via `Phoenix.LiveView.JS`.
+
+  Icon-only toggles (e.g. a Bold/Italic button) have no visible text, so pass an
+  `aria-label` and mark the icon `aria-hidden="true"`.
   """
   use Phoenix.Component
 

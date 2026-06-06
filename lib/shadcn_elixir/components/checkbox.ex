@@ -5,6 +5,12 @@ defmodule ShadcnElixir.Components.Checkbox do
 
   Renders a real checkbox (`peer sr-only`) with a styled box and check icon, so it
   submits with forms and toggles with zero JavaScript.
+
+  ## Accessibility
+
+  The visual box carries no text, so give every checkbox an accessible name —
+  either an `aria-label` or an associated `<.label for={id}>` matching the checkbox's
+  `id` (see the radio group docs for the `id` + sibling `<.label>` pattern).
   """
   use Phoenix.Component
 
@@ -50,6 +56,7 @@ defmodule ShadcnElixir.Components.Checkbox do
           stroke-linecap="round"
           stroke-linejoin="round"
           class="size-3.5 opacity-0 transition-opacity"
+          aria-hidden="true"
         >
           <path d="M20 6 9 17l-5-5" />
         </svg>

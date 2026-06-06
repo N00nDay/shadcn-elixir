@@ -56,7 +56,6 @@ defmodule ShadcnElixir.Components.Item do
   def item_group(assigns) do
     ~H"""
     <div
-      role="list"
       data-slot="item-group"
       class={cn(["group/item-group flex flex-col", @class])}
       {@rest}

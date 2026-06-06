@@ -18,6 +18,13 @@ defmodule ShadcnElixir.Components.ContextMenu do
              "m.setAttribute('data-state','open');" <>
              "m.style.left=event.offsetX+'px';m.style.top=event.offsetY+'px';"
 
+  # Keyboard equivalent: Shift+F10 or the dedicated ContextMenu key opens the menu
+  # at the trigger's top-left, so the menu is reachable without a pointer.
+  @open_kbd_js "if(event.key==='ContextMenu'||(event.shiftKey&&event.key==='F10')){" <>
+                 "event.preventDefault();" <>
+                 "var m=this.closest('[data-slot=context-menu]').querySelector('[data-slot=context-menu-content]');" <>
+                 "m.setAttribute('data-state','open');m.style.left='0px';m.style.top='0px';}"
+
   attr(:id, :string, required: true)
   attr(:class, :any, default: nil)
   attr(:rest, :global)
@@ -36,10 +43,21 @@ defmodule ShadcnElixir.Components.ContextMenu do
   slot(:inner_block, required: true)
 
   def context_menu_trigger(assigns) do
-    assigns = assign(assigns, :open_js, @open_js)
+    assigns =
+      assigns
+      |> assign(:open_js, @open_js)
+      |> assign(:open_kbd_js, @open_kbd_js)
 
     ~H"""
-    <div data-slot="context-menu-trigger" oncontextmenu={@open_js} class={cn(@class)} {@rest}>
+    <div
+      data-slot="context-menu-trigger"
+      tabindex="0"
+      aria-haspopup="menu"
+      oncontextmenu={@open_js}
+      onkeydown={@open_kbd_js}
+      class={cn(@class)}
+      {@rest}
+    >
       {render_slot(@inner_block)}
     </div>
     """
@@ -55,6 +73,8 @@ defmodule ShadcnElixir.Components.ContextMenu do
     <div
       id={"#{@menu}-content"}
       role="menu"
+      aria-orientation="vertical"
+      phx-hook="ShadcnMenu"
       data-slot="context-menu-content"
       data-state="closed"
       phx-click-away={close(@menu)}

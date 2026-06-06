@@ -121,6 +121,7 @@ defmodule ShadcnElixir.Components.Pagination do
         stroke-linecap="round"
         stroke-linejoin="round"
         class="size-4"
+        aria-hidden="true"
       >
         <path d="m15 18-6-6 6-6" />
       </svg>
@@ -152,6 +153,7 @@ defmodule ShadcnElixir.Components.Pagination do
         stroke-linecap="round"
         stroke-linejoin="round"
         class="size-4"
+        aria-hidden="true"
       >
         <path d="m9 18 6-6-6-6" />
       </svg>

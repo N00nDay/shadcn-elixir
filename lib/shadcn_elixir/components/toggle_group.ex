@@ -28,6 +28,13 @@ defmodule ShadcnElixir.Components.ToggleGroup do
   attr(:variant, :string, default: "default")
   attr(:size, :string, default: "default")
   attr(:spacing, :integer, default: 0, doc: "Gap between items (0 = joined).")
+
+  attr(:label, :string,
+    default: nil,
+    doc:
+      "Accessible name for the group (role=\"group\" should be named). Icon-only items also need their own aria-label."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -37,6 +44,7 @@ defmodule ShadcnElixir.Components.ToggleGroup do
     <div
       id={@id}
       role="group"
+      aria-label={@label}
       data-slot="toggle-group"
       data-type={@type}
       data-variant={@variant}

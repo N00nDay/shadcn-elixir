@@ -189,8 +189,8 @@ defmodule DemoWeb.HomeLive do
             </.alert_dialog_trigger>
             <.alert_dialog_content dialog="ui-alert" size="sm">
               <.alert_dialog_header>
-                <.alert_dialog_title>Update notification settings?</.alert_dialog_title>
-                <.alert_dialog_description>
+                <.alert_dialog_title dialog="ui-alert">Update notification settings?</.alert_dialog_title>
+                <.alert_dialog_description dialog="ui-alert">
                   This changes how alerts are delivered across your connected devices.
                 </.alert_dialog_description>
               </.alert_dialog_header>

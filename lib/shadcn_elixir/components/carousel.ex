@@ -14,6 +14,13 @@ defmodule ShadcnElixir.Components.Carousel do
 
   attr(:id, :string, required: true)
   attr(:orientation, :string, default: "horizontal", values: ["horizontal", "vertical"])
+
+  attr(:label, :string,
+    default: "Carousel",
+    doc:
+      "Accessible name for the carousel region (required since aria-roledescription overrides the role name)."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -24,6 +31,7 @@ defmodule ShadcnElixir.Components.Carousel do
       id={@id}
       role="region"
       aria-roledescription="carousel"
+      aria-label={@label}
       data-slot="carousel"
       data-orientation={@orientation}
       class={cn(["relative", @class])}
@@ -86,7 +94,7 @@ defmodule ShadcnElixir.Components.Carousel do
       class={Button.button_variants(variant: "outline", size: "icon", class: cn(["absolute size-8 rounded-full top-1/2 -left-12 -translate-y-1/2", @class]))}
       {@rest}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true">
         <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
       </svg>
     </button>
@@ -109,7 +117,7 @@ defmodule ShadcnElixir.Components.Carousel do
       class={Button.button_variants(variant: "outline", size: "icon", class: cn(["absolute size-8 rounded-full top-1/2 -right-12 -translate-y-1/2", @class]))}
       {@rest}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true">
         <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
       </svg>
     </button>

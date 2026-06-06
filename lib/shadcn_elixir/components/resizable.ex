@@ -64,6 +64,8 @@ defmodule ShadcnElixir.Components.Resizable do
     ~H"""
     <div
       role="separator"
+      tabindex="0"
+      aria-label="Resize panel"
       data-slot="resizable-handle"
       data-part="handle"
       class={
@@ -97,6 +99,7 @@ defmodule ShadcnElixir.Components.Resizable do
           stroke-linecap="round"
           stroke-linejoin="round"
           class="size-2.5"
+          aria-hidden="true"
         >
           <circle cx="9" cy="12" r="1" /><circle cx="9" cy="5" r="1" /><circle cx="9" cy="19" r="1" />
           <circle cx="15" cy="12" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="19" r="1" />

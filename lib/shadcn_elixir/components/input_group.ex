@@ -6,6 +6,12 @@ defmodule ShadcnElixir.Components.InputGroup do
   Composes an input with leading/trailing addons (icons, text, buttons). Composed of
   `input_group/1`, `input_group_addon/1`, `input_group_input/1`, `input_group_textarea/1`,
   `input_group_button/1`, and `input_group_text/1`.
+
+  ## Accessibility
+
+  Icon-only `input_group_button/1`s have no visible text — give them an `aria-label`
+  and mark the icon `aria-hidden="true"`. Mark purely-decorative addon icons
+  `aria-hidden="true"` too.
   """
   use Phoenix.Component
 

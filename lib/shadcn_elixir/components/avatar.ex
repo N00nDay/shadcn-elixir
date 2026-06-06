@@ -5,6 +5,13 @@ defmodule ShadcnElixir.Components.Avatar do
   Composed of `avatar/1`, `avatar_image/1`, and `avatar_fallback/1`. The fallback
   shows automatically when the image is missing or fails to load (the image removes
   itself on error, revealing the fallback beneath it).
+
+  ## Accessibility
+
+  Pass a meaningful `alt` to `avatar_image/1` (e.g. the person's name) so the avatar
+  has a text alternative — `alt` defaults to `""` (decorative), which leaves a loaded
+  avatar nameless. The fallback initials are read as letters, so a real `alt` (or an
+  adjacent visible name) should carry the identity.
   """
   use Phoenix.Component
 

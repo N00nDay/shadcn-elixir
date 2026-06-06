@@ -99,13 +99,20 @@ defmodule ShadcnElixir.Components.Table do
     """
   end
 
+  attr(:scope, :string,
+    default: "col",
+    doc:
+      "Header cell scope (\"col\"/\"row\"); set to nil to omit. Associates data cells with headers."
+  )
+
   attr(:class, :any, default: nil)
-  attr(:rest, :global, include: ~w(colspan rowspan scope abbr))
+  attr(:rest, :global, include: ~w(colspan rowspan abbr))
   slot(:inner_block, required: true)
 
   def table_head(assigns) do
     ~H"""
     <th
+      scope={@scope}
       data-slot="table-head"
       class={
         cn([

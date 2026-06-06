@@ -55,6 +55,8 @@ defmodule ShadcnElixir.Components.Drawer do
       id={"#{@dialog}-content"}
       role="dialog"
       aria-modal="true"
+      aria-labelledby={"#{@dialog}-title"}
+      aria-describedby={"#{@dialog}-description"}
       data-slot="drawer-content"
       data-state="closed"
       phx-window-keydown={close_modal(@dialog)}
@@ -70,7 +72,11 @@ defmodule ShadcnElixir.Components.Drawer do
       }
       {@rest}
     >
-      <div class="bg-muted mx-auto mt-4 h-2 w-[100px] shrink-0 rounded-full"></div>
+      <div
+        aria-hidden="true"
+        class="bg-muted mx-auto mt-4 h-2 w-[100px] shrink-0 rounded-full"
+      >
+      </div>
       {render_slot(@inner_block)}
     </div>
     """
@@ -104,17 +110,32 @@ defmodule ShadcnElixir.Components.Drawer do
     """
   end
 
+  attr(:dialog, :string,
+    default: nil,
+    doc: "The drawer id — when set, gives the title a stable id for aria-labelledby."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
 
   def drawer_title(assigns) do
     ~H"""
-    <div data-slot="drawer-title" class={cn(["text-foreground font-semibold", @class])} {@rest}>
+    <h2
+      id={@dialog && "#{@dialog}-title"}
+      data-slot="drawer-title"
+      class={cn(["text-foreground font-semibold", @class])}
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </h2>
     """
   end
+
+  attr(:dialog, :string,
+    default: nil,
+    doc: "The drawer id — when set, gives the description a stable id for aria-describedby."
+  )
 
   attr(:class, :any, default: nil)
   attr(:rest, :global)
@@ -122,9 +143,14 @@ defmodule ShadcnElixir.Components.Drawer do
 
   def drawer_description(assigns) do
     ~H"""
-    <div data-slot="drawer-description" class={cn(["text-muted-foreground text-sm", @class])} {@rest}>
+    <p
+      id={@dialog && "#{@dialog}-description"}
+      data-slot="drawer-description"
+      class={cn(["text-muted-foreground text-sm", @class])}
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </p>
     """
   end
 

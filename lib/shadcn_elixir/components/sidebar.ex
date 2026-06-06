@@ -73,7 +73,12 @@ defmodule ShadcnElixir.Components.Sidebar do
       type="button"
       data-slot="sidebar-trigger"
       aria-label="Toggle sidebar"
-      phx-click={JS.toggle_attribute({"data-state", "collapsed", "expanded"}, to: "##{@target}")}
+      aria-controls={@target}
+      aria-expanded="true"
+      phx-click={
+        JS.toggle_attribute({"data-state", "collapsed", "expanded"}, to: "##{@target}")
+        |> JS.toggle_attribute({"aria-expanded", "false", "true"})
+      }
       class={
         cn([
           "inline-flex size-7 items-center justify-center rounded-md hover:bg-sidebar-accent",
@@ -83,7 +88,7 @@ defmodule ShadcnElixir.Components.Sidebar do
       }
       {@rest}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true">
         <rect width="18" height="18" x="3" y="3" rx="2" /><path d="M9 3v18" />
       </svg>
     </button>
@@ -223,6 +228,7 @@ defmodule ShadcnElixir.Components.Sidebar do
     <.link
       data-slot="sidebar-menu-button"
       data-active={to_string(@active)}
+      aria-current={@active && "page"}
       class={
         cn([
           "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left",

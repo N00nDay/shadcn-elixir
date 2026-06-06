@@ -40,6 +40,7 @@ defmodule ShadcnElixir.Components.ButtonGroup do
       </.button_group>
   """
   attr(:orientation, :string, default: nil, values: [nil, "horizontal", "vertical"])
+  attr(:label, :string, default: nil, doc: "Accessible name for the group (role=\"group\").")
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -53,7 +54,7 @@ defmodule ShadcnElixir.Components.ButtonGroup do
       )
 
     ~H"""
-    <div role="group" data-slot="button-group" data-orientation={@orientation || "horizontal"} class={@class} {@rest}>
+    <div role="group" aria-label={@label} data-slot="button-group" data-orientation={@orientation || "horizontal"} class={@class} {@rest}>
       {render_slot(@inner_block)}
     </div>
     """
@@ -88,6 +89,7 @@ defmodule ShadcnElixir.Components.ButtonGroup do
     ~H"""
     <div
       role="separator"
+      aria-orientation="vertical"
       data-orientation="vertical"
       data-slot="button-group-separator"
       class={

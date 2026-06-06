@@ -2,8 +2,14 @@ defmodule ShadcnElixir.Components.Switch do
   @moduledoc """
   Switch — a port of shadcn/ui's [Switch](https://ui.shadcn.com/docs/components/switch).
 
-  Renders a real checkbox (`peer sr-only`) wrapped in a styled track + thumb, so it
-  submits with forms and toggles with zero JavaScript.
+  Renders a real checkbox (`peer sr-only`) with `role="switch"` wrapped in a styled
+  track + thumb, so it submits with forms and toggles with zero JavaScript while being
+  announced as an on/off switch.
+
+  ## Accessibility
+
+  The track/thumb carry no text, so give every switch an accessible name — either an
+  `aria-label` or an associated `<.label for={id}>` matching the switch's `id`.
   """
   use Phoenix.Component
 
@@ -27,7 +33,17 @@ defmodule ShadcnElixir.Components.Switch do
   def switch(assigns) do
     ~H"""
     <label class={cn(["inline-flex items-center", @class])} data-slot="switch">
-      <input type="checkbox" name={@name} value={@value} checked={@checked} class="peer sr-only" {@rest} />
+      <input
+        type="checkbox"
+        role="switch"
+        name={@name}
+        value={@value}
+        checked={@checked}
+        aria-checked={to_string(@checked)}
+        onchange="this.setAttribute('aria-checked', this.checked)"
+        class="peer sr-only"
+        {@rest}
+      />
       <span data-size={@size} class={
         "group/switch bg-input peer-checked:bg-primary dark:peer-checked:bg-primary " <>
           "dark:bg-input/80 inline-flex shrink-0 items-center rounded-full " <>

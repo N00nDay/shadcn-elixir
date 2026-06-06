@@ -38,6 +38,7 @@ defmodule ShadcnElixir.Components.Tabs do
       id={@id}
       data-slot="tabs"
       data-orientation={@orientation}
+      phx-hook="ShadcnTabs"
       class={cn(["group/tabs flex gap-2 data-[orientation=horizontal]:flex-col", @class])}
       {@rest}
     >
@@ -87,7 +88,10 @@ defmodule ShadcnElixir.Components.Tabs do
     <button
       type="button"
       role="tab"
+      id={"#{@tabs}-trigger-#{@value}"}
       aria-selected={to_string(@active)}
+      aria-controls={"#{@tabs}-panel-#{@value}"}
+      tabindex={if @active, do: "0", else: "-1"}
       data-state={if @active, do: "active", else: "inactive"}
       data-tab-value={@value}
       phx-click={select_tab(@tabs, @value)}
@@ -141,6 +145,9 @@ defmodule ShadcnElixir.Components.Tabs do
     ~H"""
     <div
       role="tabpanel"
+      id={"#{@tabs}-panel-#{@value}"}
+      aria-labelledby={"#{@tabs}-trigger-#{@value}"}
+      tabindex="0"
       data-tab-value={@value}
       data-slot="tabs-content"
       data-state={if @active, do: "active", else: "inactive"}
@@ -160,9 +167,11 @@ defmodule ShadcnElixir.Components.Tabs do
     %JS{}
     |> JS.set_attribute({"data-state", "inactive"}, to: tab)
     |> JS.set_attribute({"aria-selected", "false"}, to: tab)
+    |> JS.set_attribute({"tabindex", "-1"}, to: tab)
     |> JS.set_attribute({"data-state", "inactive"}, to: panel)
     |> JS.set_attribute({"data-state", "active"})
     |> JS.set_attribute({"aria-selected", "true"})
+    |> JS.set_attribute({"tabindex", "0"})
     |> JS.set_attribute({"data-state", "active"},
       to: "##{tabs} [role=tabpanel][data-tab-value='#{value}']"
     )

@@ -22,16 +22,29 @@ defmodule ShadcnElixir.Components.Chart do
   attr(:id, :string, required: true)
   attr(:type, :string, default: "bar", values: ["bar", "line"])
   attr(:data, :list, required: true, doc: "List of maps with :label and :value keys.")
+
+  attr(:label, :string,
+    default: nil,
+    doc: "Accessible name for the chart. Defaults to a generated summary of the data."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
 
   def chart(assigns) do
-    assigns = assign(assigns, :payload, Jason.encode!(normalize(assigns.data)))
+    normalized = normalize(assigns.data)
+
+    assigns =
+      assigns
+      |> assign(:payload, Jason.encode!(normalized))
+      |> assign(:chart_label, assigns.label || summarize(assigns.type, normalized))
 
     ~H"""
     <div
       id={@id}
       phx-hook="ShadcnChart"
+      role="img"
+      aria-label={@chart_label}
       data-slot="chart"
       data-chart-type={@type}
       data-chart={@payload}
@@ -46,6 +59,12 @@ defmodule ShadcnElixir.Components.Chart do
     >
     </div>
     """
+  end
+
+  # A concise text alternative so screen-reader users get the data, not a blank image.
+  defp summarize(type, normalized) do
+    points = Enum.map_join(normalized, ", ", fn %{label: l, value: v} -> "#{l}: #{v}" end)
+    "#{String.capitalize(type)} chart. #{points}"
   end
 
   defp normalize(data) do

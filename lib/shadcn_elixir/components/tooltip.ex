@@ -26,17 +26,33 @@ defmodule ShadcnElixir.Components.Tooltip do
     """
   end
 
+  attr(:tooltip, :string,
+    default: nil,
+    doc: "The tooltip id — when set, wires the trigger to its content via aria-describedby."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
 
   def tooltip_trigger(assigns) do
     ~H"""
-    <span data-slot="tooltip-trigger" tabindex="0" class={cn(@class)} {@rest}>
+    <span
+      data-slot="tooltip-trigger"
+      tabindex="0"
+      aria-describedby={@tooltip && "#{@tooltip}-content"}
+      class={cn(@class)}
+      {@rest}
+    >
       {render_slot(@inner_block)}
     </span>
     """
   end
+
+  attr(:tooltip, :string,
+    default: nil,
+    doc: "The tooltip id — when set, gives the content a stable id for aria-describedby."
+  )
 
   attr(:side, :string, default: "top", values: ["top", "bottom", "left", "right"])
   attr(:class, :any, default: nil)
@@ -46,6 +62,7 @@ defmodule ShadcnElixir.Components.Tooltip do
   def tooltip_content(assigns) do
     ~H"""
     <span
+      id={@tooltip && "#{@tooltip}-content"}
       role="tooltip"
       data-slot="tooltip-content"
       class={

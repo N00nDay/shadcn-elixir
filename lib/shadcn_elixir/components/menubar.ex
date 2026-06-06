@@ -78,6 +78,8 @@ defmodule ShadcnElixir.Components.Menubar do
     <div
       id={"#{@menu}-content"}
       role="menu"
+      aria-orientation="vertical"
+      phx-hook="ShadcnMenu"
       data-slot="menubar-content"
       data-state="closed"
       phx-click-away={close(@menu)}

@@ -5,6 +5,22 @@ defmodule ShadcnElixir.Components.Field do
   Form field primitives. Composed of `field_set/1`, `field_legend/1`, `field_group/1`,
   `field/1`, `field_content/1`, `field_label/1`, `field_title/1`, `field_description/1`,
   `field_separator/1`, and `field_error/1`.
+
+  ## Accessibility
+
+  Wire the control to its label and (when present) its error so assistive tech
+  announces them:
+
+      <.field invalid={@errors != []}>
+        <.field_label for="email">Email</.field_label>
+        <.input id="email" name="email" aria-invalid={to_string(@errors != [])}
+          aria-describedby="email-error" />
+        <.field_error id="email-error">Enter a valid email.</.field_error>
+      </.field>
+
+  `field_error/1` is a `role="alert"` live region, so a newly rendered error is
+  announced. Always pass `aria-invalid` as a `"true"`/`"false"` string (a bare
+  boolean renders as a present-but-empty attribute and can't express the valid state).
   """
   use Phoenix.Component
 
@@ -110,6 +126,7 @@ defmodule ShadcnElixir.Components.Field do
       </.field>
   """
   attr(:orientation, :string, default: nil, values: [nil, "vertical", "horizontal", "responsive"])
+  attr(:invalid, :boolean, default: false, doc: "Marks the field invalid (drives error styling).")
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -123,7 +140,14 @@ defmodule ShadcnElixir.Components.Field do
       )
 
     ~H"""
-    <div role="group" data-slot="field" data-orientation={@orientation || "vertical"} class={@class} {@rest}>
+    <div
+      role="group"
+      data-slot="field"
+      data-orientation={@orientation || "vertical"}
+      data-invalid={to_string(@invalid)}
+      class={@class}
+      {@rest}
+    >
       {render_slot(@inner_block)}
     </div>
     """

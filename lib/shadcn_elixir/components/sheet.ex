@@ -84,6 +84,8 @@ defmodule ShadcnElixir.Components.Sheet do
       id={"#{@dialog}-content"}
       role="dialog"
       aria-modal="true"
+      aria-labelledby={"#{@dialog}-title"}
+      aria-describedby={"#{@dialog}-description"}
       data-slot="sheet-content"
       data-side={@side}
       data-state="closed"
@@ -109,10 +111,10 @@ defmodule ShadcnElixir.Components.Sheet do
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          aria-hidden="true"
         >
           <path d="M18 6 6 18" /><path d="m6 6 12 12" />
         </svg>
-        <span class="sr-only">Close</span>
       </button>
     </div>
     """
@@ -142,17 +144,32 @@ defmodule ShadcnElixir.Components.Sheet do
     """
   end
 
+  attr(:dialog, :string,
+    default: nil,
+    doc: "The sheet id — when set, gives the title a stable id for aria-labelledby."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
 
   def sheet_title(assigns) do
     ~H"""
-    <div data-slot="sheet-title" class={cn(["text-foreground font-semibold", @class])} {@rest}>
+    <h2
+      id={@dialog && "#{@dialog}-title"}
+      data-slot="sheet-title"
+      class={cn(["text-foreground font-semibold", @class])}
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </h2>
     """
   end
+
+  attr(:dialog, :string,
+    default: nil,
+    doc: "The sheet id — when set, gives the description a stable id for aria-describedby."
+  )
 
   attr(:class, :any, default: nil)
   attr(:rest, :global)
@@ -160,9 +177,14 @@ defmodule ShadcnElixir.Components.Sheet do
 
   def sheet_description(assigns) do
     ~H"""
-    <div data-slot="sheet-description" class={cn(["text-muted-foreground text-sm", @class])} {@rest}>
+    <p
+      id={@dialog && "#{@dialog}-description"}
+      data-slot="sheet-description"
+      class={cn(["text-muted-foreground text-sm", @class])}
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </p>
     """
   end
 

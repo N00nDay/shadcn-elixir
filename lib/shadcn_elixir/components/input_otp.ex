@@ -22,6 +22,7 @@ defmodule ShadcnElixir.Components.InputOTP do
   attr(:name, :string, default: nil)
   attr(:length, :integer, default: 6)
   attr(:value, :string, default: "")
+  attr(:label, :string, default: "One-time password", doc: "Accessible name for the field group.")
   attr(:class, :any, default: nil)
   attr(:rest, :global)
 
@@ -38,13 +39,14 @@ defmodule ShadcnElixir.Components.InputOTP do
       {@rest}
     >
       <input type="hidden" name={@name} value={@value} data-part="value" />
-      <div data-slot="input-otp-group" class="flex items-center">
+      <div role="group" aria-label={@label} data-slot="input-otp-group" class="flex items-center">
         <input
           :for={i <- @slots}
           type="text"
           inputmode="numeric"
           autocomplete="one-time-code"
           maxlength="1"
+          aria-label={"Digit #{i + 1} of #{@length}"}
           data-part="slot"
           data-index={i}
           value={String.at(@value, i) || ""}

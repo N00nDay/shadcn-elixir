@@ -11,6 +11,11 @@ defmodule ShadcnElixir.Components.NavigationMenu do
 
   import ShadcnElixir, only: [cn: 1]
 
+  attr(:label, :string,
+    default: "Main",
+    doc: "Accessible name for the navigation landmark (distinguishes multiple <nav>s)."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -19,6 +24,7 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     ~H"""
     <nav
       data-slot="navigation-menu"
+      aria-label={@label}
       class={
         cn([
           "group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
@@ -73,6 +79,7 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     <button
       type="button"
       data-slot="navigation-menu-trigger"
+      aria-haspopup="menu"
       class={
         cn([
           "group/nav-trigger bg-background hover:bg-accent hover:text-accent-foreground",
@@ -138,6 +145,7 @@ defmodule ShadcnElixir.Components.NavigationMenu do
     <.link
       data-slot="navigation-menu-link"
       data-active={to_string(@active)}
+      aria-current={@active && "page"}
       class={
         cn([
           "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",

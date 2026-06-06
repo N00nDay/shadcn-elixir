@@ -18,6 +18,11 @@ defmodule ShadcnElixir.Components.ScrollArea do
         ...long content...
       </.scroll_area>
   """
+  attr(:label, :string,
+    default: nil,
+    doc: "Accessible name; when set, the viewport becomes a labelled role=\"region\"."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
@@ -26,6 +31,9 @@ defmodule ShadcnElixir.Components.ScrollArea do
     ~H"""
     <div
       data-slot="scroll-area"
+      tabindex="0"
+      role={@label && "region"}
+      aria-label={@label}
       class={
         cn([
           "relative overflow-auto",

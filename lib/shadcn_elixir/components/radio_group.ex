@@ -62,7 +62,12 @@ defmodule ShadcnElixir.Components.RadioGroup do
           "peer-disabled:cursor-not-allowed peer-disabled:opacity-50 " <>
           "peer-checked:[&>svg]:opacity-100"
       }>
-        <svg viewBox="0 0 24 24" fill="currentColor" class="size-2 opacity-0 transition-opacity">
+        <svg
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="size-2 opacity-0 transition-opacity"
+          aria-hidden="true"
+        >
           <circle cx="12" cy="12" r="10" />
         </svg>
       </span>

@@ -20,7 +20,12 @@ defmodule ShadcnElixir.Components.Skeleton do
 
   def skeleton(assigns) do
     ~H"""
-    <div data-slot="skeleton" class={cn(["bg-accent animate-pulse rounded-md", @class])} {@rest}>
+    <div
+      aria-hidden="true"
+      data-slot="skeleton"
+      class={cn(["bg-accent animate-pulse rounded-md", @class])}
+      {@rest}
+    >
       {render_slot(@inner_block)}
     </div>
     """

@@ -35,7 +35,14 @@ defmodule ShadcnElixir.Components.Toast do
       assign(assigns, :class, variant(@variants, variant: assigns.variant, class: assigns.class))
 
     ~H"""
-    <div role="status" aria-live="polite" data-slot="toast" class={@class} {@rest}>
+    <div
+      role={if @variant == "destructive", do: "alert", else: "status"}
+      aria-live={if @variant == "destructive", do: "assertive", else: "polite"}
+      aria-atomic="true"
+      data-slot="toast"
+      class={@class}
+      {@rest}
+    >
       {render_slot(@inner_block)}
     </div>
     """
@@ -107,7 +114,7 @@ defmodule ShadcnElixir.Components.Toast do
       }
       {@rest}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true">
         <path d="M18 6 6 18" /><path d="m6 6 12 12" />
       </svg>
     </button>

@@ -22,8 +22,8 @@ defmodule ShadcnElixir.Components.Dialog do
         <.dialog_trigger dialog="edit"><.button>Edit</.button></.dialog_trigger>
         <.dialog_content dialog="edit">
           <.dialog_header>
-            <.dialog_title>Edit profile</.dialog_title>
-            <.dialog_description>Make changes here.</.dialog_description>
+            <.dialog_title dialog="edit">Edit profile</.dialog_title>
+            <.dialog_description dialog="edit">Make changes here.</.dialog_description>
           </.dialog_header>
           <.dialog_footer><.button>Save</.button></.dialog_footer>
         </.dialog_content>
@@ -74,6 +74,8 @@ defmodule ShadcnElixir.Components.Dialog do
       id={"#{@dialog}-content"}
       role="dialog"
       aria-modal="true"
+      aria-labelledby={"#{@dialog}-title"}
+      aria-describedby={"#{@dialog}-description"}
       data-slot="dialog-content"
       data-state="closed"
       phx-window-keydown={close_modal(@dialog)}
@@ -112,10 +114,10 @@ defmodule ShadcnElixir.Components.Dialog do
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          aria-hidden="true"
         >
           <path d="M18 6 6 18" /><path d="m6 6 12 12" />
         </svg>
-        <span class="sr-only">Close</span>
       </button>
     </div>
     """
@@ -153,17 +155,32 @@ defmodule ShadcnElixir.Components.Dialog do
     """
   end
 
+  attr(:dialog, :string,
+    default: nil,
+    doc: "The dialog id — when set, gives the title a stable id for aria-labelledby."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
 
   def dialog_title(assigns) do
     ~H"""
-    <div data-slot="dialog-title" class={cn(["text-lg leading-none font-semibold", @class])} {@rest}>
+    <h2
+      id={@dialog && "#{@dialog}-title"}
+      data-slot="dialog-title"
+      class={cn(["text-lg leading-none font-semibold", @class])}
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </h2>
     """
   end
+
+  attr(:dialog, :string,
+    default: nil,
+    doc: "The dialog id — when set, gives the description a stable id for aria-describedby."
+  )
 
   attr(:class, :any, default: nil)
   attr(:rest, :global)
@@ -171,9 +188,14 @@ defmodule ShadcnElixir.Components.Dialog do
 
   def dialog_description(assigns) do
     ~H"""
-    <div data-slot="dialog-description" class={cn(["text-muted-foreground text-sm", @class])} {@rest}>
+    <p
+      id={@dialog && "#{@dialog}-description"}
+      data-slot="dialog-description"
+      class={cn(["text-muted-foreground text-sm", @class])}
+      {@rest}
+    >
       {render_slot(@inner_block)}
-    </div>
+    </p>
     """
   end
 

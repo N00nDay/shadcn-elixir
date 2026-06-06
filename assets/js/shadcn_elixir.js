@@ -219,6 +219,134 @@ function setupInputOTP(root) {
   });
 }
 
+// ---- Menu (dropdown / context / menubar keyboard support) -------------------
+//
+// Brings the `role="menu"` content up to the WAI-ARIA menu pattern: roving focus
+// with Arrow/Home/End, Enter/Space to activate, focus moves to the first item on
+// open and returns to the opener (the trigger) on close, and the trigger button
+// gets aria-haspopup / aria-controls / aria-expanded kept in sync.
+
+const MENU_ITEM_SEL =
+  '[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]';
+
+function setupMenu(root) {
+  if (root.__shadcnBound) return;
+  root.__shadcnBound = true;
+
+  // The trigger lives next to the content inside the menu wrapper. Resolve the
+  // real focusable control (the inner <button>/<a>) so ARIA lands on it.
+  const wrapper = root.parentElement;
+  const host = wrapper && q(wrapper, '[data-slot$="-trigger"]');
+  const trigger = host
+    ? host.matches('button, a, [role="button"]')
+      ? host
+      : host.querySelector('button, a, [role="button"]') || host
+    : null;
+  if (trigger) {
+    trigger.setAttribute("aria-haspopup", "menu");
+    trigger.setAttribute("aria-controls", root.id);
+    if (!trigger.hasAttribute("aria-expanded"))
+      trigger.setAttribute("aria-expanded", "false");
+  }
+
+  const enabledItems = () =>
+    qa(root, MENU_ITEM_SEL).filter(
+      (el) =>
+        !el.hidden &&
+        el.getAttribute("aria-disabled") !== "true" &&
+        el.getAttribute("data-disabled") !== "true" &&
+        el.offsetParent !== null
+    );
+
+  const focusAt = (list, i) => {
+    if (!list.length) return;
+    list[(i + list.length) % list.length].focus();
+  };
+
+  root.addEventListener("keydown", (e) => {
+    const list = enabledItems();
+    const i = list.indexOf(document.activeElement);
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        focusAt(list, i < 0 ? 0 : i + 1);
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        focusAt(list, i < 0 ? list.length - 1 : i - 1);
+        break;
+      case "Home":
+        e.preventDefault();
+        focusAt(list, 0);
+        break;
+      case "End":
+        e.preventDefault();
+        focusAt(list, list.length - 1);
+        break;
+      case "Enter":
+      case " ":
+        if (i >= 0) {
+          e.preventDefault();
+          list[i].click();
+        }
+        break;
+    }
+  });
+
+  // React to open/close (driven by data-state) to move focus and sync the trigger.
+  const sync = () => {
+    const open = root.dataset.state === "open";
+    if (trigger) trigger.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open && !root.__open) {
+      root.__open = true;
+      root.__opener = document.activeElement;
+      requestAnimationFrame(() => focusAt(enabledItems(), 0));
+    } else if (!open && root.__open) {
+      root.__open = false;
+      const opener = root.__opener;
+      if (opener && typeof opener.focus === "function") opener.focus();
+    }
+  };
+  new MutationObserver(sync).observe(root, {
+    attributes: true,
+    attributeFilter: ["data-state"],
+  });
+}
+
+// ---- Tabs (roving tabindex + arrow-key navigation) --------------------------
+//
+// Adds the WAI-ARIA Tabs keyboard pattern on top of the click-driven JS: arrow
+// keys move between tabs (Left/Right horizontal, Up/Down vertical), Home/End jump
+// to the first/last, and activation follows focus (clicking applies selection).
+
+function setupTabs(root) {
+  if (root.__shadcnTabsBound) return;
+  root.__shadcnTabsBound = true;
+
+  const vertical = root.dataset.orientation === "vertical";
+  const tabs = () => qa(root, '[role="tab"]').filter((t) => !t.disabled);
+
+  root.addEventListener("keydown", (e) => {
+    const tab = e.target.closest('[role="tab"]');
+    if (!tab || !root.contains(tab)) return;
+    const list = tabs();
+    const i = list.indexOf(tab);
+    if (i < 0) return;
+    const next = vertical ? "ArrowDown" : "ArrowRight";
+    const prev = vertical ? "ArrowUp" : "ArrowLeft";
+    let target = null;
+    if (e.key === next) target = list[(i + 1) % list.length];
+    else if (e.key === prev) target = list[(i - 1 + list.length) % list.length];
+    else if (e.key === "Home") target = list[0];
+    else if (e.key === "End") target = list[list.length - 1];
+    if (target) {
+      e.preventDefault();
+      target.focus();
+      target.click(); // activation follows focus (radix default)
+    }
+  });
+}
+
 // ---- Resizable --------------------------------------------------------------
 
 function setupResizable(root) {
@@ -227,14 +355,49 @@ function setupResizable(root) {
 
   const vertical = root.dataset.direction === "vertical";
   qa(root, '[data-part="handle"]').forEach((handle) => {
+    const prev = handle.previousElementSibling;
+    const next = handle.nextElementSibling;
+
+    // The splitter's orientation is perpendicular to the panel layout.
+    handle.setAttribute("aria-orientation", vertical ? "horizontal" : "vertical");
+    handle.setAttribute("aria-valuemin", "0");
+    handle.setAttribute("aria-valuemax", "100");
+
+    const sizeOf = (el) => (vertical ? el.offsetHeight : el.offsetWidth);
+    const reportValue = () => {
+      if (!prev || !next) return;
+      const total = sizeOf(prev) + sizeOf(next);
+      const pct = total ? Math.round((sizeOf(prev) / total) * 100) : 0;
+      handle.setAttribute("aria-valuenow", String(pct));
+    };
+    const applyPct = (pct) => {
+      if (!prev || !next) return;
+      const p = Math.max(0, Math.min(100, pct));
+      prev.style.flex = `${p} 1 0%`;
+      next.style.flex = `${100 - p} 1 0%`;
+      handle.setAttribute("aria-valuenow", String(Math.round(p)));
+    };
+    reportValue();
+
+    // Keyboard resize (WAI-ARIA Window Splitter): arrows nudge, Home/End snap.
+    handle.addEventListener("keydown", (e) => {
+      if (!prev || !next) return;
+      const total = sizeOf(prev) + sizeOf(next);
+      const cur = total ? (sizeOf(prev) / total) * 100 : 0;
+      const dec = vertical ? "ArrowUp" : "ArrowLeft";
+      const inc = vertical ? "ArrowDown" : "ArrowRight";
+      if (e.key === dec) (e.preventDefault(), applyPct(cur - 5));
+      else if (e.key === inc) (e.preventDefault(), applyPct(cur + 5));
+      else if (e.key === "Home") (e.preventDefault(), applyPct(0));
+      else if (e.key === "End") (e.preventDefault(), applyPct(100));
+    });
+
     handle.addEventListener("pointerdown", (e) => {
       e.preventDefault();
-      const prev = handle.previousElementSibling;
-      const next = handle.nextElementSibling;
       if (!prev || !next) return;
       const startPos = vertical ? e.clientY : e.clientX;
-      const prevSize = vertical ? prev.offsetHeight : prev.offsetWidth;
-      const nextSize = vertical ? next.offsetHeight : next.offsetWidth;
+      const prevSize = sizeOf(prev);
+      const nextSize = sizeOf(next);
       const total = prevSize + nextSize;
 
       const onMove = (ev) => {
@@ -242,6 +405,10 @@ function setupResizable(root) {
         const newPrev = Math.max(0, Math.min(total, prevSize + delta));
         prev.style.flex = `${newPrev} 1 0%`;
         next.style.flex = `${total - newPrev} 1 0%`;
+        handle.setAttribute(
+          "aria-valuenow",
+          String(total ? Math.round((newPrev / total) * 100) : 0)
+        );
       };
       const onUp = () => {
         document.removeEventListener("pointermove", onMove);
@@ -368,14 +535,18 @@ function setupToaster(root) {
 
   const add = (detail) => {
     const { title, description, variant, duration = 4000 } = detail || {};
+    const destructive = variant === "destructive";
     const el = document.createElement("div");
-    el.setAttribute("role", "status");
+    // Errors interrupt (assertive alert); everything else announces politely.
+    el.setAttribute("role", destructive ? "alert" : "status");
+    el.setAttribute("aria-live", destructive ? "assertive" : "polite");
+    el.setAttribute("aria-atomic", "true");
     el.className =
       "pointer-events-auto relative flex w-full items-center justify-between gap-4 " +
-      "overflow-hidden rounded-md border p-4 shadow-lg bg-background text-foreground " +
+      "overflow-hidden rounded-md border p-4 pr-10 shadow-lg bg-background text-foreground " +
       inClass +
       " " +
-      (variant === "destructive" ? "border-destructive bg-destructive text-white" : "");
+      (destructive ? "border-destructive bg-destructive text-white" : "");
     const stack = document.createElement("div");
     stack.className = "grid gap-1";
     if (title) {
@@ -391,6 +562,20 @@ function setupToaster(root) {
       stack.appendChild(d);
     }
     el.appendChild(stack);
+
+    // Keyboard-accessible close button (not just click-anywhere-to-dismiss).
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.setAttribute("aria-label", "Close");
+    closeBtn.className =
+      "absolute top-1 right-1 rounded-md p-1 opacity-70 transition-opacity hover:opacity-100";
+    closeBtn.textContent = "✕";
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dismiss(el);
+    });
+    el.appendChild(closeBtn);
+
     // Dismiss on click, or automatically after `duration`.
     el.addEventListener("click", () => dismiss(el));
     fromTop ? root.prepend(el) : root.appendChild(el);
@@ -428,6 +613,16 @@ export const Hooks = {
       setupInputOTP(this.el);
     },
   },
+  ShadcnMenu: {
+    mounted() {
+      setupMenu(this.el);
+    },
+  },
+  ShadcnTabs: {
+    mounted() {
+      setupTabs(this.el);
+    },
+  },
   ShadcnResizable: {
     mounted() {
       setupResizable(this.el);
@@ -458,6 +653,8 @@ export function initShadcn(root = document) {
   qa(root, '[data-slot="command"]').forEach(setupCommand);
   qa(root, '[data-slot="combobox"]').forEach(setupCombobox);
   qa(root, '[data-slot="input-otp"]').forEach(setupInputOTP);
+  qa(root, '[role="menu"][data-state]').forEach(setupMenu);
+  qa(root, '[data-slot="tabs"]').forEach(setupTabs);
   qa(root, '[data-slot="resizable-panel-group"]').forEach(setupResizable);
   qa(root, '[data-slot="chart"]').forEach(setupChart);
   qa(root, '[data-slot="toaster"]').forEach(setupToaster);

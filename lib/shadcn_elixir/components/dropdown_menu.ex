@@ -56,6 +56,8 @@ defmodule ShadcnElixir.Components.DropdownMenu do
     <div
       id={"#{@menu}-content"}
       role="menu"
+      aria-orientation="vertical"
+      phx-hook="ShadcnMenu"
       data-slot="dropdown-menu-content"
       data-state="closed"
       phx-click-away={close(@menu)}
@@ -174,6 +176,7 @@ defmodule ShadcnElixir.Components.DropdownMenu do
           stroke-linecap="round"
           stroke-linejoin="round"
           class="size-4"
+          aria-hidden="true"
         >
           <path d="M20 6 9 17l-5-5" />
         </svg>
@@ -201,7 +204,7 @@ defmodule ShadcnElixir.Components.DropdownMenu do
       {@rest}
     >
       <span class="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
-        <svg :if={@checked} viewBox="0 0 24 24" fill="currentColor" class="size-2">
+        <svg :if={@checked} viewBox="0 0 24 24" fill="currentColor" class="size-2" aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
         </svg>
       </span>
@@ -261,6 +264,9 @@ defmodule ShadcnElixir.Components.DropdownMenu do
   def dropdown_menu_sub_trigger(assigns) do
     ~H"""
     <div
+      role="menuitem"
+      tabindex="-1"
+      aria-haspopup="menu"
       data-slot="dropdown-menu-sub-trigger"
       data-inset={to_string(@inset)}
       class={cn([item_class(nil), "data-[inset=true]:pl-8", @class])}
@@ -276,6 +282,7 @@ defmodule ShadcnElixir.Components.DropdownMenu do
         stroke-linecap="round"
         stroke-linejoin="round"
         class="ml-auto size-4"
+        aria-hidden="true"
       >
         <path d="m9 18 6-6-6-6" />
       </svg>

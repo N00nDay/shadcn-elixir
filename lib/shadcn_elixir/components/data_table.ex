@@ -32,6 +32,10 @@ defmodule ShadcnElixir.Components.DataTable do
     attr(:label, :string)
     attr(:class, :any)
     attr(:sort_click, :any, doc: "A phx-click value to make this header sortable.")
+
+    attr(:sort_dir, :string,
+      doc: "Current sort direction for this column: \"asc\", \"desc\", or nil. Drives aria-sort."
+    )
   end
 
   def data_table(assigns) do
@@ -40,10 +44,14 @@ defmodule ShadcnElixir.Components.DataTable do
       <.table>
         <.table_header>
           <.table_row>
-            <.table_head :for={col <- @col} class={col[:class]}>
-              <button :if={col[:sort_click]} type="button" phx-click={col[:sort_click]} class="inline-flex items-center gap-1 hover:text-foreground">
+            <.table_head
+              :for={col <- @col}
+              class={col[:class]}
+              aria-sort={col[:sort_click] && sort_aria(col[:sort_dir])}
+            >
+              <button :if={col[:sort_click]} type="button" phx-click={col[:sort_click]} aria-label={"Sort by #{col[:label]}"} class="inline-flex items-center gap-1 hover:text-foreground">
                 {col[:label]}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5 opacity-60">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5 opacity-60" aria-hidden="true">
                   <path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" />
                 </svg>
               </button>
@@ -67,4 +75,8 @@ defmodule ShadcnElixir.Components.DataTable do
     </div>
     """
   end
+
+  defp sort_aria("asc"), do: "ascending"
+  defp sort_aria("desc"), do: "descending"
+  defp sort_aria(_), do: "none"
 end

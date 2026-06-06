@@ -56,6 +56,8 @@ defmodule ShadcnElixir.Components.AlertDialog do
       id={"#{@dialog}-content"}
       role="alertdialog"
       aria-modal="true"
+      aria-labelledby={"#{@dialog}-title"}
+      aria-describedby={"#{@dialog}-description"}
       data-slot="alert-dialog-content"
       data-size={@size}
       data-state="closed"
@@ -129,13 +131,19 @@ defmodule ShadcnElixir.Components.AlertDialog do
     """
   end
 
+  attr(:dialog, :string,
+    default: nil,
+    doc: "The dialog id — when set, gives the title a stable id for aria-labelledby."
+  )
+
   attr(:class, :any, default: nil)
   attr(:rest, :global)
   slot(:inner_block, required: true)
 
   def alert_dialog_title(assigns) do
     ~H"""
-    <div
+    <h2
+      id={@dialog && "#{@dialog}-title"}
       data-slot="alert-dialog-title"
       class={
         cn([
@@ -147,9 +155,14 @@ defmodule ShadcnElixir.Components.AlertDialog do
       {@rest}
     >
       {render_slot(@inner_block)}
-    </div>
+    </h2>
     """
   end
+
+  attr(:dialog, :string,
+    default: nil,
+    doc: "The dialog id — when set, gives the description a stable id for aria-describedby."
+  )
 
   attr(:class, :any, default: nil)
   attr(:rest, :global)
@@ -157,13 +170,14 @@ defmodule ShadcnElixir.Components.AlertDialog do
 
   def alert_dialog_description(assigns) do
     ~H"""
-    <div
+    <p
+      id={@dialog && "#{@dialog}-description"}
       data-slot="alert-dialog-description"
       class={cn(["text-muted-foreground text-sm", @class])}
       {@rest}
     >
       {render_slot(@inner_block)}
-    </div>
+    </p>
     """
   end
 

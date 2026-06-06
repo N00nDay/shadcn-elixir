@@ -48,7 +48,7 @@ defmodule ShadcnElixir.Components.Calendar do
           phx-value-month={Date.to_iso8601(@prev_month)}
           class={button_variants(variant: "outline", size: "icon", class: "size-7")}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true">
             <path d="m15 18-6-6 6-6" />
           </svg>
         </button>
@@ -63,17 +63,18 @@ defmodule ShadcnElixir.Components.Calendar do
           phx-value-month={Date.to_iso8601(@next_month)}
           class={button_variants(variant: "outline", size: "icon", class: "size-7")}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true">
             <path d="m9 18 6-6-6-6" />
           </svg>
         </button>
       </div>
 
-      <table class="w-full border-collapse">
+      <table class="w-full border-collapse" aria-label={Calendar.strftime(@first, "%B %Y")}>
         <thead>
           <tr class="flex">
             <th
               :for={wd <- @weekdays}
+              scope="col"
               class="text-muted-foreground w-8 rounded-md text-[0.8rem] font-normal"
             >
               {wd}
@@ -88,7 +89,8 @@ defmodule ShadcnElixir.Components.Calendar do
                 disabled={is_nil(@on_select)}
                 phx-click={@on_select}
                 phx-value-date={Date.to_iso8601(day)}
-                aria-selected={to_string(day == @selected)}
+                aria-label={day_label(day, @selected)}
+                aria-current={if day == @today, do: "date"}
                 data-today={day == @today}
                 data-outside={day.month != @first.month}
                 class={day_class(day, @first, @today, @selected)}
@@ -112,6 +114,11 @@ defmodule ShadcnElixir.Components.Calendar do
     |> Date.range(last_cell)
     |> Enum.to_list()
     |> Enum.chunk_every(7)
+  end
+
+  defp day_label(day, selected) do
+    label = Calendar.strftime(day, "%A, %B %-d, %Y")
+    if day == selected, do: label <> ", selected", else: label
   end
 
   defp day_class(day, first, today, selected) do
