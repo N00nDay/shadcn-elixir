@@ -17,13 +17,25 @@ defmodule DemoWeb.DocsLive do
     page = params["page"] || "introduction"
     page = if page in @pages, do: page, else: "introduction"
 
-    {:noreply, assign(socket, page: page, page_title: Docs.page_title(page))}
+    {:noreply, assign(socket, page: page, page_title: Docs.page_title(page), toc: toc_for(page))}
   end
+
+  defp toc_for("installation") do
+    [
+      %{id: "add-dependency", label: "Add the dependency"},
+      %{id: "tw-merge-cache", label: "Start the tw_merge cache"},
+      %{id: "import-components", label: "Import the components"},
+      %{id: "scan-tailwind", label: "Scan the markup"}
+    ]
+  end
+
+  defp toc_for(_), do: []
 
   def render(assigns) do
     ~H"""
     <.docs_shell
       active={{:page, @page}}
+      toc={@toc}
       breadcrumb={[
         %{label: "Docs", href: "/docs/introduction"},
         %{label: Docs.page_title(@page), href: nil}
@@ -82,10 +94,10 @@ defmodule DemoWeb.DocsLive do
     ~H"""
     <.doc_heading title="Installation" description="Add shadcn-elixir to your Phoenix app." />
 
-    <.doc_section_title>1. Add the dependency</.doc_section_title>
+    <.doc_section_title id="add-dependency">1. Add the dependency</.doc_section_title>
     <.code_block id="install-deps" language="elixir" source={deps_snippet()} />
 
-    <.doc_section_title>2. Start the tw_merge cache</.doc_section_title>
+    <.doc_section_title id="tw-merge-cache">2. Start the tw_merge cache</.doc_section_title>
     <p class="mb-4 text-sm text-muted-foreground">
       <code class="rounded bg-muted px-1 py-0.5 text-xs">cn/1</code>
       uses <code class="rounded bg-muted px-1 py-0.5 text-xs">tw_merge</code>, which needs a cache
@@ -93,14 +105,14 @@ defmodule DemoWeb.DocsLive do
     </p>
     <.code_block id="install-cache" language="elixir" source={cache_snippet()} />
 
-    <.doc_section_title>3. Import the components</.doc_section_title>
+    <.doc_section_title id="import-components">3. Import the components</.doc_section_title>
     <p class="mb-4 text-sm text-muted-foreground">
       Add <code class="rounded bg-muted px-1 py-0.5 text-xs">use ShadcnElixir</code>
       to your web module's <code class="text-xs">html_helpers</code>, or import a single module.
     </p>
     <.code_block id="install-use" language="elixir" source={use_snippet()} />
 
-    <.doc_section_title>4. Scan the markup with Tailwind</.doc_section_title>
+    <.doc_section_title id="scan-tailwind">4. Scan the markup with Tailwind</.doc_section_title>
     <.code_block
       id="install-source"
       language="elixir"

@@ -40,6 +40,21 @@ const DocsHooks = {
       })
     },
   },
+  // ⌘K / Ctrl+K opens the docs search palette by clicking its trigger.
+  CommandK: {
+    mounted() {
+      this._onKey = (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+          e.preventDefault()
+          this.el.click()
+        }
+      }
+      window.addEventListener("keydown", this._onKey)
+    },
+    destroyed() {
+      window.removeEventListener("keydown", this._onKey)
+    },
+  },
 }
 
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
