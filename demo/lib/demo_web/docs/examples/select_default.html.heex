@@ -1,0 +1,14 @@
+<.select id="select-demo" name="fruit" class="w-full max-w-xs">
+  <.select_trigger select="select-demo">
+    <.select_value placeholder="Select a fruit" />
+  </.select_trigger>
+  <.select_content select="select-demo">
+    <.select_group>
+      <.select_label>Fruits</.select_label>
+      <.select_item select="select-demo" value="apple">Apple</.select_item>
+      <.select_item select="select-demo" value="banana">Banana</.select_item>
+      <.select_item select="select-demo" value="blueberry">Blueberry</.select_item>
+      <.select_item select="select-demo" value="grapes">Grapes</.select_item>
+    </.select_group>
+  </.select_content>
+</.select>

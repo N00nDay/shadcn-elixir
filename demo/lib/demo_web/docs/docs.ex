@@ -739,5 +739,83 @@ defmodule DemoWeb.Docs do
     }
   end
 
+  def component("typography") do
+    %{
+      slug: "typography",
+      title: "Typography",
+      description: "Styles for headings, paragraphs, lists, quotes, and inline code.",
+      examples: [%{key: "typography_default", title: "Default", description: nil}],
+      props: [
+        %{label: "typography_h3", module: C.Typography, fun: :typography_h3},
+        %{label: "typography_p", module: C.Typography, fun: :typography_p},
+        %{label: "typography_blockquote", module: C.Typography, fun: :typography_blockquote},
+        %{label: "typography_list", module: C.Typography, fun: :typography_list}
+      ]
+    }
+  end
+
+  def component("field") do
+    %{
+      slug: "field",
+      title: "Field",
+      description: "Compose accessible form fields with labels, descriptions, and errors.",
+      examples: [%{key: "field_default", title: "Default", description: nil}],
+      props: [
+        %{label: "field_group", module: C.Field, fun: :field_group},
+        %{label: "field", module: C.Field, fun: :field},
+        %{label: "field_label", module: C.Field, fun: :field_label},
+        %{label: "field_description", module: C.Field, fun: :field_description}
+      ]
+    }
+  end
+
+  def component("command") do
+    %{
+      slug: "command",
+      title: "Command",
+      description: "A fast, composable command menu with built-in filtering.",
+      examples: [%{key: "command_default", title: "Default", description: nil}],
+      props: [
+        %{label: "command", module: C.Command, fun: :command},
+        %{label: "command_input", module: C.Command, fun: :command_input},
+        %{label: "command_list", module: C.Command, fun: :command_list},
+        %{label: "command_group", module: C.Command, fun: :command_group},
+        %{label: "command_item", module: C.Command, fun: :command_item}
+      ]
+    }
+  end
+
+  def component("select") do
+    %{
+      slug: "select",
+      title: "Select",
+      description: "Displays a list of options for the user to pick from, triggered by a button.",
+      examples: [%{key: "select_default", title: "Default", description: nil}],
+      props: [
+        %{label: "select", module: C.Select, fun: :select},
+        %{label: "select_trigger", module: C.Select, fun: :select_trigger},
+        %{label: "select_value", module: C.Select, fun: :select_value},
+        %{label: "select_content", module: C.Select, fun: :select_content},
+        %{label: "select_item", module: C.Select, fun: :select_item}
+      ]
+    }
+  end
+
+  def component("navigation_menu") do
+    %{
+      slug: "navigation_menu",
+      title: "Navigation Menu",
+      description: "A collection of links for navigating websites.",
+      examples: [%{key: "navigation_menu_default", title: "Default", description: nil}],
+      props: [
+        %{label: "navigation_menu", module: C.NavigationMenu, fun: :navigation_menu},
+        %{label: "navigation_menu_list", module: C.NavigationMenu, fun: :navigation_menu_list},
+        %{label: "navigation_menu_item", module: C.NavigationMenu, fun: :navigation_menu_item},
+        %{label: "navigation_menu_trigger", module: C.NavigationMenu, fun: :navigation_menu_trigger},
+        %{label: "navigation_menu_link", module: C.NavigationMenu, fun: :navigation_menu_link}
+      ]
+    }
+  end
+
   def component(_), do: nil
 end
