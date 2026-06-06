@@ -372,5 +372,141 @@ defmodule DemoWeb.Docs do
     }
   end
 
+  def component("input") do
+    %{
+      slug: "input",
+      title: "Input",
+      description: "Displays a form input field or a component that looks like an input field.",
+      examples: [%{key: "input_default", title: "Default", description: nil}],
+      props: [%{label: "input", module: C.Input, fun: :input}]
+    }
+  end
+
+  def component("label") do
+    %{
+      slug: "label",
+      title: "Label",
+      description: "Renders an accessible label associated with controls.",
+      examples: [%{key: "label_default", title: "Default", description: nil}],
+      props: [%{label: "label", module: C.Label, fun: :label}]
+    }
+  end
+
+  def component("radio_group") do
+    %{
+      slug: "radio_group",
+      title: "Radio Group",
+      description:
+        "A set of checkable buttons where no more than one can be checked at a time. " <>
+          "Renders real radio inputs — no JavaScript.",
+      examples: [%{key: "radio_group_default", title: "Default", description: nil}],
+      props: [
+        %{label: "radio_group", module: C.RadioGroup, fun: :radio_group},
+        %{label: "radio_group_item", module: C.RadioGroup, fun: :radio_group_item}
+      ]
+    }
+  end
+
+  def component("progress") do
+    %{
+      slug: "progress",
+      title: "Progress",
+      description: "Displays an indicator showing the completion progress of a task.",
+      examples: [%{key: "progress_default", title: "Default", description: nil}],
+      props: [%{label: "progress", module: C.Progress, fun: :progress}]
+    }
+  end
+
+  def component("native_select") do
+    %{
+      slug: "native_select",
+      title: "Native Select",
+      description: "A styled native select for when a real form control is preferable.",
+      examples: [%{key: "native_select_default", title: "Default", description: nil}],
+      props: [%{label: "native_select", module: C.NativeSelect, fun: :native_select}]
+    }
+  end
+
+  def component("table") do
+    %{
+      slug: "table",
+      title: "Table",
+      description: "A responsive table component.",
+      examples: [%{key: "table_default", title: "Default", description: nil}],
+      props: [
+        %{label: "table", module: C.Table, fun: :table},
+        %{label: "table_header", module: C.Table, fun: :table_header},
+        %{label: "table_body", module: C.Table, fun: :table_body},
+        %{label: "table_row", module: C.Table, fun: :table_row},
+        %{label: "table_head", module: C.Table, fun: :table_head},
+        %{label: "table_cell", module: C.Table, fun: :table_cell},
+        %{label: "table_caption", module: C.Table, fun: :table_caption}
+      ]
+    }
+  end
+
+  def component("breadcrumb") do
+    %{
+      slug: "breadcrumb",
+      title: "Breadcrumb",
+      description: "Displays the path to the current resource using a hierarchy of links.",
+      examples: [%{key: "breadcrumb_default", title: "Default", description: nil}],
+      props: [
+        %{label: "breadcrumb", module: C.Breadcrumb, fun: :breadcrumb},
+        %{label: "breadcrumb_list", module: C.Breadcrumb, fun: :breadcrumb_list},
+        %{label: "breadcrumb_item", module: C.Breadcrumb, fun: :breadcrumb_item},
+        %{label: "breadcrumb_link", module: C.Breadcrumb, fun: :breadcrumb_link},
+        %{label: "breadcrumb_page", module: C.Breadcrumb, fun: :breadcrumb_page},
+        %{label: "breadcrumb_separator", module: C.Breadcrumb, fun: :breadcrumb_separator}
+      ]
+    }
+  end
+
+  def component("alert_dialog") do
+    %{
+      slug: "alert_dialog",
+      title: "Alert Dialog",
+      description:
+        "A modal dialog that interrupts the user with important content and expects a response.",
+      examples: [%{key: "alert_dialog_default", title: "Default", description: nil}],
+      props: [
+        %{label: "alert_dialog", module: C.AlertDialog, fun: :alert_dialog},
+        %{label: "alert_dialog_content", module: C.AlertDialog, fun: :alert_dialog_content},
+        %{label: "alert_dialog_action", module: C.AlertDialog, fun: :alert_dialog_action},
+        %{label: "alert_dialog_cancel", module: C.AlertDialog, fun: :alert_dialog_cancel}
+      ]
+    }
+  end
+
+  def component("dropdown_menu") do
+    %{
+      slug: "dropdown_menu",
+      title: "Dropdown Menu",
+      description:
+        "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
+      examples: [%{key: "dropdown_menu_default", title: "Default", description: nil}],
+      props: [
+        %{label: "dropdown_menu", module: C.DropdownMenu, fun: :dropdown_menu},
+        %{label: "dropdown_menu_content", module: C.DropdownMenu, fun: :dropdown_menu_content},
+        %{label: "dropdown_menu_item", module: C.DropdownMenu, fun: :dropdown_menu_item}
+      ]
+    }
+  end
+
+  def component("tabs") do
+    %{
+      slug: "tabs",
+      title: "Tabs",
+      description: "A set of layered sections of content displayed one panel at a time.",
+      examples: [%{key: "tabs_default", title: "Default", description: nil}],
+      props: [
+        %{label: "tabs", module: C.Tabs, fun: :tabs},
+        %{label: "tabs_list", module: C.Tabs, fun: :tabs_list},
+        %{label: "tabs_trigger", module: C.Tabs, fun: :tabs_trigger},
+        %{label: "tabs_content", module: C.Tabs, fun: :tabs_content}
+      ]
+    }
+  end
+
   def component(_), do: nil
 end

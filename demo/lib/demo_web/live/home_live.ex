@@ -122,7 +122,16 @@ defmodule DemoWeb.HomeLive do
         <div class="flex gap-2">
           <.button>
             Button
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-icon="inline-end">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              data-icon="inline-end"
+            >
               <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
             </svg>
           </.button>
@@ -136,7 +145,15 @@ defmodule DemoWeb.HomeLive do
               <.input_group_input placeholder="Name" />
               <.input_group_addon align="inline-end">
                 <.input_group_text>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
                   </svg>
                 </.input_group_text>
@@ -188,7 +205,15 @@ defmodule DemoWeb.HomeLive do
             <.dropdown_menu id="ui-menu">
               <.dropdown_menu_trigger menu="ui-menu">
                 <.button variant="outline" size="icon" aria-label="Open actions">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path d="m5 12 7-7 7 7" /><path d="M12 19V5" />
                   </svg>
                 </.button>
@@ -202,7 +227,9 @@ defmodule DemoWeb.HomeLive do
                 </.dropdown_menu_group>
                 <.dropdown_menu_separator />
                 <.dropdown_menu_group>
-                  <.dropdown_menu_item menu="ui-menu" variant="destructive">Delete</.dropdown_menu_item>
+                  <.dropdown_menu_item menu="ui-menu" variant="destructive">
+                    Delete
+                  </.dropdown_menu_item>
                 </.dropdown_menu_group>
               </.dropdown_menu_content>
             </.dropdown_menu>
