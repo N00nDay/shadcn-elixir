@@ -1,0 +1,11 @@
+<.carousel id="carousel-demo" class="w-full max-w-xs">
+  <.carousel_content>
+    <.carousel_item :for={n <- 1..5}>
+      <div class="flex aspect-square items-center justify-center rounded-lg border bg-card text-4xl font-semibold">
+        {n}
+      </div>
+    </.carousel_item>
+  </.carousel_content>
+  <.carousel_previous carousel="carousel-demo" />
+  <.carousel_next carousel="carousel-demo" />
+</.carousel>

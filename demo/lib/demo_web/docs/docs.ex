@@ -817,5 +817,122 @@ defmodule DemoWeb.Docs do
     }
   end
 
+  def component("calendar") do
+    %{
+      slug: "calendar",
+      title: "Calendar",
+      description: "A date field component for selecting dates.",
+      examples: [%{key: "calendar_default", title: "Default", description: nil}],
+      props: [%{label: "calendar", module: C.Calendar, fun: :calendar}]
+    }
+  end
+
+  def component("carousel") do
+    %{
+      slug: "carousel",
+      title: "Carousel",
+      description: "A carousel with motion and swipe, built using the colocated hook.",
+      examples: [%{key: "carousel_default", title: "Default", description: nil}],
+      props: [
+        %{label: "carousel", module: C.Carousel, fun: :carousel},
+        %{label: "carousel_content", module: C.Carousel, fun: :carousel_content},
+        %{label: "carousel_item", module: C.Carousel, fun: :carousel_item}
+      ]
+    }
+  end
+
+  def component("chart") do
+    %{
+      slug: "chart",
+      title: "Chart",
+      description: "Bar and line charts rendered from a simple list of label/value maps.",
+      examples: [%{key: "chart_default", title: "Default", description: nil}],
+      props: [%{label: "chart", module: C.Chart, fun: :chart}]
+    }
+  end
+
+  def component("combobox") do
+    %{
+      slug: "combobox",
+      title: "Combobox",
+      description: "An autocomplete input and command palette with a list of suggestions.",
+      examples: [%{key: "combobox_default", title: "Default", description: nil}],
+      props: [%{label: "combobox", module: C.Combobox, fun: :combobox}]
+    }
+  end
+
+  def component("data_table") do
+    %{
+      slug: "data_table",
+      title: "Data Table",
+      description: "A table for displaying rows of data with column slots.",
+      examples: [%{key: "data_table_default", title: "Default", description: nil}],
+      props: [%{label: "data_table", module: C.DataTable, fun: :data_table}]
+    }
+  end
+
+  def component("date_picker") do
+    %{
+      slug: "date_picker",
+      title: "Date Picker",
+      description: "A date picker combining a popover and a calendar.",
+      examples: [%{key: "date_picker_default", title: "Default", description: nil}],
+      props: [%{label: "date_picker", module: C.DatePicker, fun: :date_picker}]
+    }
+  end
+
+  def component("input_otp") do
+    %{
+      slug: "input_otp",
+      title: "Input OTP",
+      description: "Accessible one-time-password input with copy-paste support.",
+      examples: [%{key: "input_otp_default", title: "Default", description: nil}],
+      props: [%{label: "input_otp", module: C.InputOTP, fun: :input_otp}]
+    }
+  end
+
+  def component("resizable") do
+    %{
+      slug: "resizable",
+      title: "Resizable",
+      description: "Accessible resizable panel groups and layouts with keyboard support.",
+      examples: [%{key: "resizable_default", title: "Default", description: nil}],
+      props: [
+        %{label: "resizable_panel_group", module: C.Resizable, fun: :resizable_panel_group},
+        %{label: "resizable_panel", module: C.Resizable, fun: :resizable_panel},
+        %{label: "resizable_handle", module: C.Resizable, fun: :resizable_handle}
+      ]
+    }
+  end
+
+  def component("toast") do
+    %{
+      slug: "toast",
+      title: "Toast",
+      description: "A succinct message that is displayed temporarily.",
+      examples: [%{key: "toast_default", title: "Default", description: nil}],
+      props: [
+        %{label: "toast", module: C.Toast, fun: :toast},
+        %{label: "toast_title", module: C.Toast, fun: :toast_title},
+        %{label: "toast_description", module: C.Toast, fun: :toast_description}
+      ]
+    }
+  end
+
+  def component("sidebar") do
+    %{
+      slug: "sidebar",
+      title: "Sidebar",
+      description: "A composable, collapsible sidebar with a provider, content, and menu.",
+      examples: [%{key: "sidebar_default", title: "Default", description: nil}],
+      props: [
+        %{label: "sidebar_provider", module: C.Sidebar, fun: :sidebar_provider},
+        %{label: "sidebar", module: C.Sidebar, fun: :sidebar},
+        %{label: "sidebar_menu_button", module: C.Sidebar, fun: :sidebar_menu_button},
+        %{label: "sidebar_trigger", module: C.Sidebar, fun: :sidebar_trigger}
+      ]
+    }
+  end
+
   def component(_), do: nil
 end

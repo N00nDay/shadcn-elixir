@@ -1,0 +1,12 @@
+<.data_table
+  rows={[
+    %{invoice: "INV001", status: "Paid", amount: "$250.00"},
+    %{invoice: "INV002", status: "Pending", amount: "$150.00"},
+    %{invoice: "INV003", status: "Unpaid", amount: "$350.00"}
+  ]}
+  class="w-full max-w-lg"
+>
+  <:col :let={row} label="Invoice">{row.invoice}</:col>
+  <:col :let={row} label="Status">{row.status}</:col>
+  <:col :let={row} label="Amount">{row.amount}</:col>
+</.data_table>
