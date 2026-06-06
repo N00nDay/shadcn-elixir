@@ -508,5 +508,112 @@ defmodule DemoWeb.Docs do
     }
   end
 
+  def component("toggle") do
+    %{
+      slug: "toggle",
+      title: "Toggle",
+      description: "A two-state button that can be either on or off.",
+      examples: [%{key: "toggle_default", title: "Default", description: nil}],
+      props: [%{label: "toggle", module: C.Toggle, fun: :toggle}]
+    }
+  end
+
+  def component("toggle_group") do
+    %{
+      slug: "toggle_group",
+      title: "Toggle Group",
+      description: "A set of two-state buttons that can be toggled on or off.",
+      examples: [%{key: "toggle_group_default", title: "Default", description: nil}],
+      props: [
+        %{label: "toggle_group", module: C.ToggleGroup, fun: :toggle_group},
+        %{label: "toggle_group_item", module: C.ToggleGroup, fun: :toggle_group_item}
+      ]
+    }
+  end
+
+  def component("spinner") do
+    %{
+      slug: "spinner",
+      title: "Spinner",
+      description: "An indeterminate loading indicator.",
+      examples: [%{key: "spinner_default", title: "Default", description: nil}],
+      props: [%{label: "spinner", module: C.Spinner, fun: :spinner}]
+    }
+  end
+
+  def component("empty") do
+    %{
+      slug: "empty",
+      title: "Empty",
+      description: "Use to display an empty state — no content, no results, or no data.",
+      examples: [%{key: "empty_default", title: "Default", description: nil}],
+      props: [
+        %{label: "empty", module: C.Empty, fun: :empty},
+        %{label: "empty_header", module: C.Empty, fun: :empty_header},
+        %{label: "empty_media", module: C.Empty, fun: :empty_media},
+        %{label: "empty_title", module: C.Empty, fun: :empty_title},
+        %{label: "empty_description", module: C.Empty, fun: :empty_description},
+        %{label: "empty_content", module: C.Empty, fun: :empty_content}
+      ]
+    }
+  end
+
+  def component("popover") do
+    %{
+      slug: "popover",
+      title: "Popover",
+      description: "Displays rich content in a portal, triggered by a button.",
+      examples: [%{key: "popover_default", title: "Default", description: nil}],
+      props: [
+        %{label: "popover", module: C.Popover, fun: :popover},
+        %{label: "popover_trigger", module: C.Popover, fun: :popover_trigger},
+        %{label: "popover_content", module: C.Popover, fun: :popover_content}
+      ]
+    }
+  end
+
+  def component("hover_card") do
+    %{
+      slug: "hover_card",
+      title: "Hover Card",
+      description: "For sighted users to preview content available behind a link.",
+      examples: [%{key: "hover_card_default", title: "Default", description: nil}],
+      props: [
+        %{label: "hover_card", module: C.HoverCard, fun: :hover_card},
+        %{label: "hover_card_trigger", module: C.HoverCard, fun: :hover_card_trigger},
+        %{label: "hover_card_content", module: C.HoverCard, fun: :hover_card_content}
+      ]
+    }
+  end
+
+  def component("collapsible") do
+    %{
+      slug: "collapsible",
+      title: "Collapsible",
+      description: "An interactive component which expands and collapses a panel.",
+      examples: [%{key: "collapsible_default", title: "Default", description: nil}],
+      props: [
+        %{label: "collapsible", module: C.Collapsible, fun: :collapsible},
+        %{label: "collapsible_trigger", module: C.Collapsible, fun: :collapsible_trigger},
+        %{label: "collapsible_content", module: C.Collapsible, fun: :collapsible_content}
+      ]
+    }
+  end
+
+  def component("pagination") do
+    %{
+      slug: "pagination",
+      title: "Pagination",
+      description: "Pagination with page navigation, next and previous links.",
+      examples: [%{key: "pagination_default", title: "Default", description: nil}],
+      props: [
+        %{label: "pagination", module: C.Pagination, fun: :pagination},
+        %{label: "pagination_link", module: C.Pagination, fun: :pagination_link},
+        %{label: "pagination_previous", module: C.Pagination, fun: :pagination_previous},
+        %{label: "pagination_next", module: C.Pagination, fun: :pagination_next}
+      ]
+    }
+  end
+
   def component(_), do: nil
 end

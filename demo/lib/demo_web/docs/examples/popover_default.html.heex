@@ -1,0 +1,21 @@
+<.popover id="pop-demo">
+  <.popover_trigger popover="pop-demo">
+    <.button variant="outline">Open popover</.button>
+  </.popover_trigger>
+  <.popover_content popover="pop-demo" class="w-80">
+    <div class="grid gap-2">
+      <h4 class="leading-none font-medium">Dimensions</h4>
+      <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+      <div class="grid gap-2 pt-2">
+        <div class="grid grid-cols-3 items-center gap-4">
+          <.label for="pop-width">Width</.label>
+          <.input id="pop-width" value="100%" class="col-span-2 h-8" />
+        </div>
+        <div class="grid grid-cols-3 items-center gap-4">
+          <.label for="pop-height">Height</.label>
+          <.input id="pop-height" value="25px" class="col-span-2 h-8" />
+        </div>
+      </div>
+    </div>
+  </.popover_content>
+</.popover>
