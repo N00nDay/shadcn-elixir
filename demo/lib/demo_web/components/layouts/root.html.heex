@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title default="shadcn-elixir" suffix=" · demo">{assigns[:page_title]}</.live_title>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}>
+    </script>
+    <script>
+      // shadcn-elixir uses a `.dark` class on <html> for dark mode.
+      (() => {
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark") document.documentElement.classList.add("dark");
+        window.toggleTheme = () => {
+          const el = document.documentElement;
+          el.classList.toggle("dark");
+          localStorage.setItem("theme", el.classList.contains("dark") ? "dark" : "light");
+        };
+      })();
+    </script>
+  </head>
+  <body class="bg-background text-foreground">
+    {@inner_content}
+  </body>
+</html>

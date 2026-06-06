@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "demo",
+      "runtimeExecutable": "/bin/zsh",
+      "runtimeArgs": ["-lc", "cd demo && exec mix phx.server"],
+      "port": 4000
+    }
+  ]
+}
