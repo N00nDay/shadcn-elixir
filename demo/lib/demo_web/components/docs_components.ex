@@ -62,7 +62,8 @@ defmodule DemoWeb.DocsComponents do
 
   # --- Footer (attribution) --------------------------------------------------
 
-  defp docs_footer(assigns) do
+  @doc "Attribution footer (shared by docs pages and the landing page)."
+  def docs_footer(assigns) do
     assigns = assign(assigns, :github_url, @github_url)
 
     ~H"""
@@ -104,9 +105,10 @@ defmodule DemoWeb.DocsComponents do
 
   # --- Site header -----------------------------------------------------------
 
+  @doc "Top site header (shared by docs pages and the landing page)."
   attr :components, :list, required: true
 
-  defp site_header(assigns) do
+  def site_header(assigns) do
     assigns = assign(assigns, :github_url, @github_url)
 
     ~H"""
@@ -215,9 +217,10 @@ defmodule DemoWeb.DocsComponents do
     """
   end
 
+  @doc "The ⌘K search command palette dialog (shared by docs pages and the landing page)."
   attr :components, :list, required: true
 
-  defp search_dialog(assigns) do
+  def search_dialog(assigns) do
     ~H"""
     <.dialog id="docs-search">
       <.dialog_content dialog="docs-search" show_close={false} class="overflow-hidden p-0 sm:max-w-lg">

@@ -3,6 +3,6 @@ defmodule DemoWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Build your Phoenix UI with shadcn-elixir"
+    assert html_response(conn, 200) =~ "Beautifully designed components for Phoenix"
   end
 end
