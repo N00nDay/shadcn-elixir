@@ -76,14 +76,16 @@ defmodule ShadcnElixir.Components.Menubar do
   def menubar_content(assigns) do
     ~H"""
     <div
+      id={"#{@menu}-content"}
       role="menu"
       data-slot="menubar-content"
-      hidden
+      data-state="closed"
       phx-click-away={close(@menu)}
       phx-window-keydown={close(@menu)}
       phx-key="escape"
       class={
         cn([
+          "data-[state=closed]:hidden",
           "bg-popover text-popover-foreground absolute top-full left-0 z-50 mt-1 min-w-[12rem]",
           "overflow-hidden rounded-md border p-1 shadow-md",
           @class

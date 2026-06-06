@@ -46,9 +46,9 @@ defmodule ShadcnElixir.Components.Drawer do
     <div
       id={"#{@dialog}-overlay"}
       data-slot="drawer-overlay"
-      hidden
+      data-state="closed"
       phx-click={close_modal(@dialog)}
-      class="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=open]:fade-in-0"
+      class="fixed inset-0 z-50 bg-black/50 data-[state=closed]:hidden data-[state=open]:animate-in data-[state=open]:fade-in-0"
     >
     </div>
     <div
@@ -56,11 +56,12 @@ defmodule ShadcnElixir.Components.Drawer do
       role="dialog"
       aria-modal="true"
       data-slot="drawer-content"
-      hidden
+      data-state="closed"
       phx-window-keydown={close_modal(@dialog)}
       phx-key="escape"
       class={
         cn([
+          "data-[state=closed]:hidden",
           "bg-background fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[80vh] flex-col",
           "rounded-t-lg border data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom",
           @class

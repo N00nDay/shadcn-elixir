@@ -113,8 +113,8 @@ defmodule ShadcnElixir.Components.Tabs do
       role="tabpanel"
       data-tab-value={@value}
       data-slot="tabs-content"
-      hidden={not @active}
-      class={cn(["flex-1 outline-none", @class])}
+      data-state={if @active, do: "active", else: "inactive"}
+      class={cn(["data-[state=inactive]:hidden flex-1 outline-none", @class])}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -130,9 +130,11 @@ defmodule ShadcnElixir.Components.Tabs do
     %JS{}
     |> JS.set_attribute({"data-state", "inactive"}, to: tab)
     |> JS.set_attribute({"aria-selected", "false"}, to: tab)
-    |> JS.hide(to: panel)
+    |> JS.set_attribute({"data-state", "inactive"}, to: panel)
     |> JS.set_attribute({"data-state", "active"})
     |> JS.set_attribute({"aria-selected", "true"})
-    |> JS.show(to: "##{tabs} [role=tabpanel][data-tab-value='#{value}']")
+    |> JS.set_attribute({"data-state", "active"},
+      to: "##{tabs} [role=tabpanel][data-tab-value='#{value}']"
+    )
   end
 end

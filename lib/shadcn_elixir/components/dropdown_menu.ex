@@ -57,12 +57,13 @@ defmodule ShadcnElixir.Components.DropdownMenu do
       id={"#{@menu}-content"}
       role="menu"
       data-slot="dropdown-menu-content"
-      hidden
+      data-state="closed"
       phx-click-away={close(@menu)}
       phx-window-keydown={close(@menu)}
       phx-key="escape"
       class={
         cn([
+          "data-[state=closed]:hidden",
           "bg-popover text-popover-foreground absolute top-full z-50 mt-2 min-w-[8rem]",
           "overflow-hidden rounded-md border p-1 shadow-md",
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",

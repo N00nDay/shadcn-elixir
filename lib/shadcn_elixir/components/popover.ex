@@ -56,12 +56,13 @@ defmodule ShadcnElixir.Components.Popover do
       role="dialog"
       data-slot="popover-content"
       data-align={@align}
-      hidden
+      data-state="closed"
       phx-click-away={close(@popover)}
       phx-window-keydown={close(@popover)}
       phx-key="escape"
       class={
         cn([
+          "data-[state=closed]:hidden",
           "bg-popover text-popover-foreground absolute top-full z-50 mt-2 w-72 origin-top",
           "rounded-md border p-4 shadow-md outline-hidden",
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",

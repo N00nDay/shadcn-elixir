@@ -65,9 +65,9 @@ defmodule ShadcnElixir.Components.Dialog do
     <div
       id={"#{@dialog}-overlay"}
       data-slot="dialog-overlay"
-      hidden
+      data-state="closed"
       phx-click={close_modal(@dialog)}
-      class="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=open]:fade-in-0"
+      class="fixed inset-0 z-50 bg-black/50 data-[state=closed]:hidden data-[state=open]:animate-in data-[state=open]:fade-in-0"
     >
     </div>
     <div
@@ -75,11 +75,12 @@ defmodule ShadcnElixir.Components.Dialog do
       role="dialog"
       aria-modal="true"
       data-slot="dialog-content"
-      hidden
+      data-state="closed"
       phx-window-keydown={close_modal(@dialog)}
       phx-key="escape"
       class={
         cn([
+          "data-[state=closed]:hidden",
           "bg-background fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)]",
           "translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg",
           "duration-200 sm:max-w-lg data-[state=open]:animate-in data-[state=open]:fade-in-0",

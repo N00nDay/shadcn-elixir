@@ -15,7 +15,7 @@ defmodule ShadcnElixir.Components.Sheet do
   @content %{
     base:
       "bg-background fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out " <>
-        "data-[state=open]:animate-in",
+        "data-[state=closed]:hidden data-[state=open]:animate-in",
     variants: %{
       side: %{
         "right" =>
@@ -68,9 +68,9 @@ defmodule ShadcnElixir.Components.Sheet do
     <div
       id={"#{@dialog}-overlay"}
       data-slot="sheet-overlay"
-      hidden
+      data-state="closed"
       phx-click={close_modal(@dialog)}
-      class="fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=open]:fade-in-0"
+      class="fixed inset-0 z-50 bg-black/50 data-[state=closed]:hidden data-[state=open]:animate-in data-[state=open]:fade-in-0"
     >
     </div>
     <div
@@ -79,7 +79,7 @@ defmodule ShadcnElixir.Components.Sheet do
       aria-modal="true"
       data-slot="sheet-content"
       data-side={@side}
-      hidden
+      data-state="closed"
       phx-window-keydown={close_modal(@dialog)}
       phx-key="escape"
       class={@content_class}

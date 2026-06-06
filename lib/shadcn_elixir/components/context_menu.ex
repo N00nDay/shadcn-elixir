@@ -15,7 +15,7 @@ defmodule ShadcnElixir.Components.ContextMenu do
 
   @open_js "event.preventDefault();" <>
              "var m=this.closest('[data-slot=context-menu]').querySelector('[data-slot=context-menu-content]');" <>
-             "m.hidden=false;m.setAttribute('data-state','open');" <>
+             "m.setAttribute('data-state','open');" <>
              "m.style.left=event.offsetX+'px';m.style.top=event.offsetY+'px';"
 
   attr(:id, :string, required: true)
@@ -53,14 +53,16 @@ defmodule ShadcnElixir.Components.ContextMenu do
   def context_menu_content(assigns) do
     ~H"""
     <div
+      id={"#{@menu}-content"}
       role="menu"
       data-slot="context-menu-content"
-      hidden
+      data-state="closed"
       phx-click-away={close(@menu)}
       phx-window-keydown={close(@menu)}
       phx-key="escape"
       class={
         cn([
+          "data-[state=closed]:hidden",
           "bg-popover text-popover-foreground absolute z-50 min-w-[8rem] overflow-hidden",
           "rounded-md border p-1 shadow-md",
           @class
