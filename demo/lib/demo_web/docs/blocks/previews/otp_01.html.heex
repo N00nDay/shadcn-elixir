@@ -1,0 +1,27 @@
+<div class="flex h-full w-full items-center justify-center p-6 md:p-10">
+  <div class="w-full max-w-xs">
+    <.card>
+      <.card_header>
+        <.card_title>Enter verification code</.card_title>
+        <.card_description>We sent a 6-digit code to your email.</.card_description>
+      </.card_header>
+      <.card_content>
+        <form>
+          <.field_group>
+            <.field>
+              <.field_label for="otp-01-code">Verification code</.field_label>
+              <.input_otp id="otp-01-code" length={6} class="gap-2.5" />
+              <.field_description>Enter the 6-digit code sent to your email.</.field_description>
+            </.field>
+            <.field_group>
+              <.button type="submit">Verify</.button>
+              <.field_description class="text-center">
+                Didn't receive the code? <a href="#">Resend</a>
+              </.field_description>
+            </.field_group>
+          </.field_group>
+        </form>
+      </.card_content>
+    </.card>
+  </div>
+</div>

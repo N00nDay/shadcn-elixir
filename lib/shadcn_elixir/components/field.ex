@@ -253,6 +253,7 @@ defmodule ShadcnElixir.Components.Field do
       <div class="bg-border absolute inset-0 top-1/2 h-px"></div>
       <span
         :if={@inner_block != []}
+        data-slot="field-separator-content"
         class="bg-background text-muted-foreground relative mx-auto block w-fit px-2"
       >
         {render_slot(@inner_block)}

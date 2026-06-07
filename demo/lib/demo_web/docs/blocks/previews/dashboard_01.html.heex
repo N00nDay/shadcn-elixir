@@ -1,0 +1,339 @@
+<div class="h-full w-full overflow-hidden">
+  <.sidebar_provider id="dashboard-01-sb" class="h-full min-h-0">
+    <.sidebar class="h-full border-r">
+      <.sidebar_header>
+        <.sidebar_menu>
+          <.sidebar_menu_item>
+            <.sidebar_menu_button href="#" size="lg">
+              <div class="bg-primary text-primary-foreground flex aspect-square size-8 shrink-0 items-center justify-center rounded-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-4"
+                >
+                  <path d="M12 2 2 7l10 5 10-5-10-5Z" /><path d="m2 17 10 5 10-5" /><path d="m2 12 10 5 10-5" />
+                </svg>
+              </div>
+              <span class="font-semibold group-data-[state=collapsed]/sidebar-wrapper:hidden">
+                Acme Inc.
+              </span>
+            </.sidebar_menu_button>
+          </.sidebar_menu_item>
+        </.sidebar_menu>
+      </.sidebar_header>
+      <.sidebar_content>
+        <.sidebar_group>
+          <.sidebar_group_content>
+            <.sidebar_menu>
+              <.sidebar_menu_item>
+                <.sidebar_menu_button href="#" active>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect width="7" height="9" x="3" y="3" rx="1" /><rect
+                      width="7"
+                      height="5"
+                      x="14"
+                      y="3"
+                      rx="1"
+                    /><rect width="7" height="9" x="14" y="12" rx="1" /><rect
+                      width="7"
+                      height="5"
+                      x="3"
+                      y="16"
+                      rx="1"
+                    />
+                  </svg>
+                  <span>Dashboard</span>
+                </.sidebar_menu_button>
+              </.sidebar_menu_item>
+              <.sidebar_menu_item>
+                <.sidebar_menu_button href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" />
+                  </svg>
+                  <span>Analytics</span>
+                </.sidebar_menu_button>
+              </.sidebar_menu_item>
+              <.sidebar_menu_item>
+                <.sidebar_menu_button href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+                  </svg>
+                  <span>Projects</span>
+                </.sidebar_menu_button>
+              </.sidebar_menu_item>
+              <.sidebar_menu_item>
+                <.sidebar_menu_button href="#">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle
+                      cx="9"
+                      cy="7"
+                      r="4"
+                    /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  <span>Team</span>
+                </.sidebar_menu_button>
+              </.sidebar_menu_item>
+            </.sidebar_menu>
+          </.sidebar_group_content>
+        </.sidebar_group>
+      </.sidebar_content>
+      <.sidebar_footer>
+        <.sidebar_menu>
+          <.sidebar_menu_item>
+            <.sidebar_menu_button href="#" size="lg">
+              <span class="bg-muted flex size-8 shrink-0 items-center justify-center rounded-lg text-xs font-medium">
+                CN
+              </span>
+              <div class="grid flex-1 text-left text-sm leading-tight group-data-[state=collapsed]/sidebar-wrapper:hidden">
+                <span class="truncate font-semibold">shadcn</span>
+                <span class="truncate text-xs text-muted-foreground">m@example.com</span>
+              </div>
+            </.sidebar_menu_button>
+          </.sidebar_menu_item>
+        </.sidebar_menu>
+      </.sidebar_footer>
+    </.sidebar>
+    <.sidebar_inset class="min-h-0">
+      <header class="flex h-12 shrink-0 items-center gap-2 border-b px-4">
+        <.sidebar_trigger target="dashboard-01-sb" />
+        <.separator orientation="vertical" class="mr-2 h-4" />
+        <span class="text-base font-medium">Documents</span>
+        <.button variant="outline" size="sm" class="ml-auto hidden sm:flex">Quick Create</.button>
+      </header>
+      <div class="flex flex-1 flex-col gap-4 overflow-hidden p-4 md:p-6">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <.card>
+            <.card_header>
+              <.card_description>Total Revenue</.card_description>
+              <.card_title class="text-2xl font-semibold tabular-nums">$1,250.00</.card_title>
+              <.card_action>
+                <.badge variant="outline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="size-3"
+                  >
+                    <path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" />
+                  </svg>
+                  +12.5%
+                </.badge>
+              </.card_action>
+            </.card_header>
+            <.card_footer class="flex-col items-start gap-1 text-sm">
+              <div class="flex gap-2 font-medium">Trending up this month</div>
+              <div class="text-muted-foreground">Visitors for the last 6 months</div>
+            </.card_footer>
+          </.card>
+          <.card>
+            <.card_header>
+              <.card_description>New Customers</.card_description>
+              <.card_title class="text-2xl font-semibold tabular-nums">1,234</.card_title>
+              <.card_action>
+                <.badge variant="outline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="size-3"
+                  >
+                    <path d="M16 17h6v-6" /><path d="m22 17-8.5-8.5-5 5L2 7" />
+                  </svg>
+                  -20%
+                </.badge>
+              </.card_action>
+            </.card_header>
+            <.card_footer class="flex-col items-start gap-1 text-sm">
+              <div class="flex gap-2 font-medium">Down 20% this period</div>
+              <div class="text-muted-foreground">Acquisition needs attention</div>
+            </.card_footer>
+          </.card>
+          <.card>
+            <.card_header>
+              <.card_description>Active Accounts</.card_description>
+              <.card_title class="text-2xl font-semibold tabular-nums">45,678</.card_title>
+              <.card_action>
+                <.badge variant="outline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="size-3"
+                  >
+                    <path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" />
+                  </svg>
+                  +12.5%
+                </.badge>
+              </.card_action>
+            </.card_header>
+            <.card_footer class="flex-col items-start gap-1 text-sm">
+              <div class="flex gap-2 font-medium">Strong user retention</div>
+              <div class="text-muted-foreground">Engagement exceed targets</div>
+            </.card_footer>
+          </.card>
+          <.card>
+            <.card_header>
+              <.card_description>Growth Rate</.card_description>
+              <.card_title class="text-2xl font-semibold tabular-nums">4.5%</.card_title>
+              <.card_action>
+                <.badge variant="outline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="size-3"
+                  >
+                    <path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" />
+                  </svg>
+                  +4.5%
+                </.badge>
+              </.card_action>
+            </.card_header>
+            <.card_footer class="flex-col items-start gap-1 text-sm">
+              <div class="flex gap-2 font-medium">Steady performance increase</div>
+              <div class="text-muted-foreground">Meets growth projections</div>
+            </.card_footer>
+          </.card>
+        </div>
+
+        <.card>
+          <.card_header>
+            <.card_title>Total Visitors</.card_title>
+            <.card_description>Total for the last 3 months</.card_description>
+          </.card_header>
+          <.card_content class="px-2">
+            <.chart
+              id="dashboard-01-chart"
+              type="area"
+              variant="stacked"
+              keys={["desktop", "mobile"]}
+              legend
+              colors={["--foreground", "--muted-foreground"]}
+              class="h-[260px] w-full"
+              data={[
+                %{label: "2025-04-01", desktop: 222, mobile: 150},
+                %{label: "2025-04-08", desktop: 245, mobile: 180},
+                %{label: "2025-04-15", desktop: 187, mobile: 120},
+                %{label: "2025-04-22", desktop: 305, mobile: 210},
+                %{label: "2025-04-29", desktop: 273, mobile: 190},
+                %{label: "2025-05-06", desktop: 209, mobile: 130},
+                %{label: "2025-05-13", desktop: 214, mobile: 140},
+                %{label: "2025-05-20", desktop: 331, mobile: 220},
+                %{label: "2025-05-27", desktop: 295, mobile: 200},
+                %{label: "2025-06-03", desktop: 342, mobile: 250},
+                %{label: "2025-06-10", desktop: 268, mobile: 170},
+                %{label: "2025-06-17", desktop: 389, mobile: 280}
+              ]}
+            />
+          </.card_content>
+        </.card>
+
+        <.card>
+          <.card_header>
+            <.card_title>Recent Documents</.card_title>
+            <.card_description>Outline of the documents in this workspace.</.card_description>
+          </.card_header>
+          <.card_content>
+            <.table>
+              <.table_header>
+                <.table_row>
+                  <.table_head>Header</.table_head>
+                  <.table_head>Section Type</.table_head>
+                  <.table_head>Status</.table_head>
+                  <.table_head class="text-right">Limit</.table_head>
+                </.table_row>
+              </.table_header>
+              <.table_body>
+                <.table_row>
+                  <.table_cell class="font-medium">Cover page</.table_cell>
+                  <.table_cell>Cover page</.table_cell>
+                  <.table_cell>
+                    <.badge variant="outline">In Process</.badge>
+                  </.table_cell>
+                  <.table_cell class="text-right tabular-nums">5</.table_cell>
+                </.table_row>
+                <.table_row>
+                  <.table_cell class="font-medium">Table of contents</.table_cell>
+                  <.table_cell>Table of contents</.table_cell>
+                  <.table_cell>
+                    <.badge variant="outline">Done</.badge>
+                  </.table_cell>
+                  <.table_cell class="text-right tabular-nums">29</.table_cell>
+                </.table_row>
+                <.table_row>
+                  <.table_cell class="font-medium">Executive summary</.table_cell>
+                  <.table_cell>Narrative</.table_cell>
+                  <.table_cell>
+                    <.badge variant="outline">Done</.badge>
+                  </.table_cell>
+                  <.table_cell class="text-right tabular-nums">10</.table_cell>
+                </.table_row>
+                <.table_row>
+                  <.table_cell class="font-medium">Technical approach</.table_cell>
+                  <.table_cell>Narrative</.table_cell>
+                  <.table_cell>
+                    <.badge variant="outline">In Process</.badge>
+                  </.table_cell>
+                  <.table_cell class="text-right tabular-nums">27</.table_cell>
+                </.table_row>
+              </.table_body>
+            </.table>
+          </.card_content>
+        </.card>
+      </div>
+    </.sidebar_inset>
+  </.sidebar_provider>
+</div>

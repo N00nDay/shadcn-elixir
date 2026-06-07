@@ -1,0 +1,46 @@
+<div class="bg-background flex h-full flex-col items-center justify-center gap-6 p-6 md:p-10">
+  <div class="w-full max-w-sm">
+    <div class="flex flex-col gap-6">
+      <form>
+        <.field_group>
+          <div class="flex flex-col items-center gap-2 text-center">
+            <a href="#" class="flex flex-col items-center gap-2 font-medium">
+              <div class="flex size-8 items-center justify-center rounded-md">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-6"
+                  aria-hidden="true"
+                >
+                  <path d="M12 4v16" /><path d="M4 7c0-1.7 1.3-3 3-3h10c1.7 0 3 1.3 3 3" /><path d="M4 7v13" /><path d="M20 7v13" />
+                </svg>
+              </div>
+              <span class="sr-only">Acme Inc.</span>
+            </a>
+            <h1 class="text-xl font-bold">Enter verification code</h1>
+            <.field_description>We sent a 6-digit code to your email address</.field_description>
+          </div>
+          <.field>
+            <.field_label for="otp-05-code" class="sr-only">Verification code</.field_label>
+            <.input_otp id="otp-05-code" length={6} class="justify-center gap-2.5" />
+            <.field_description class="text-center">
+              Didn't receive the code? <a href="#">Resend</a>
+            </.field_description>
+          </.field>
+          <.field>
+            <.button type="submit">Verify</.button>
+          </.field>
+        </.field_group>
+      </form>
+      <.field_description class="px-6 text-center">
+        By clicking continue, you agree to our <a href="#">Terms of Service</a>
+        and <a href="#">Privacy Policy</a>.
+      </.field_description>
+    </div>
+  </div>
+</div>

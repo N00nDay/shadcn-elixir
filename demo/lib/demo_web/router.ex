@@ -23,6 +23,11 @@ defmodule DemoWeb.Router do
     live "/docs/:page", DocsLive
     get "/charts", RedirectController, :charts
     live "/charts/:category", ChartsLive
+    get "/blocks", RedirectController, :blocks
+    live "/blocks/:category", BlocksLive
+    get "/create", RedirectController, :create
+    get "/create/frame", CreateFrameController, :show
+    live "/create/:item", CreateLive
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,46 @@
+<div class="flex h-full w-full items-center justify-center p-6 md:p-10">
+  <div class="w-full max-w-sm">
+    <.card>
+      <.card_header>
+        <.card_title>Create an account</.card_title>
+        <.card_description>Enter your information below to create your account</.card_description>
+      </.card_header>
+      <.card_content>
+        <form>
+          <.field_group>
+            <.field>
+              <.field_label for="signup-01-name">Full Name</.field_label>
+              <.input id="signup-01-name" type="text" placeholder="John Doe" required />
+            </.field>
+            <.field>
+              <.field_label for="signup-01-email">Email</.field_label>
+              <.input id="signup-01-email" type="email" placeholder="m@example.com" required />
+              <.field_description>
+                We'll use this to contact you. We will not share your email with anyone else.
+              </.field_description>
+            </.field>
+            <.field>
+              <.field_label for="signup-01-password">Password</.field_label>
+              <.input id="signup-01-password" type="password" required />
+              <.field_description>Must be at least 8 characters long.</.field_description>
+            </.field>
+            <.field>
+              <.field_label for="signup-01-confirm">Confirm Password</.field_label>
+              <.input id="signup-01-confirm" type="password" required />
+              <.field_description>Please confirm your password.</.field_description>
+            </.field>
+            <.field_group>
+              <.field>
+                <.button type="submit">Create Account</.button>
+                <.button variant="outline" type="button">Sign up with Google</.button>
+                <.field_description class="px-6 text-center">
+                  Already have an account? <a href="#">Sign in</a>
+                </.field_description>
+              </.field>
+            </.field_group>
+          </.field_group>
+        </form>
+      </.card_content>
+    </.card>
+  </div>
+</div>

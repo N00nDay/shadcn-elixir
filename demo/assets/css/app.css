@@ -9,6 +9,10 @@
 /* ...and the shadcn-elixir component library source (for the classes it uses). */
 @source "../../../lib/shadcn_elixir";
 
+/* ...and the library's JS hooks, which build markup with utility classes (e.g. the calendar
+   hook's per-row `rounded-l-md`/`rounded-r-md` range band). */
+@source "../../../assets/js";
+
 /* heroicons (hero-* classes), used by Phoenix core_components */
 @plugin "../vendor/heroicons";
 

@@ -1,0 +1,30 @@
+<div class="flex h-full w-full">
+  <div class="flex w-full items-center justify-center p-6 lg:w-1/2">
+    <div class="w-full max-w-xs">
+      <form>
+        <.field_group>
+          <div class="flex flex-col items-center gap-1 text-center">
+            <h1 class="text-2xl font-bold">Enter verification code</h1>
+            <p class="text-muted-foreground text-sm text-balance">
+              We sent a 6-digit code to your email.
+            </p>
+          </div>
+          <.field>
+            <.field_label for="otp-02-code" class="sr-only">Verification code</.field_label>
+            <.input_otp id="otp-02-code" length={6} class="justify-center gap-2.5" />
+            <.field_description class="text-center">
+              Enter the 6-digit code sent to your email.
+            </.field_description>
+          </.field>
+          <.button type="submit">Verify</.button>
+          <.field_description class="text-center">
+            Didn't receive the code? <a href="#">Resend</a>
+          </.field_description>
+        </.field_group>
+      </form>
+    </div>
+  </div>
+  <div class="relative hidden w-1/2 lg:block">
+    <.skeleton class="absolute inset-0 size-full rounded-none bg-muted/50" />
+  </div>
+</div>

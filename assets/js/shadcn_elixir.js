@@ -1253,10 +1253,230 @@ export function toast(title, opts = {}) {
 
 // ---- LiveView hooks ---------------------------------------------------------
 
+// ---- Calendar ---------------------------------------------------------------
+
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+// A client-side, self-contained calendar: single or range selection across one or more linked
+// months driven by a single shared prev/next control. State lives here; nothing hits the server.
+function setupCalendar(root) {
+  if (root.__calBound) return;
+  root.__calBound = true;
+  if (!root.dataset.month) return;
+
+  const pad = (n) => String(n).padStart(2, "0");
+  const parse = (str) => {
+    const [y, m, d] = str.split("-").map(Number);
+    return new Date(y, m - 1, d);
+  };
+  const iso = (dt) => `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`;
+  const firstOf = (dt) => new Date(dt.getFullYear(), dt.getMonth(), 1);
+
+  const mode = root.dataset.mode === "range" ? "range" : "single";
+  const monthCount = Math.max(1, parseInt(root.dataset.months || "1", 10));
+  const today = root.dataset.today || null;
+  let base = firstOf(parse(root.dataset.month));
+  let selected = root.dataset.selected || null;
+  let rangeStart = root.dataset.rangeStart || null;
+  let rangeEnd = root.dataset.rangeEnd || null;
+
+  const navClass =
+    "inline-flex shrink-0 items-center justify-center rounded-md border bg-background shadow-xs" +
+    " hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30" +
+    " dark:hover:bg-input/50 size-7 absolute top-0 z-10 cursor-pointer";
+
+  function chevron(d) {
+    const svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.setAttribute("class", "size-4");
+    svg.setAttribute("aria-hidden", "true");
+    const path = document.createElementNS(SVG_NS, "path");
+    path.setAttribute("d", d);
+    svg.appendChild(path);
+    return svg;
+  }
+
+  // The button's own styling. The range *band* background lives on the <td> (so it can round
+  // each week-row's ends); endpoints stay fully-rounded primary pills that sit on top.
+  function dayBtnClass(dt, monthIdx) {
+    const di = iso(dt);
+    const outside = dt.getMonth() !== monthIdx;
+    let c =
+      "size-8 p-0 font-normal inline-flex items-center justify-center text-sm cursor-pointer" +
+      " relative z-10 rounded-md";
+    if (mode === "range") {
+      const isStart = rangeStart && di === rangeStart;
+      const isEnd = rangeEnd && di === rangeEnd;
+      const inBand = rangeStart && rangeEnd && di >= rangeStart && di <= rangeEnd;
+      if (isStart || isEnd) {
+        c +=
+          " bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground";
+      } else if (inBand) {
+        c += " text-accent-foreground"; // the <td> paints the band
+      } else if (rangeStart && !rangeEnd && di === rangeStart) {
+        c += " bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground";
+      } else {
+        c += " hover:bg-accent hover:text-accent-foreground";
+        if (today && di === today) c += " bg-accent text-accent-foreground";
+      }
+    } else {
+      c += " hover:bg-accent hover:text-accent-foreground";
+      if (selected && di === selected)
+        c +=
+          " bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground";
+      else if (today && di === today) c += " bg-accent text-accent-foreground";
+    }
+    if (outside) c += " text-muted-foreground opacity-50";
+    return c;
+  }
+
+  function buildMonth(first) {
+    const monthIdx = first.getMonth();
+    const col = document.createElement("div");
+    col.className = "flex flex-col gap-4";
+
+    const cap = document.createElement("div");
+    cap.className = "flex h-7 items-center justify-center text-sm font-medium";
+    cap.textContent = `${MONTH_NAMES[monthIdx]} ${first.getFullYear()}`;
+    col.appendChild(cap);
+
+    const table = document.createElement("table");
+    table.className = "w-full border-collapse";
+    const thead = document.createElement("thead");
+    const htr = document.createElement("tr");
+    htr.className = "flex";
+    for (const wd of WEEKDAYS) {
+      const th = document.createElement("th");
+      th.scope = "col";
+      th.className = "text-muted-foreground w-8 rounded-md text-[0.8rem] font-normal";
+      th.textContent = wd;
+      htr.appendChild(th);
+    }
+    thead.appendChild(htr);
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+    const start = new Date(first);
+    start.setDate(1 - first.getDay());
+    const lastOfMonth = new Date(first.getFullYear(), monthIdx + 1, 0);
+    const endCell = new Date(lastOfMonth);
+    endCell.setDate(lastOfMonth.getDate() + (6 - lastOfMonth.getDay()));
+    const cells = [];
+    for (let d = new Date(start); d <= endCell; d.setDate(d.getDate() + 1)) cells.push(new Date(d));
+    for (let i = 0; i < cells.length; i += 7) {
+      const rowCells = cells.slice(i, i + 7);
+      // Which cells fall inside the selected range (endpoints included) — used to paint a
+      // continuous band per week with rounded ends.
+      const band = rowCells.map((dt) => {
+        const di = iso(dt);
+        return mode === "range" && rangeStart && rangeEnd && di >= rangeStart && di <= rangeEnd;
+      });
+      const firstBand = band.indexOf(true);
+      const lastBand = band.lastIndexOf(true);
+
+      const tr = document.createElement("tr");
+      tr.className = "mt-2 flex w-full";
+      rowCells.forEach((dt, idx) => {
+        const td = document.createElement("td");
+        let tdC = "p-0 text-center text-sm";
+        if (band[idx]) {
+          tdC += " bg-accent";
+          if (idx === firstBand) tdC += " rounded-l-md";
+          if (idx === lastBand) tdC += " rounded-r-md";
+        }
+        td.className = tdC;
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.part = "day";
+        btn.dataset.date = iso(dt);
+        btn.className = dayBtnClass(dt, monthIdx);
+        btn.textContent = String(dt.getDate());
+        td.appendChild(btn);
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    col.appendChild(table);
+    return col;
+  }
+
+  function renderAll() {
+    root.replaceChildren();
+    const wrap = document.createElement("div");
+    wrap.className = "relative flex flex-col gap-4 sm:flex-row";
+
+    const prev = document.createElement("button");
+    prev.type = "button";
+    prev.dataset.part = "prev";
+    prev.setAttribute("aria-label", "Previous month");
+    prev.className = navClass + " left-0";
+    prev.appendChild(chevron("m15 18-6-6 6-6"));
+    wrap.appendChild(prev);
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.dataset.part = "next";
+    next.setAttribute("aria-label", "Next month");
+    next.className = navClass + " right-0";
+    next.appendChild(chevron("m9 18 6-6-6-6"));
+    wrap.appendChild(next);
+
+    for (let i = 0; i < monthCount; i++) {
+      wrap.appendChild(buildMonth(new Date(base.getFullYear(), base.getMonth() + i, 1)));
+    }
+    root.appendChild(wrap);
+  }
+
+  root.addEventListener("click", (e) => {
+    const day = e.target.closest('[data-part="day"]');
+    const prev = e.target.closest('[data-part="prev"]');
+    const next = e.target.closest('[data-part="next"]');
+    if (day) {
+      const di = day.dataset.date;
+      if (mode === "range") {
+        if (!rangeStart || (rangeStart && rangeEnd)) {
+          rangeStart = di;
+          rangeEnd = null;
+        } else if (di < rangeStart) {
+          rangeEnd = rangeStart;
+          rangeStart = di;
+        } else {
+          rangeEnd = di;
+        }
+      } else {
+        selected = di;
+      }
+      renderAll();
+    } else if (prev || next) {
+      base = new Date(base.getFullYear(), base.getMonth() + (next ? 1 : -1), 1);
+      renderAll();
+    }
+  });
+
+  renderAll();
+}
+
 export const Hooks = {
   ShadcnSelect: {
     mounted() {
       setupSelect(this.el);
+    },
+  },
+  ShadcnCalendar: {
+    mounted() {
+      setupCalendar(this.el);
     },
   },
   ShadcnCommand: {
@@ -1311,6 +1531,7 @@ export const Hooks = {
 
 export function initShadcn(root = document) {
   qa(root, '[data-slot="select"]').forEach(setupSelect);
+  qa(root, '[data-slot="calendar"][data-month]').forEach(setupCalendar);
   qa(root, '[data-slot="command"]').forEach(setupCommand);
   qa(root, '[data-slot="combobox"]').forEach(setupCombobox);
   qa(root, '[data-slot="input-otp"]').forEach(setupInputOTP);

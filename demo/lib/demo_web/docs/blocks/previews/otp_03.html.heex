@@ -1,0 +1,45 @@
+<div class="bg-muted flex h-full flex-col items-center justify-center gap-6 p-6 md:p-10">
+  <div class="flex w-full max-w-xs flex-col gap-6">
+    <a href="#" class="flex items-center gap-2 self-center font-medium">
+      <div class="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+          aria-hidden="true"
+        >
+          <path d="M12 4v16" /><path d="M4 7c0-1.7 1.3-3 3-3h10c1.7 0 3 1.3 3 3" /><path d="M4 7v13" /><path d="M20 7v13" />
+        </svg>
+      </div>
+      Acme Inc.
+    </a>
+    <.card>
+      <.card_header class="text-center">
+        <.card_title class="text-xl">Enter verification code</.card_title>
+        <.card_description>We sent a 6-digit code to your email.</.card_description>
+      </.card_header>
+      <.card_content>
+        <form>
+          <.field_group>
+            <.field>
+              <.field_label for="otp-03-code" class="sr-only">Verification code</.field_label>
+              <.input_otp id="otp-03-code" length={6} class="justify-center gap-2.5" />
+              <.field_description class="text-center">
+                Enter the 6-digit code sent to your email.
+              </.field_description>
+            </.field>
+            <.button type="submit">Verify</.button>
+            <.field_description class="text-center">
+              Didn't receive the code? <a href="#">Resend</a>
+            </.field_description>
+          </.field_group>
+        </form>
+      </.card_content>
+    </.card>
+  </div>
+</div>

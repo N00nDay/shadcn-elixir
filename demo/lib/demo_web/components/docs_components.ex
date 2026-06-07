@@ -122,7 +122,10 @@ defmodule DemoWeb.DocsComponents do
           >
             Components
           </.link>
-          <.link href="#" class="text-foreground/70 transition-colors hover:text-foreground">
+          <.link
+            navigate="/blocks/featured"
+            class="text-foreground/70 transition-colors hover:text-foreground"
+          >
             Blocks
           </.link>
           <.link
@@ -131,7 +134,10 @@ defmodule DemoWeb.DocsComponents do
           >
             Charts
           </.link>
-          <.link href="#" class="text-foreground/70 transition-colors hover:text-foreground">
+          <.link
+            navigate="/create/preview-02"
+            class="text-foreground/70 transition-colors hover:text-foreground"
+          >
             Create
           </.link>
         </nav>

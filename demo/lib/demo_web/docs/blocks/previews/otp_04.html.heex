@@ -1,0 +1,40 @@
+<div class="flex h-full w-full items-center justify-center p-6 md:p-10">
+  <div class="w-full max-w-sm md:max-w-3xl">
+    <div class="flex flex-col gap-6 md:min-h-[450px]">
+      <.card class="flex-1 overflow-hidden p-0">
+        <.card_content class="grid flex-1 p-0 md:grid-cols-2">
+          <form class="flex flex-col items-center justify-center p-6 md:p-8">
+            <.field_group>
+              <.field class="items-center text-center">
+                <h1 class="text-2xl font-bold">Enter verification code</h1>
+                <p class="text-muted-foreground text-sm text-balance">
+                  We sent a 6-digit code to your email
+                </p>
+              </.field>
+              <.field>
+                <.field_label for="otp-04-code" class="sr-only">Verification code</.field_label>
+                <.input_otp id="otp-04-code" length={6} class="justify-center gap-2.5" />
+                <.field_description class="text-center">
+                  Enter the 6-digit code sent to your email.
+                </.field_description>
+              </.field>
+              <.field>
+                <.button type="submit">Verify</.button>
+                <.field_description class="text-center">
+                  Didn't receive the code? <a href="#">Resend</a>
+                </.field_description>
+              </.field>
+            </.field_group>
+          </form>
+          <div class="relative hidden md:block">
+            <.skeleton class="absolute inset-0 size-full rounded-none bg-muted/50" />
+          </div>
+        </.card_content>
+      </.card>
+      <.field_description class="text-center">
+        By clicking continue, you agree to our <a href="#">Terms of Service</a>
+        and <a href="#">Privacy Policy</a>.
+      </.field_description>
+    </div>
+  </div>
+</div>
