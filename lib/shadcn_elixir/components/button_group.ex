@@ -18,12 +18,31 @@ defmodule ShadcnElixir.Components.ButtonGroup do
         "[&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",
     variants: %{
       orientation: %{
+        # The `[&>*…]` rules square the *direct* children. A dropdown-menu/popover trigger
+        # (split-button pattern) is wrapped in a `relative inline-block` div whose real
+        # control is a `data-slot=button` inside a `display:contents` trigger span — so we
+        # also reach through that wrapper to square the inner button at the group's seams.
+        # (React/Radix needs none of this because `asChild` makes the button the direct
+        # child; the port's wrapper div is the divergence.) Classes are written out in full
+        # so Tailwind's source scanner emits them — do not build these via interpolation.
         "horizontal" =>
           "[&>*:not(:first-child)]:border-l-0 [&>*:not(:first-child)]:rounded-l-none " <>
-            "[&>*:not(:last-child)]:rounded-r-none",
+            "[&>*:not(:last-child)]:rounded-r-none " <>
+            "[&>[data-slot=dropdown-menu]:not(:first-child)>[data-slot=dropdown-menu-trigger]>[data-slot=button]]:rounded-l-none " <>
+            "[&>[data-slot=dropdown-menu]:not(:first-child)>[data-slot=dropdown-menu-trigger]>[data-slot=button]]:border-l-0 " <>
+            "[&>[data-slot=dropdown-menu]:not(:last-child)>[data-slot=dropdown-menu-trigger]>[data-slot=button]]:rounded-r-none " <>
+            "[&>[data-slot=popover]:not(:first-child)>[data-slot=popover-trigger]>[data-slot=button]]:rounded-l-none " <>
+            "[&>[data-slot=popover]:not(:first-child)>[data-slot=popover-trigger]>[data-slot=button]]:border-l-0 " <>
+            "[&>[data-slot=popover]:not(:last-child)>[data-slot=popover-trigger]>[data-slot=button]]:rounded-r-none",
         "vertical" =>
           "flex-col [&>*:not(:first-child)]:border-t-0 [&>*:not(:first-child)]:rounded-t-none " <>
-            "[&>*:not(:last-child)]:rounded-b-none"
+            "[&>*:not(:last-child)]:rounded-b-none " <>
+            "[&>[data-slot=dropdown-menu]:not(:first-child)>[data-slot=dropdown-menu-trigger]>[data-slot=button]]:rounded-t-none " <>
+            "[&>[data-slot=dropdown-menu]:not(:first-child)>[data-slot=dropdown-menu-trigger]>[data-slot=button]]:border-t-0 " <>
+            "[&>[data-slot=dropdown-menu]:not(:last-child)>[data-slot=dropdown-menu-trigger]>[data-slot=button]]:rounded-b-none " <>
+            "[&>[data-slot=popover]:not(:first-child)>[data-slot=popover-trigger]>[data-slot=button]]:rounded-t-none " <>
+            "[&>[data-slot=popover]:not(:first-child)>[data-slot=popover-trigger]>[data-slot=button]]:border-t-0 " <>
+            "[&>[data-slot=popover]:not(:last-child)>[data-slot=popover-trigger]>[data-slot=button]]:rounded-b-none"
       }
     },
     default_variants: %{orientation: "horizontal"}

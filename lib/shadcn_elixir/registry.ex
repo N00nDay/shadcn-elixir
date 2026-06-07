@@ -24,6 +24,9 @@ defmodule ShadcnElixir.Registry do
   @doc "Path to the theme stylesheet."
   def theme_css, do: Path.join(root_path(), "priv/static/theme.css")
 
+  @doc "Path to the theme presets (base color / accent theme / chart color palettes)."
+  def themes_css, do: Path.join(root_path(), "priv/static/themes.css")
+
   @doc "Path to the JS hooks file."
   def js_file, do: Path.join(root_path(), "assets/js/shadcn_elixir.js")
 
