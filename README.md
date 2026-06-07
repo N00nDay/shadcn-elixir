@@ -1,35 +1,113 @@
 # shadcn-elixir
 
-A portable Phoenix/Elixir component library — a faithful port of
-[shadcn/ui](https://ui.shadcn.com/).
+The [shadcn/ui](https://ui.shadcn.com) component model, ported to Phoenix.
 
-Every component, matching UI, with the same extensibility model: CSS-variable theming
-and **copy-paste ownership**. Built on Phoenix function components, `Phoenix.LiveView.JS`
-+ colocated hooks for interactivity, and Tailwind CSS v4.
+Beautifully designed components you copy into your own app and own outright — built on
+Phoenix function components, `Phoenix.LiveView.JS` + colocated hooks for interactivity,
+and Tailwind CSS v4. All 58 shadcn/ui components, the same look, the same CSS-variable
+theming.
 
-## Why
+> An independent, community port of shadcn/ui for the Elixir ecosystem — not affiliated
+> with shadcn. See [Credits](#credits).
 
-shadcn/ui isn't a dependency you lock into — the components live in *your* project and
-you own them. `shadcn-elixir` brings that philosophy to Phoenix:
+## Documentation
 
-- **Use it as a Hex dependency** for the quickest start, or
-- **Generate the source into your app** with `mix shadcn.add <component>` and own/customize it.
+The demo app is the documentation site: a faithful clone of ui.shadcn.com with live
+previews, copy-paste code, and an API reference for every component. Run it locally:
 
-## Status
+```bash
+cd demo
+mix setup
+mix phx.server   # → http://localhost:4000
+```
 
-Full component parity with shadcn/ui — all 58 components implemented.
+A hosted docs site and HexDocs are on the way.
 
-| Area | State |
+## Quick start
+
+Add the dependency:
+
+```elixir
+# mix.exs
+def deps do
+  [{:shadcn_elixir, "~> 0.1.0"}]
+end
+```
+
+`cn/1` uses [`tw_merge`](https://hex.pm/packages/tw_merge), so add its cache to your
+supervision tree (`lib/my_app/application.ex`):
+
+```elixir
+children = [
+  # ...
+  TwMerge.Cache
+]
+```
+
+Import the theme after Tailwind in `assets/css/app.css`, and let Tailwind scan the
+component markup:
+
+```css
+@import "tailwindcss";
+@import "../../deps/shadcn_elixir/priv/static/theme.css";
+@source "../../deps/shadcn_elixir/lib";
+```
+
+Then reach for components in HEEx:
+
+```elixir
+use ShadcnElixir   # or: import ShadcnElixir.Components.Button
+```
+
+```heex
+<.button>Click me</.button>
+<.button variant="destructive" size="sm">Delete</.button>
+<.button variant="outline" navigate={~p"/settings"}>Settings</.button>
+```
+
+That's the fastest path. Prefer to **own the source**? Generate it instead.
+
+## Own the components
+
+Like shadcn, you can copy components into your project and edit them freely. You get
+exactly what you ask for plus its dependencies — never the whole library:
+
+```bash
+mix shadcn.init                    # theme.css + JS hooks + the wiring steps to follow
+mix shadcn.add button card dialog  # copy components (and their deps) into your app
+mix shadcn.add --list              # list every available component
+```
+
+Files land in `lib/<app>_web/components/ui/` as `<App>Web.Components.UI.<Name>`, with
+inter-component references rewritten to match. `init` can also bake a theme preset in:
+
+```bash
+mix shadcn.init --base stone --theme blue --radius lg
+```
+
+## JavaScript
+
+Most components use `Phoenix.LiveView.JS` or native HTML and need no setup. A few (Select,
+Command, Combobox, Input OTP, Resizable, Chart, Sonner) ship hooks:
+
+```js
+import { Hooks } from "../../deps/shadcn_elixir/assets/js/shadcn_elixir";
+const liveSocket = new LiveSocket("/live", Socket, { hooks: { ...Hooks } });
+```
+
+## How it maps to shadcn/ui
+
+| shadcn/ui | shadcn-elixir |
 | --- | --- |
-| `cn/1` (tailwind-merge) + `Variants` (CVA engine) | ✅ |
-| Theming (`theme.css`, light/dark tokens) | ✅ |
-| Tier 0 — static components (24) | ✅ |
-| Tier 1 — interactive, LiveView.JS / native (8) | ✅ |
-| Tier 2 — overlays/floating (14) | ✅ |
-| Tier 3 — complex/stateful (12) | ✅ |
-| `mix shadcn.init` / `mix shadcn.add` generator | ✅ |
+| React function component | `Phoenix.Component` (HEEx) |
+| Radix UI primitives | `Phoenix.LiveView.JS` + colocated hooks / native HTML |
+| `class-variance-authority` (CVA) | `ShadcnElixir.Variants.variant/2` |
+| `cn()` (clsx + tailwind-merge) | `ShadcnElixir.cn/1` (via `tw_merge`) |
+| CSS-variable theming + `.dark` | identical tokens via Tailwind v4 |
+| `npx shadcn add` + registry | `mix shadcn.add` + `ShadcnElixir.Registry` |
 
-### Components
+<details>
+<summary><strong>All 58 components</strong></summary>
 
 accordion, alert, alert-dialog, aspect-ratio, avatar, badge, breadcrumb, button,
 button-group, calendar, card, carousel, chart, checkbox, collapsible, combobox, command,
@@ -39,127 +117,20 @@ navigation-menu, pagination, popover, progress, radio-group, resizable, scroll-a
 select, separator, sheet, sidebar, skeleton, slider, sonner, spinner, switch, table,
 tabs, textarea, toast, toggle, toggle-group, tooltip, typography.
 
-## Preview (demo app)
+</details>
 
-A runnable Phoenix app lives in [`demo/`](demo/) — it shows components from every tier
-with the full Tailwind v4 + theme + JS-hooks pipeline wired up:
+A few components (calendar, chart, sonner, sidebar) are lightweight reimplementations
+rather than 1:1 ports, since the originals lean on heavy JS libraries
+(react-day-picker, Recharts, sonner, Radix) that don't fit the no-extra-runtime model.
+They match the look and the common-case behavior.
 
-```bash
-cd demo
-mix setup
-mix phx.server   # http://localhost:4000
-```
+## Credits
 
-## Installation
-
-Add to your `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:shadcn_elixir, "~> 0.1.0"}
-  ]
-end
-```
-
-`cn/1` uses [`tw_merge`](https://hex.pm/packages/tw_merge), which needs a cache process.
-Add it to your application's supervision tree (`lib/my_app/application.ex`):
-
-```elixir
-children = [
-  # ...
-  TwMerge.Cache
-]
-```
-
-### Theming
-
-Import the theme after Tailwind in your app's CSS (`assets/css/app.css`):
-
-```css
-@import "tailwindcss";
-@import "../../deps/shadcn_elixir/priv/static/theme.css";
-```
-
-This wires up shadcn's semantic tokens (`--background`, `--primary`/`--primary-foreground`,
-`--muted`, `--destructive`, `--radius`, …) for both light and `.dark` modes. Override any
-token in your own `:root`/`.dark` block to re-theme.
-
-## Usage
-
-Import every component (e.g. in your `MyAppWeb` `html_helpers`):
-
-```elixir
-use ShadcnElixir
-```
-
-Or import a single component module:
-
-```elixir
-import ShadcnElixir.Components.Button
-```
-
-Then use them in HEEx:
-
-```heex
-<.button>Click me</.button>
-<.button variant="destructive" size="sm">Delete</.button>
-<.button variant="outline" navigate={~p"/settings"}>Settings</.button>
-```
-
-## Own the components (generator)
-
-Prefer shadcn's copy-paste model? Generate the source into your own project and customize
-freely:
-
-```bash
-mix shadcn.init                      # install theme.css + JS hooks, print wiring steps
-mix shadcn.add button card dialog    # copy components (+ their deps) into your app
-mix shadcn.add --all                 # everything
-mix shadcn.add --list                # list available components
-```
-
-Components are written to `lib/<app>_web/components/ui/<name>.ex` as
-`<App>Web.Components.UI.<Name>`, with inter-component references rewritten to match.
-Dependencies are resolved automatically (e.g. `date_picker` pulls in `popover`,
-`calendar`, and `button`). The lightweight helpers (`cn/1`, `Variants`, `JS`) remain
-references to the `:shadcn_elixir` dependency.
-
-## JavaScript
-
-Most components (dialog, popover, dropdown, tabs, accordion, …) are powered by
-`Phoenix.LiveView.JS` or native HTML and need no JS wiring. A few (Select, Command,
-Combobox, Input OTP, Resizable, Chart, Sonner) use hooks shipped in
-`assets/js/shadcn_elixir.js`:
-
-```js
-// LiveView
-import { Hooks } from "../../deps/shadcn_elixir/assets/js/shadcn_elixir";
-const liveSocket = new LiveSocket("/live", Socket, { hooks: { ...Hooks } });
-
-// or, for dead/static views
-import { initShadcn } from "../../deps/shadcn_elixir/assets/js/shadcn_elixir";
-document.addEventListener("DOMContentLoaded", () => initShadcn());
-```
-
-Tailwind v4 must scan the component markup. Add a source line to your CSS:
-
-```css
-@source "../../deps/shadcn_elixir/lib";   /* when using the library directly */
-```
-
-## Architecture
-
-| shadcn/ui | shadcn-elixir |
-| --- | --- |
-| React function component | `Phoenix.Component` (HEEx) |
-| Radix UI primitives | `Phoenix.LiveView.JS` + colocated hooks / native HTML |
-| `class-variance-authority` (CVA) | `ShadcnElixir.Variants.variant/2` |
-| `cn()` (clsx + tailwind-merge) | `ShadcnElixir.cn/1` (via `tw_merge`) |
-| CSS-variable theming + `.dark` | identical tokens via Tailwind v4 `@theme inline` |
-| `npx shadcn add` + registry | `mix shadcn.add` + `ShadcnElixir.Registry` |
+All credit for the original design system goes to [shadcn](https://github.com/shadcn) —
+[shadcn/ui](https://ui.shadcn.com) is MIT licensed. This port also follows the lead of
+[shadcn-svelte](https://shadcn-svelte.com) by [Huntabyte](https://github.com/huntabyte),
+the community Svelte port, whose docs and registry approach inspired this one.
 
 ## License
 
-MIT © N00nDay. shadcn/ui is by [shadcn](https://github.com/shadcn);
-this is an independent port for the Elixir ecosystem.
+MIT © [N00nDay](https://github.com/N00nDay). shadcn/ui is MIT © shadcn.
