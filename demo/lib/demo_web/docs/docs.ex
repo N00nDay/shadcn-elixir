@@ -684,7 +684,8 @@ defmodule DemoWeb.Docs do
     %{
       slug: "sheet",
       title: "Sheet",
-      description: "Extends the Dialog component to display content that slides in from the edge.",
+      description:
+        "Extends the Dialog component to display content that slides in from the edge.",
       examples: [%{key: "sheet_default", title: "Default", description: nil}],
       props: [
         %{label: "sheet", module: C.Sheet, fun: :sheet},
@@ -811,7 +812,11 @@ defmodule DemoWeb.Docs do
         %{label: "navigation_menu", module: C.NavigationMenu, fun: :navigation_menu},
         %{label: "navigation_menu_list", module: C.NavigationMenu, fun: :navigation_menu_list},
         %{label: "navigation_menu_item", module: C.NavigationMenu, fun: :navigation_menu_item},
-        %{label: "navigation_menu_trigger", module: C.NavigationMenu, fun: :navigation_menu_trigger},
+        %{
+          label: "navigation_menu_trigger",
+          module: C.NavigationMenu,
+          fun: :navigation_menu_trigger
+        },
         %{label: "navigation_menu_link", module: C.NavigationMenu, fun: :navigation_menu_link}
       ]
     }

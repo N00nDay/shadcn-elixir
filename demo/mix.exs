@@ -61,6 +61,8 @@ defmodule Demo.MixProject do
       {:makeup, "~> 1.0"},
       {:makeup_eex, ">= 0.0.0"},
       {:makeup_html, ">= 0.0.0"},
+      # Docs site: real scannable QR code on the landing "connect" card (demo-only).
+      {:eqrcode, "~> 0.2"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"}

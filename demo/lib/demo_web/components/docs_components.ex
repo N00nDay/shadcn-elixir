@@ -80,7 +80,7 @@ defmodule DemoWeb.DocsComponents do
             target="_blank"
             rel="noreferrer"
             class="font-medium underline underline-offset-4"
-          >Craig Howell</.link>. The source code is available on <.link
+          >N00nDay</.link>. The source code is available on <.link
             href={@github_url}
             target="_blank"
             rel="noreferrer"
@@ -102,7 +102,7 @@ defmodule DemoWeb.DocsComponents do
 
     ~H"""
     <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div class="mx-auto flex h-14 max-w-screen-2xl items-center gap-4 px-6 lg:px-10">
+      <div class="flex h-14 w-full items-center gap-4 px-12 lg:px-6">
         <nav class="hidden items-center gap-4 text-sm font-medium md:flex">
           <.link navigate="/" class="text-foreground/70 transition-colors hover:text-foreground">
             Home

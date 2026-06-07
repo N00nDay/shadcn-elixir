@@ -30,7 +30,7 @@ defmodule ShadcnElixir.Components.NativeSelect do
     ~H"""
     <div
       data-slot="native-select-wrapper"
-      class="group/native-select relative w-fit has-[select:disabled]:opacity-50"
+      class={cn(["group/native-select relative w-fit has-[select:disabled]:opacity-50", @class])}
     >
       <select
         name={@name}
@@ -45,8 +45,7 @@ defmodule ShadcnElixir.Components.NativeSelect do
             "data-[size=sm]:h-8 data-[size=sm]:py-1 dark:bg-input/30 dark:hover:bg-input/50",
             "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
             "aria-invalid:border-destructive aria-invalid:ring-destructive/20",
-            "dark:aria-invalid:ring-destructive/40",
-            @class
+            "dark:aria-invalid:ring-destructive/40"
           ])
         }
         {@rest}

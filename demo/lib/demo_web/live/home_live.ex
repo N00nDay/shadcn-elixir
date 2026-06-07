@@ -74,7 +74,7 @@ defmodule DemoWeb.HomeLive do
             data-slot="demo"
             class="relative flex w-full flex-col gap-(--gap) overflow-hidden bg-muted p-12 pb-0! [--gap:--spacing(8)] lg:p-6 lg:[--gap:--spacing(6)] dark:bg-background"
           >
-            <div class="relative z-10 mx-auto grid gap-(--gap) **:data-[slot=card]:w-full md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:max-w-[1600px] min-[1400px]:grid-cols-4 min-[1900px]:grid-cols-5 2xl:max-w-[1900px]">
+            <div class="relative z-10 mx-auto grid gap-(--gap) **:data-[slot=card]:w-full min-[1400px]:grid-cols-4! md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:max-w-[1600px] 2xl:max-w-[1900px]">
               <div class="flex flex-col items-start gap-(--gap)">
                 <.kit_card />
                 <.nav_card />
@@ -84,9 +84,6 @@ defmodule DemoWeb.HomeLive do
                 <.contribution_card />
                 <.balance_card />
                 <.dividends_card />
-              </div>
-              <div class="hidden flex-col gap-(--gap) min-[1900px]:flex">
-                <.account_nav_card />
               </div>
               <div class="hidden flex-col gap-(--gap) md:flex">
                 <.connect_card />
@@ -105,6 +102,8 @@ defmodule DemoWeb.HomeLive do
             <div class="from-background via-muted pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-120 bg-linear-to-t to-transparent dark:hidden">
             </div>
             <div class="from-background pointer-events-none absolute inset-x-0 bottom-0 z-[1] hidden h-120 bg-linear-to-t to-transparent dark:block">
+            </div>
+            <div class="absolute inset-x-0 bottom-0 z-20 h-48 bg-linear-to-t from-background via-muted/80 to-transparent lg:h-80 xl:h-64 dark:via-background/80">
             </div>
           </div>
         </section>
@@ -189,7 +188,9 @@ defmodule DemoWeb.HomeLive do
             </.alert_dialog_trigger>
             <.alert_dialog_content dialog="ui-alert" size="sm">
               <.alert_dialog_header>
-                <.alert_dialog_title dialog="ui-alert">Update notification settings?</.alert_dialog_title>
+                <.alert_dialog_title dialog="ui-alert">
+                  Update notification settings?
+                </.alert_dialog_title>
                 <.alert_dialog_description dialog="ui-alert">
                   This changes how alerts are delivered across your connected devices.
                 </.alert_dialog_description>
@@ -260,17 +261,6 @@ defmodule DemoWeb.HomeLive do
       {"Community", "M2 12h20 M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"}
     ]
 
-    assigns = assign(assigns, planning: planning, support: support)
-
-    ~H"""
-    <.card class="grid grid-cols-2 gap-x-6 gap-y-4 p-6">
-      <.nav_section title="Planning" items={@planning} />
-      <.nav_section title="Support" items={@support} />
-    </.card>
-    """
-  end
-
-  defp account_nav_card(assigns) do
     overview = [
       {"Analytics", "M3 3v18h18 M7 16l4-4 3 3 5-5", true},
       {"Transactions", "M7 7h14 M3 7l4-4 M17 17H3 M21 17l-4 4", false},
@@ -291,13 +281,16 @@ defmodule DemoWeb.HomeLive do
        false}
     ]
 
-    assigns = assign(assigns, overview: overview, account: account)
+    assigns =
+      assign(assigns, planning: planning, support: support, overview: overview, account: account)
 
     ~H"""
-    <.card class="grid grid-cols-2 gap-x-6 gap-y-4 p-6">
-      <.nav_section title="Overview" items={@overview} />
-      <.nav_section title="Account" items={@account} />
-    </.card>
+    <div class="grid w-full grid-cols-2 gap-(--gap)">
+      <.card class="p-6"><.nav_section title="Planning" items={@planning} /></.card>
+      <.card class="p-6"><.nav_section title="Support" items={@support} /></.card>
+      <.card class="p-6"><.nav_section title="Overview" items={@overview} /></.card>
+      <.card class="p-6"><.nav_section title="Account" items={@account} /></.card>
+    </div>
     """
   end
 
@@ -393,19 +386,19 @@ defmodule DemoWeb.HomeLive do
         <.card_description>Last 6 months of activity</.card_description>
       </.card_header>
       <.card_content>
-        <div class="flex h-40 items-stretch justify-between gap-2">
+        <div class="flex h-60 items-stretch justify-between gap-2">
           <div :for={{label, h} <- @bars} class="flex h-full flex-1 flex-col justify-end gap-2">
             <div class="w-full rounded-t-sm bg-muted-foreground/70" style={"height: #{h}%"}></div>
             <span class="text-center text-xs text-muted-foreground">{label}</span>
           </div>
         </div>
         <div class="mt-4 grid grid-cols-2 gap-3">
-          <div class="rounded-lg border p-3">
+          <div class="rounded-lg border bg-input/30 p-3">
             <p class="text-xs tracking-wide text-muted-foreground uppercase">Upcoming</p>
             <p class="font-semibold">May 2024</p>
             <p class="text-xs text-muted-foreground">Scheduled</p>
           </div>
-          <div class="rounded-lg border p-3">
+          <div class="rounded-lg border bg-input/30 p-3">
             <p class="text-xs tracking-wide text-muted-foreground uppercase">Savings Plan</p>
             <p class="font-semibold">Accelerated</p>
             <p class="text-xs text-muted-foreground">Recurring</p>
@@ -501,38 +494,32 @@ defmodule DemoWeb.HomeLive do
   end
 
   defp connect_card(assigns) do
+    assigns = assign(assigns, :qr, home_qr_svg())
+
     ~H"""
     <.card class="items-center text-center">
       <.card_content class="flex flex-col items-center gap-4 pt-2">
-        <div class="rounded-xl bg-white p-4 text-black">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-32"
-          >
-            <rect width="5" height="5" x="3" y="3" rx="1" /><rect
-              width="5"
-              height="5"
-              x="16"
-              y="3"
-              rx="1"
-            /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" />
-          </svg>
+        <div class="size-52 rounded-xl bg-white p-4 text-black [&>svg]:size-full">
+          {Phoenix.HTML.raw(@qr)}
         </div>
         <div>
           <p class="font-semibold">Scan to connect your mobile device</p>
           <p class="mt-1 text-sm text-muted-foreground">
-            Open the Ledger mobile app and scan this code to link your device.
+            Scan this code with your phone's camera to open this site's home page.
           </p>
         </div>
       </.card_content>
     </.card>
     """
+  end
+
+  # A real, scannable QR code encoding this site's home page URL, rendered inline as
+  # SVG (no runtime/network dependency). Scales to its container via viewBox.
+  defp home_qr_svg do
+    DemoWeb.Endpoint.url()
+    |> EQRCode.encode()
+    |> EQRCode.svg(viewbox: true, color: "#000000", background_color: "#FFFFFF")
+    |> String.replace(~r/\A<\?xml[^>]*\?>\n/, "")
   end
 
   defp transfer_card(assigns) do
@@ -682,11 +669,11 @@ defmodule DemoWeb.HomeLive do
 
   defp analytics_card(assigns) do
     ~H"""
-    <.card>
+    <.card class="overflow-hidden">
       <.card_header>
         <div class="flex items-center justify-between">
           <.card_title>Analytics</.card_title>
-          <.button variant="ghost" size="sm">View Analytics</.button>
+          <.button variant="outline" size="sm" class="rounded-full">View Analytics</.button>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-2xl font-bold">418.2K</span>
@@ -694,13 +681,17 @@ defmodule DemoWeb.HomeLive do
           <.badge variant="secondary">+10%</.badge>
         </div>
       </.card_header>
-      <.card_content>
-        <svg viewBox="0 0 300 80" preserveAspectRatio="none" class="h-20 w-full text-muted-foreground">
+      <.card_content class="p-0">
+        <svg viewBox="0 0 300 120" preserveAspectRatio="none" class="h-40 w-full">
+          <polygon
+            points="0,80 50,62 80,55 150,100 205,72 235,66 300,66 300,120 0,120"
+            class="fill-muted-foreground/40"
+          />
           <polyline
-            points="0,60 50,45 100,55 150,25 200,40 250,15 300,30"
+            points="0,80 50,62 80,55 150,100 205,72 235,66 300,66"
             fill="none"
-            stroke="currentColor"
             stroke-width="2"
+            class="stroke-foreground"
           />
         </svg>
       </.card_content>
@@ -724,7 +715,7 @@ defmodule DemoWeb.HomeLive do
         <.card_title>Notifications</.card_title>
         <.card_description>Choose which email and push alerts you want to receive.</.card_description>
       </.card_header>
-      <.card_content class="space-y-4">
+      <.card_content class="space-y-6">
         <div :for={{title, desc, on} <- @rows} class="flex items-start gap-3">
           <.checkbox checked={on} class="mt-0.5" />
           <div>

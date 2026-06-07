@@ -161,5 +161,5 @@ Tailwind v4 must scan the component markup. Add a source line to your CSS:
 
 ## License
 
-MIT © Craig Howell. shadcn/ui is by [shadcn](https://github.com/shadcn);
+MIT © N00nDay. shadcn/ui is by [shadcn](https://github.com/shadcn);
 this is an independent port for the Elixir ecosystem.
