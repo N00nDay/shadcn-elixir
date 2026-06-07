@@ -8,8 +8,10 @@ defmodule DemoWeb.CreateLive do
   The Customizer pickers are interactive: each opens a dropdown of options and selecting pushes
   `set_pref`. Base Color, Theme, Chart Color, Radius and Typography apply live to the preview via
   `data-base`/`data-theme`/`data-chart` + inline `--radius`/`font-family` on the preview wrapper,
-  with the scoped token CSS from `DemoWeb.Create.Themes`. The Menu offers Shuffle / Light-Dark /
-  Reset. Style / Icon Library / Menu Color/Accent update their value (no style system to apply).
+  with the scoped token CSS from `DemoWeb.Create.Themes`. Bottom actions: Copy Preset (shareable
+  URL), Shuffle, Light/Dark, Reset, and Initialize Project (copies a `mix shadcn.init` command).
+  Only Base/Theme/Chart/Radius/Menu Accent can be baked into that command; Style, Font, Heading,
+  Icon Library and Menu Color are preview-only (badged) — see `init_command/1`.
 
   Uses plain `Phoenix.LiveView` + `use ShadcnElixir`. Mirrors `DemoWeb.ChartsLive`.
   """
@@ -62,7 +64,7 @@ defmodule DemoWeb.CreateLive do
     {:noreply, socket |> assign(item: item) |> apply_preset(params)}
   end
 
-  # Restore design-system state from query params (used by the Copy Preset / Open links so a
+  # Restore design-system state from query params (used by the Copy Preset link so a
   # preset URL is shareable and reopens with the same configuration).
   defp apply_preset(socket, p) do
     socket
@@ -163,6 +165,42 @@ defmodule DemoWeb.CreateLive do
 
   defp rand(options), do: options |> Enum.random() |> elem(0)
 
+  # An option's swatch color — only a hex third element counts (color pickers). Font options put a
+  # font-family string there, which is not a color, so they render the chevron instead of a dot.
+  defp swatch(opt) when tuple_size(opt) == 3 do
+    value = elem(opt, 2)
+    if is_binary(value) and String.starts_with?(value, "#"), do: value
+  end
+
+  defp swatch(_opt), do: nil
+
+  # Build the `mix shadcn.init` command for the current selections, including only the dimensions
+  # init can actually bake in (base/theme/chart/radius/menu-accent) and omitting defaults so the
+  # command stays minimal. Style/fonts/icons/menu-color are preview-only and not exportable.
+  defp init_command(assigns) do
+    flags =
+      [
+        base: drop_default(assigns.base, "neutral"),
+        theme: drop_default(assigns.theme, "neutral"),
+        chart: drop_default(assigns.chart_color, "neutral"),
+        radius: radius_flag(assigns.radius),
+        "menu-accent": drop_default(assigns.menu_accent, "subtle")
+      ]
+      |> Enum.reject(fn {_k, v} -> is_nil(v) end)
+      |> Enum.map_join("", fn {k, v} -> " --#{k} #{v}" end)
+
+    "mix shadcn.init" <> flags
+  end
+
+  defp drop_default(value, default), do: if(value == default, do: nil, else: value)
+
+  # Customizer radius slug → mix shadcn.init --radius token ("default" omitted).
+  defp radius_flag("none"), do: "none"
+  defp radius_flag("small"), do: "sm"
+  defp radius_flag("medium"), do: "md"
+  defp radius_flag("large"), do: "lg"
+  defp radius_flag(_), do: nil
+
   # Shared dropdown menu-item styling (mirrors the dropdown_menu component's item_class).
   defp menu_item_class do
     "focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground " <>
@@ -239,69 +277,6 @@ defmodule DemoWeb.CreateLive do
 
         <div class="md:w-56 shrink-0">
           <.card class="dark bg-card/90 w-full gap-0 rounded-2xl py-0 shadow-xl backdrop-blur-xl">
-            <div class="hidden items-center justify-between gap-2 border-b px-3 py-2.5 md:flex">
-              <.dropdown_menu id="create-menu" class="w-full">
-                <.dropdown_menu_trigger menu="create-menu">
-                  <button
-                    type="button"
-                    class="ring-foreground/10 flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-sm ring-1"
-                  >
-                    <span class="font-medium">Menu</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="size-5"
-                      aria-hidden="true"
-                    >
-                      <line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="12" y2="12" /><line
-                        x1="4"
-                        x2="20"
-                        y1="18"
-                        y2="18"
-                      />
-                    </svg>
-                  </button>
-                </.dropdown_menu_trigger>
-                <.dropdown_menu_content menu="create-menu" align="start" class="w-full min-w-0">
-                  <div
-                    role="menuitem"
-                    tabindex="-1"
-                    data-slot="dropdown-menu-item"
-                    phx-click={ShadcnElixir.JS.close("create-menu") |> JS.push("shuffle")}
-                    class={menu_item_class()}
-                  >
-                    Shuffle
-                    <.dropdown_menu_shortcut>R</.dropdown_menu_shortcut>
-                  </div>
-                  <div
-                    role="menuitem"
-                    tabindex="-1"
-                    data-slot="dropdown-menu-item"
-                    phx-click={ShadcnElixir.JS.close("create-menu") |> JS.push("toggle_dark")}
-                    class={menu_item_class()}
-                  >
-                    Light/Dark
-                    <.dropdown_menu_shortcut>D</.dropdown_menu_shortcut>
-                  </div>
-                  <.dropdown_menu_separator />
-                  <div
-                    role="menuitem"
-                    tabindex="-1"
-                    data-slot="dropdown-menu-item"
-                    phx-click={ShadcnElixir.JS.close("create-menu") |> JS.push("reset")}
-                    class={menu_item_class()}
-                  >
-                    Reset
-                    <.dropdown_menu_shortcut>⇧R</.dropdown_menu_shortcut>
-                  </div>
-                </.dropdown_menu_content>
-              </.dropdown_menu>
-            </div>
             <div class="flex flex-col">
               <div class="flex flex-col gap-3 p-3">
                 <.picker
@@ -310,6 +285,7 @@ defmodule DemoWeb.CreateLive do
                   param="style"
                   value={@style}
                   options={Create.styles()}
+                  preview_only
                 />
               </div>
               <.separator />
@@ -344,6 +320,7 @@ defmodule DemoWeb.CreateLive do
                   param="font_heading"
                   value={@font_heading}
                   options={Create.font_headings()}
+                  preview_only
                 />
                 <.picker
                   id="pk-font"
@@ -351,6 +328,7 @@ defmodule DemoWeb.CreateLive do
                   param="font_body"
                   value={@font_body}
                   options={Create.fonts()}
+                  preview_only
                 />
               </div>
               <.separator />
@@ -361,6 +339,7 @@ defmodule DemoWeb.CreateLive do
                   param="icon_library"
                   value={@icon_library}
                   options={Create.icon_libraries()}
+                  preview_only
                 />
                 <.picker
                   id="pk-radius"
@@ -378,6 +357,7 @@ defmodule DemoWeb.CreateLive do
                   param="menu_color"
                   value={@menu_color}
                   options={Create.menu_colors()}
+                  preview_only
                 />
                 <.picker
                   id="pk-menu-accent"
@@ -402,16 +382,6 @@ defmodule DemoWeb.CreateLive do
                 <span class="hidden group-data-[copied=true]:inline">Copied!</span>
               </.button>
               <.button
-                href={preset_path(assigns)}
-                target="_blank"
-                rel="noopener"
-                variant="outline"
-                size="sm"
-                class="w-full"
-              >
-                Open
-              </.button>
-              <.button
                 variant="outline"
                 size="sm"
                 class="w-full"
@@ -433,9 +403,78 @@ defmodule DemoWeb.CreateLive do
                 </svg>
                 Shuffle
               </.button>
+              <.button
+                variant="outline"
+                size="sm"
+                class="w-full"
+                aria-label="Toggle light and dark mode"
+                phx-click="toggle_dark"
+              >
+                <svg
+                  :if={@dark}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-4"
+                  aria-hidden="true"
+                >
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                </svg>
+                <svg
+                  :if={!@dark}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-4"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+                </svg>
+                {if @dark, do: "Dark", else: "Light"}
+              </.button>
+              <.button
+                variant="outline"
+                size="sm"
+                class="w-full"
+                aria-label="Reset to defaults"
+                phx-click="reset"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-4"
+                  aria-hidden="true"
+                >
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" />
+                </svg>
+                Reset
+              </.button>
             </div>
             <div class="px-3 pb-3">
-              <.button class="w-full">
+              <%!-- Copies a `mix shadcn.init` command that bakes the exportable picks (base color,
+                    accent theme, chart palette, radius, menu accent) into the generated theme.
+                    Style, fonts, icon library and menu color are preview-only (badged above) and
+                    can't be passed to init — they need a package-install/import-rewrite pipeline
+                    the port doesn't have. --%>
+              <.button
+                id="init-project"
+                phx-hook="CopyCode"
+                data-code={init_command(assigns)}
+                class="group w-full"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -456,7 +495,8 @@ defmodule DemoWeb.CreateLive do
                     ry="2"
                   />
                 </svg>
-                Initialize Project
+                <span class="group-data-[copied=true]:hidden">Initialize Project</span>
+                <span class="hidden group-data-[copied=true]:inline">Copied init command</span>
               </.button>
             </div>
           </.card>
@@ -472,12 +512,18 @@ defmodule DemoWeb.CreateLive do
   attr :value, :string, required: true
   attr :options, :list, required: true
 
-  # A two-line trigger that opens a dropdown of options; selecting pushes `set_pref`. Options
-  # are {slug, title} or {slug, title, swatch_hex}; color options render a swatch dot.
+  attr :preview_only, :boolean,
+    default: false,
+    doc:
+      "Dimension that affects the live preview only — it can't be baked into `mix shadcn.init`."
+
+  # A two-line trigger that opens a dropdown of options; selecting pushes `set_pref`. Options are
+  # {slug, title} or {slug, title, extra}. Only a hex `extra` is a color swatch — font options carry
+  # a font-family string there (not a color), so they fall through to the up/down chevron.
   defp picker(assigns) do
     opts =
       Enum.map(assigns.options, fn opt ->
-        %{slug: elem(opt, 0), title: elem(opt, 1), color: tuple_size(opt) == 3 && elem(opt, 2)}
+        %{slug: elem(opt, 0), title: elem(opt, 1), color: swatch(opt)}
       end)
 
     current = Enum.find(opts, &(&1.slug == assigns.value))
@@ -496,7 +542,16 @@ defmodule DemoWeb.CreateLive do
           class="hover:bg-accent/50 flex h-12 w-full items-center justify-between gap-2 rounded-md px-3 text-left transition-colors"
         >
           <div class="flex min-w-0 flex-col">
-            <span class="text-muted-foreground text-xs">{@label}</span>
+            <span class="text-muted-foreground flex items-center gap-1.5 text-xs">
+              {@label}
+              <span
+                :if={@preview_only}
+                title="Preview only — not included in the Initialize command"
+                class="border-border/60 text-muted-foreground/80 rounded-sm border px-1 text-[10px] leading-tight font-normal tracking-wide uppercase"
+              >
+                Preview
+              </span>
+            </span>
             <span class="text-foreground truncate text-sm font-medium">{@current_title}</span>
           </div>
           <span
