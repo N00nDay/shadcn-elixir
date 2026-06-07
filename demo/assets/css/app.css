@@ -35,6 +35,27 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+/* ApexCharts: strip the library's default tooltip frame so our token-styled
+   tooltip card (built in apex_chart.js) is the only chrome shown. */
+.apexcharts-tooltip {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+.apexcharts-tooltip .apexcharts-tooltip-title {
+  display: none !important;
+}
+
+/* ApexCharts: space the legend marker dot away from its label. */
+.apexcharts-legend-marker {
+  margin-right: 6px !important;
+}
+.apexcharts-legend-series {
+  align-items: center !important;
+  display: inline-flex !important;
+}
+
 /* Copy button: swap clipboard <-> check based on copied state. */
 .copy-btn .check-icon { display: none; }
 .copy-btn[data-copied="true"] .copy-icon { display: none; }

@@ -1,0 +1,22 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      apexcharts:
+        specifier: ^5.14.0
+        version: 5.14.0
+
+packages:
+
+  apexcharts@5.14.0:
+    resolution: {integrity: sha512-hBLz5Gd8B5ZuocEzNUwEeKdw9vd7uy4OnqbDjAYyvwiAEyHk3OnO9+tGzAznpM6pnyCqWjPXUKKYoNIwdskeuQ==}
+
+snapshots:
+
+  apexcharts@5.14.0: {}

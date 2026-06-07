@@ -12,6 +12,8 @@ config :demo, DemoWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}],
   check_origin: false,
   code_reloader: true,
+  # The library is a path dependency; reload it too so component edits hot-swap.
+  reloadable_apps: [:shadcn_elixir, :demo],
   debug_errors: true,
   secret_key_base: "S+n+/2RdHco5mlxJPqHkdWdtAM1uv5sPZqPfbyn2MCuNCVdaTvAkq1caNEXs9lBV",
   watchers: [

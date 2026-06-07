@@ -23,6 +23,9 @@ defmodule DemoWeb.DocsComponents do
   @makeup_css Makeup.stylesheet(Makeup.Styles.HTML.StyleMap.monokai_style(), "highlight")
   @github_url "https://github.com/N00nDay/shadcn-elixir"
 
+  @doc "The Makeup (monokai) stylesheet, for pages that render `code_block/1` outside the docs shell."
+  def makeup_css, do: @makeup_css
+
   @doc """
   The documentation shell: site header, sticky docs sidebar, content column, and TOC.
 
@@ -122,7 +125,10 @@ defmodule DemoWeb.DocsComponents do
           <.link href="#" class="text-foreground/70 transition-colors hover:text-foreground">
             Blocks
           </.link>
-          <.link href="#" class="text-foreground/70 transition-colors hover:text-foreground">
+          <.link
+            navigate="/charts/area"
+            class="text-foreground/70 transition-colors hover:text-foreground"
+          >
             Charts
           </.link>
           <.link href="#" class="text-foreground/70 transition-colors hover:text-foreground">

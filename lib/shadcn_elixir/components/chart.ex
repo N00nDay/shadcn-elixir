@@ -3,8 +3,13 @@ defmodule ShadcnElixir.Components.Chart do
   Chart — a port of shadcn/ui's [Chart](https://ui.shadcn.com/docs/components/chart).
 
   shadcn charts wrap Recharts; this is a lightweight, dependency-free equivalent: the
-  `ShadcnChart` JS hook (see `assets/js/shadcn_elixir.js`) renders an SVG bar or line
-  chart from the provided data, themed via the `--chart-1..5` CSS variables.
+  `ShadcnChart` JS hook (see `assets/js/shadcn_elixir.js`) renders an SVG chart from the
+  provided data, themed via the `--chart-1..5` CSS variables. Supported `type`s are
+  `bar`, `line`, `area`, `pie`, `donut`, `radar`, and `radial`.
+
+  Each datum is a map with a `:label` and one numeric key per series. `keys` names the
+  series to plot (defaulting to `["value"]`); `variant` selects a style (e.g. `"linear"`,
+  `"step"`, `"stacked"`, `"horizontal"`, `"dots"`, `"donut-text"`, `"lines-only"`).
 
   ## Examples
 
@@ -14,14 +19,50 @@ defmodule ShadcnElixir.Components.Chart do
         class="h-[250px] w-full"
         data={[%{label: "Jan", value: 186}, %{label: "Feb", value: 305}, %{label: "Mar", value: 237}]}
       />
+
+      <.chart
+        id="multi"
+        type="line"
+        variant="multiple"
+        keys={["desktop", "mobile"]}
+        data={[%{label: "Jan", desktop: 186, mobile: 80}, %{label: "Feb", desktop: 305, mobile: 200}]}
+      />
   """
   use Phoenix.Component
 
   import ShadcnElixir, only: [cn: 1]
 
   attr(:id, :string, required: true)
-  attr(:type, :string, default: "bar", values: ["bar", "line"])
-  attr(:data, :list, required: true, doc: "List of maps with :label and :value keys.")
+
+  attr(:type, :string,
+    default: "bar",
+    values: ["bar", "line", "area", "pie", "donut", "radar", "radial"]
+  )
+
+  attr(:data, :list, required: true, doc: "List of maps with a :label and one key per series.")
+
+  attr(:keys, :list,
+    default: ["value"],
+    doc: "Series keys to plot, in order. Each maps to a `--chart-N` color."
+  )
+
+  attr(:variant, :string,
+    default: nil,
+    doc: "Style variant for the chosen type (e.g. \"linear\", \"step\", \"stacked\", \"dots\")."
+  )
+
+  attr(:legend, :boolean, default: false, doc: "Render a legend of the series below the chart.")
+
+  attr(:colors, :list,
+    default: nil,
+    doc:
+      "Override the series colors with a list of CSS custom-property names (e.g. `[\"--foreground\"]`)."
+  )
+
+  attr(:theme, :string,
+    default: nil,
+    doc: "An opaque theme key — when it changes, the chart re-resolves its colors and re-renders."
+  )
 
   attr(:label, :string,
     default: nil,
@@ -32,21 +73,31 @@ defmodule ShadcnElixir.Components.Chart do
   attr(:rest, :global)
 
   def chart(assigns) do
-    normalized = normalize(assigns.data)
+    keys = Enum.map(assigns.keys, &to_string/1)
+    normalized = normalize(assigns.data, keys)
 
     assigns =
       assigns
+      |> assign(:keys, keys)
       |> assign(:payload, Jason.encode!(normalized))
-      |> assign(:chart_label, assigns.label || summarize(assigns.type, normalized))
+      |> assign(:keys_json, Jason.encode!(keys))
+      |> assign(:colors_json, assigns.colors && Jason.encode!(assigns.colors))
+      |> assign(:chart_label, assigns.label || summarize(assigns.type, normalized, keys))
 
     ~H"""
     <div
       id={@id}
       phx-hook="ShadcnChart"
+      phx-update="ignore"
       role="img"
       aria-label={@chart_label}
       data-slot="chart"
       data-chart-type={@type}
+      data-chart-variant={@variant}
+      data-chart-keys={@keys_json}
+      data-chart-legend={to_string(@legend)}
+      data-chart-colors={@colors_json}
+      data-chart-theme={@theme}
       data-chart={@payload}
       class={
         cn([
@@ -62,17 +113,29 @@ defmodule ShadcnElixir.Components.Chart do
   end
 
   # A concise text alternative so screen-reader users get the data, not a blank image.
-  defp summarize(type, normalized) do
-    points = Enum.map_join(normalized, ", ", fn %{label: l, value: v} -> "#{l}: #{v}" end)
+  defp summarize(type, normalized, [key | _]) do
+    points =
+      Enum.map_join(normalized, ", ", fn row -> "#{row["label"]}: #{row[key]}" end)
+
     "#{String.capitalize(type)} chart. #{points}"
   end
 
-  defp normalize(data) do
+  defp normalize(data, keys) do
     Enum.map(data, fn row ->
-      %{
-        label: to_string(row[:label] || row["label"] || ""),
-        value: row[:value] || row["value"] || 0
-      }
+      base = %{"label" => to_string(get(row, :label) || "")}
+
+      Enum.reduce(keys, base, fn key, acc ->
+        Map.put(acc, key, num(get(row, key)))
+      end)
     end)
   end
+
+  defp get(row, key) when is_atom(key), do: get(row, Atom.to_string(key))
+
+  defp get(row, key) when is_binary(key) do
+    Map.get(row, key) || Map.get(row, String.to_atom(key))
+  end
+
+  defp num(v) when is_number(v), do: v
+  defp num(_), do: 0
 end

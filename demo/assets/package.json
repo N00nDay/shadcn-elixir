@@ -1,0 +1,9 @@
+{
+  "name": "shadcn-elixir-demo-assets",
+  "version": "0.0.0",
+  "private": true,
+  "description": "JS dependencies for the shadcn-elixir docs/demo site (bundled by esbuild).",
+  "dependencies": {
+    "apexcharts": "^5.14.0"
+  }
+}

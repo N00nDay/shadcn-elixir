@@ -21,6 +21,8 @@ defmodule DemoWeb.Router do
     live "/docs", DocsLive
     live "/docs/components/:component", ComponentLive
     live "/docs/:page", DocsLive
+    get "/charts", RedirectController, :charts
+    live "/charts/:category", ChartsLive
   end
 
   # Other scopes may use custom stacks.

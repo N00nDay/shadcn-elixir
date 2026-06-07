@@ -24,6 +24,9 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import {hooks as colocatedHooks} from "phoenix-colocated/demo"
 import {Hooks as ShadcnHooks} from "../../../assets/js/shadcn_elixir"
+// The demo opts into ApexCharts for production-grade charts, overriding the library's
+// dependency-free SVG `ShadcnChart` hook (which stays the portable default).
+import {ShadcnChart as ApexShadcnChart} from "./apex_chart"
 import topbar from "../vendor/topbar"
 
 // Docs site: copy a code block's source to the clipboard. Not a UI component —
@@ -96,7 +99,7 @@ const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute
 const liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken},
-  hooks: {...colocatedHooks, ...ShadcnHooks, ...DocsHooks},
+  hooks: {...colocatedHooks, ...ShadcnHooks, ...DocsHooks, ShadcnChart: ApexShadcnChart},
 })
 
 // Show progress bar on live navigation and form submits
